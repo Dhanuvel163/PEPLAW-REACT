@@ -30,7 +30,7 @@
   "developer": {
   "name": "Dhanavel",
   "url": "https://github.com/Dhanuvel163",
-  "shortcuts":[
+  "shortcuts": [
     {
       "name":"Home Page",
       "short_name":"Home",
@@ -38,10 +38,27 @@
       "url":"/home",
       "icons":[
         {
-          "src":"assets/lawlogo192.webp",
-          "type":"image/webp",
-          "purpose": "any maskable"
+          "src":"/assets/lawlogo192.webp",
+          "sizes": "192x192"
         }
+      ]
+    },
+    {
+      "name": "Lawyer login",
+      "short_name": "Lawyer login",
+      "description": "Login as a lawyer",
+      "url": "/lawyer/login",
+      "icons": [
+        { "src": "/assets/loginlawyer.svg", "sizes": "192x192" }
+      ]
+    },
+    {
+      "name": "User login",
+      "short_name": "User login",
+      "description": "Login as a user",
+      "url": "/user/login",
+      "icons": [
+        { "src": "/assets/userlogin.svg", "sizes": "192x192" }
       ]
     }
   ],
