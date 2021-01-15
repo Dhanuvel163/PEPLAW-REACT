@@ -1,26 +1,46 @@
 export const isloggedin=()=>{
-    const token=localStorage.getItem('token');
-    if(token){
-        return true
-    }else{
+    try{
+        const token=localStorage.getItem('token');
+        if(token){
+            return true
+        }else{
+            return false
+        }
+    }catch(e){
         return false
     }
 }
 
 export const isuserloggedin=()=>{
-    const islawyer=localStorage.getItem('islawyer');
-    return (islawyer==='false')?true:false;
+    try {
+        const islawyer=localStorage.getItem('islawyer');
+        return (islawyer==='false')?true:false;        
+    } catch (e) {
+        return false
+    }
 }
 
 export const islawyerloggedin=()=>{
-    const islawyer=localStorage.getItem('islawyer');
-    return (islawyer==='true')?true:false;
+    try {
+        const islawyer=localStorage.getItem('islawyer');
+        return (islawyer==='true')?true:false;        
+    } catch (e) {
+        return false
+    }
 }
 
 export const getuser=()=>{
-    return {name:localStorage.getItem('name')};
+    try {
+        return {name:localStorage.getItem('name')};        
+    } catch (e) {
+        return false    
+    }
 }
 
 export const getlawyer=()=>{
-    return {name:localStorage.getItem('name')};
+    try {
+        return {name:localStorage.getItem('name')};        
+    } catch (e) {
+        return false    
+    }
 }
