@@ -1,0 +1,57 @@
+{
+  "short_name": "PEPLAW",
+  "name": "LAWYER PEOPLE",
+  "icons": [
+    {
+      "src": "assets/lawlogo64.webp",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/lawlogo192.webp",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/lawlogo512.webp",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#091432",
+  "background_color": "#091432",
+  "author":"DHANAVEL R",
+  "description":"A Website to search for Lawyers by Users For their case !",
+  "developer": {
+  "name": "Dhanavel",
+  "url": "https://github.com/Dhanuvel163",
+  "shortcuts":[
+    {
+      "name":"Home Page",
+      "short_name":"Home",
+      "description":"Get to know about Peplaw",
+      "url":"/home",
+      "icons":[
+        {
+          "src":"assets/lawlogo192.webp",
+          "type":"image/webp",
+          "purpose": "any maskable"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/home",
+    "params": {
+        "title": "PEPLAW",
+        "text": "Get to know about Peplaw",
+        "url": "/home"
+    }
+}
+}
+}

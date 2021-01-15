@@ -1,0 +1,313 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.bg-dark {
+  background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
+}
+.bg-danger {
+  background: linear-gradient(to right, rgb(127, 0, 255), rgb(102, 18, 158));
+}
+.btn-primary {
+  background: linear-gradient(to right, rgb(9, 48, 40), rgb(35, 122, 87));
+}
+.btn-secondary {
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+}
+.btn-warning {
+  background: linear-gradient(to right, rgb(247, 151, 30), rgb(255, 210, 0));
+}
+
+
+.btn,
+.btn:focus {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -moz-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+}
+.btn:active {
+  animation: click 0.2s ease-in-out !important;
+  -webkit-animation: click 0.2s ease-in-out !important;
+  -moz-animation: click 0.2s ease-in-out !important;
+  -o-animation: click 0.2s ease-in-out !important;
+}
+
+.text-warning {
+  text-transform: uppercase;
+}
+.one-edge-shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .one-edge-shadow {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+
+.top-edge-shadow {
+  box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
+  -webkit-box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
+  -moz-box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
+}
+
+.box {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out !important;
+  -ms-transition: transform 0.5s ease-in-out !important;
+  -webkit-transition: transform 0.5s ease-in-out !important;
+  border-radius: 5px;
+  animation: cardAnim 0.7s;
+  -webkit-animation: cardAnim 0.7s;
+  -moz-animation: cardAnim 0.7s;
+  -o-animation: cardAnim 0.7s;
+}
+
+.box:hover {
+  transform: translateX(-10px) translateY(-10px);
+  -moz-transform: translateX(-10px) translateY(-10px);
+  -webkit-transform: translateX(-10px) translateY(-10px);
+  -o-transform: translateX(-10px) translateY(-10px);
+  -ms-transform: translateX(-10px) translateY(-10px);
+}
+
+img {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+  border-radius: 5px;
+}
+.imgbox {
+  transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out !important;
+  -ms-transition: transform 0.5s ease-in-out !important;
+  -webkit-transition: transform 0.5s ease-in-out !important;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -moz-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+}
+.imgbox:hover {
+  transform: translateX(-10px) translateY(-10px);
+  -moz-transform: translateX(-10px) translateY(-10px);
+  -webkit-transform: translateX(-10px) translateY(-10px);
+  -o-transform: translateX(-10px) translateY(-10px);
+  -ms-transform: translateX(-10px) translateY(-10px);
+}
+
+form {
+  width: 100%;
+}
+.form-control {
+  border-radius: 10px !important;
+  background-color: inherit !important;
+  color: whitesmoke !important;
+  /* border: 2.1px solid blueviolet !important; */
+  border: 2.1px solid #6c63ff !important;
+  opacity: 0.8;
+  transition: transform 0.5s ease-in-out !important;
+  -moz-transition: transform 0.5s ease-in-out !important;
+  -ms-transition: transform 0.5s ease-in-out !important;
+  -webkit-transition: transform 0.5s ease-in-out !important;
+}
+
+.form-control::placeholder {
+  color: #6c63ff !important;
+  text-transform: uppercase;
+}
+.form-control:focus::placeholder {
+  color: white !important;
+}
+.form-control:focus {
+  border: 2.1px solid white !important;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -moz-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+}
+.form-control:hover {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  -moz-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12) !important;
+  transform: translateX(-3px) translateY(-3px) scale(0.95);
+  -moz-transform: translateX(-3px) translateY(-3px) scale(0.95);
+  -webkit-transform: translateX(-3px) translateY(-3px) scale(0.95);
+  -o-transform: translateX(-3px) translateY(-3px) scale(0.95);
+  -ms-transform: translateX(-3px) translateY(-3px) scale(0.95);
+}
+.dropdown-menu {
+  transition: transform 1s ease-in-out !important;
+  -moz-transition: transform 1s ease-in-out !important;
+  -ms-transition: transform 1s ease-in-out !important;
+  -webkit-transition: transform 1s ease-in-out !important;
+  animation: growDown 0.5s ease-in-out;
+  -webkit-animation: growDown 0.5s ease-in-out;
+  -moz-animation: growDown 0.5s ease-in-out;
+  -o-animation: growDown 0.5s ease-in-out;
+  transform-origin: top center;
+  background-color: whitesmoke !important;
+  border: 1.5px solid white !important;
+  box-shadow: inset 0 0 7px #000000;
+  padding: 10px !important;
+}
+
+.dropdown-menu a {
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* color: white; */
+}
+.dropdown-menu a:hover {
+  background-color: coral !important;
+  box-shadow: inset 0 0 5px #000000;
+  -webkit-box-shadow: inset 0 0 5px #000000 !important;
+  -moz-box-shadow: inset 0 0 5px #000000 !important;
+  color: white;
+}
+.dropdown-divider {
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  border-top: 1px solid white !important;
+}
+@keyframes click {
+  0% {
+    transform: scaleX(1) translateY(4px);
+  }
+  50% {
+    transform: scaleX(1.1) translateY(4px);
+  }
+  100% {
+    transform: scaleY(1) translateY(-4px);
+  }
+}
+@keyframes cardAnim {
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  99% {
+    transform: scale(1);
+  }
+}
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.navbar {
+  opacity: 0.9;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+.navbar-collapse {
+  transition: 1s !important;
+}
+.navbar-toggler {
+  border: 0 !important;
+  outline: none !important;
+}
+
+.cases .card-body {
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  border-radius: inherit;
+}
+
+.cases .card-header {
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  z-index: 20;
+  border: 1px solid rgb(127, 0, 255);
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 16px black !important;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blueviolet;
+  width: 10px;
+  border: 1px solid white;
+  border-radius: 10px;
+}
