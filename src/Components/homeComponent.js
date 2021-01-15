@@ -25,6 +25,7 @@ function Home(){
       })
       return () => {
         imageObserver.disconnect();
+        window.removeEventListener('offline',offlineAlert,true)
       }
     })
 
