@@ -35,20 +35,40 @@
       "name":"Home Page",
       "short_name":"Home",
       "description":"Get to know about Peplaw",
-      "url":"/home"
+      "url":"/home",
+      "icons":[
+        {
+          "src":"/assets/lawlogo192.webp",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Lawyer login",
       "short_name": "Lawyer login",
       "description": "Login as a lawyer",
-      "url": "/lawyer/login"
+      "url": "/lawyer/login",
+      "icons": [
+        { "src": "/assets/loginlawyer.svg", "sizes": "192x192" }
+      ]
     },
     {
       "name": "User login",
       "short_name": "User login",
       "description": "Login as a user",
-      "url": "/user/login"
+      "url": "/user/login",
+      "icons": [
+        { "src": "/assets/userlogin.svg", "sizes": "192x192" }
+      ]
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/home",
+    "params": {
+        "title": "PEPLAW",
+        "text": "Get to know about Peplaw",
+        "url": "/home"
+    }
+}
 }
 }

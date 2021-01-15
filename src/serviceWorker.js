@@ -145,7 +145,7 @@ export function unregister() {
 //   '/assets/home2.webp',
 //   '/assets/home3.webp',
 //   '/assets/home4.webp',
-//   '/assets/homecardbg.jpg',
+//   '/assets/homecardbg.webp',
 //   '/assets/lawlogo64.webp',
 //   '/assets/lawlogo192.webp',
 //   '/assets/lawlogo512.webp',

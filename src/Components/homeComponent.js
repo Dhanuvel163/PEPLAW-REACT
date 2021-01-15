@@ -1,5 +1,5 @@
 import React, { useState,memo,useEffect } from "react";
-import {Card,CardBody,CardTitle,CardText,CardImg,Button} from "reactstrap";
+import {Card,CardBody,CardTitle,CardText,Button} from "reactstrap";
 import {Link} from "react-router-dom";
 
 function Home(){
@@ -13,13 +13,22 @@ function Home(){
           entries.forEach((entry) => {
               if (entry.isIntersecting) {
                   const lazyImage = entry.target
-                  lazyImage.src = lazyImage.dataset.src
+                  let img = document.createElement("IMG")
+                  img.setAttribute("alt","Card image cap")
+                  img.setAttribute("class","card-img-top")
+                  img.setAttribute("src",lazyImage.dataset.src)
+                  img.onload = function(){
+                  lazyImage.replaceWith(img)
+                  }
+
+                  // lazyImage.src = lazyImage.dataset.src
                   lazyImage.classList.remove("lzy_img");
+
                   imgObserver.unobserve(lazyImage);
               }
           })
       });
-      const arr = document.querySelectorAll('img.lzy_img')
+      const arr = document.querySelectorAll('.lzy_img')
       arr.forEach((v) => {
           imageObserver.observe(v);
       })
@@ -52,23 +61,21 @@ function Home(){
     return (
       <>
         <h3 className="text-center" style={{marginTop:60}}>
-          Welcome !!
+          <svg style={{marginRight:7,marginBottom:4}}
+          xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+          WELCOME !!
         </h3>
         <div className="container" style={{ marginTop: 60 }}>
-          <Card className="imgbox"
-            style={{
-              backgroundImage: `url(/assets/homecardbg.jpg)`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-          >
-            <CardBody style={{ marginTop: 30, minHeight: 500 }}>
-                <CardTitle style={{ color: "black", textAlign: "right" }}>
+          <Card className="imgbox home-card">
+            <CardBody style={{ marginTop: 30, minHeight: 400 }}>
+                <CardTitle style={{ color: "black", textAlign: "left" }}>
                   <b style={{ fontWeight: 1000 }}>
                     One of the Best Lawyers and peoples Social Media Ever !!!
                   </b>
                 </CardTitle>
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-start">
                 <Link to="/user/signup" className="nav-link">
                   <Button>
                     Get Started 
@@ -86,13 +93,11 @@ function Home(){
                   {cardData.map((data)=>(
                       <div key={data.title} className="col-12 col-md-6 mt-5">
                         <Card className="imgbox">
-                          <CardImg top 
-                          className="lzy_img"
-                         data-src={data.image} 
-                          alt="Card image cap"
-                          loading="lazy"
-                          lazyload="on"
-                          />
+                          <div data-src={data.image} className="lzy_img"> 
+                            <div className="lzy_img__image loading"></div> 
+                            <div className="lzy_img__title loading"></div> 
+                            <div className="lzy_img__description loading"></div> 
+                          </div> 
                           <CardBody>
                             <CardText
                               style={{

@@ -1,7 +1,8 @@
 import React,{PureComponent} from 'react';
-import {isloggedin,isuserloggedin,islawyerloggedin} from '../../service/userservice';
+import {isloggedin,isuserloggedin,islawyerloggedin} from '../../../service/userservice';
 import {Collapse,Navbar,NavbarToggler,Nav,NavItem,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem} from 'reactstrap';
 import {Link} from "react-router-dom";
+import './header.css'
 function Logout(props){
     const lout = () =>{
             localStorage.removeItem('token')
@@ -123,9 +124,14 @@ class Header extends PureComponent{
                     <Collapse isOpen={this.state.isOpen} navbar>
                     {
                         isloggedin() ?
-                        null
+                        <Nav className="ml-auto" navbar>
+                            <ADDCASEDATA />
+                            <USERDATA user={this.props.userdata}/>
+                            <Mycases/>
+                            <Logout fetchuserdata={this.props.fetchuserdata}></Logout>
+                        </Nav>
                         :
-                        <Nav className="mr-auto" navbar>
+                        <Nav className="ml-auto" navbar>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                 <svg style={{marginRight:4}}
@@ -166,12 +172,6 @@ class Header extends PureComponent{
                             </UncontrolledDropdown>
                         </Nav>
                     }
-                    <Nav className="ml-auto" navbar>
-                        <ADDCASEDATA />
-                        <USERDATA user={this.props.userdata}/>
-                        <Mycases/>
-                        <Logout fetchuserdata={this.props.fetchuserdata}></Logout>
-                    </Nav>
                     </Collapse>
                 </Navbar>
        </div>

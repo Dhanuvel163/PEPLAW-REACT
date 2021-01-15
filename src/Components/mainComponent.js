@@ -1,7 +1,7 @@
 import React, { Component,lazy, Suspense } from 'react';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Header from './Partials/headerComponent';
+import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/footerComponent';
 import {fetchuserdata,clearMessage} from '../shared/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';

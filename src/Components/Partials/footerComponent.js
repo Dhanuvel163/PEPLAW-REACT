@@ -4,7 +4,7 @@ import {
   } from 'reactstrap';
 function Footer(){
         return(
-            <div className='bg-dark one-edge-shadow' style={{marginBottom:8,opacity:0.8}}>
+            <div className='bg-dark one-edge-shadow footer' style={{marginBottom:8,opacity:0.8}}>
                 <NavLink style={{color:'white',fontWeight:'bold',textAlign:'center'}}>ContactUs</NavLink>
                 <NavLink style={{color:'white',fontWeight:'bold',textAlign:'center'}}>Email : dhanuram99@gmail.com</NavLink>
             </div>
