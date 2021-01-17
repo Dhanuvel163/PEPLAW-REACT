@@ -4,6 +4,8 @@ import { Control, Errors, LocalForm  } from "react-redux-form";
 import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
 import * as country_city from '../../../shared/city-country.json'
 import * as state_country from '../../../shared/state-country.json'
+import Formerror from '../../Partials/Formerror/Formerror';
+
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && val.length >= len;
 const maxLength = (len) => (val) => val && val.length <= len;
@@ -76,7 +78,7 @@ function UsereditForm(props){
                       validators={{required, minLength: minLength(6), maxLength: maxLength(20),}}
                     />
                     <Errors
-                      model=".username" show="touched"
+                      model=".username" show="touched" component={(props)=><Formerror props={props}/>}
                       messages={{
                         required: "\nusername is required !!", minLength: "\nusername should has minimum 6 characters !!",
                         maxLength: "\nusername should has maximum 20 characters only !!",
@@ -93,7 +95,8 @@ function UsereditForm(props){
                             validators={{required, minLength: minLength(10), maxLength: maxLength(10), isNumber, }}
                           />
                           <Errors
-                            model=".mobile" show="touched" messages={{
+                            model=".mobile" show="touched" component={(props)=><Formerror props={props}/>} 
+                            messages={{
                               required: "\nMobile Number is required !!",
                               minLength: "\nMobile Number should has 10 characters !!",
                               maxLength: "\nMobile Number should has 10 characters !!",
@@ -175,7 +178,7 @@ function UsereditForm(props){
                       validators={{minLength: minLength(6), maxLength: maxLength(6), isNumber, }}
                     />
                     <Errors
-                      model=".pincode" show="touched" messages={{
+                      model=".pincode" show="touched" component={(props)=><Formerror props={props}/>} messages={{
                         minLength: "\npincode Number should has 6 characters !!",
                         maxLength: "\npincode Number should has 6 characters !!",
                         isNumber: "\nEnter a valid phone Number !!"

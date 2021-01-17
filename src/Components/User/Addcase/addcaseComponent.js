@@ -2,8 +2,9 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import { Button, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
-import {postusercase} from '../../shared/actionCreators'
+import {postusercase} from '../../../shared/actionCreators'
 import {connect} from 'react-redux';
+import Formerror from '../../Partials/Formerror/Formerror';
 
 const mapStateToProps=state=>{
     return {
@@ -42,12 +43,13 @@ function Addcase(props){
                                     required
                                     }}/>
                                 <Errors
-                                    model='.disposition-code'
-                                    show="touched"
-                                    messages={{
-                                        required:'Disposition code is required !!',
-                                    }}
-                                    ></Errors>
+                                model='.disposition-code'
+                                show="touched"
+                                component={(props)=><Formerror props={props}/>}
+                                messages={{
+                                    required:'Disposition code is required !!',
+                                }}
+                                ></Errors>
                             </div>
                             <Row>
                                 <Col sm="6">
@@ -61,6 +63,7 @@ function Addcase(props){
                                     <Errors
                                     model='.disposition-date'
                                     show="touched"
+                                    component={(props)=><Formerror props={props}/>}
                                     messages={{
                                         required:'Disposition date is required !!',
                                     }}
@@ -78,6 +81,7 @@ function Addcase(props){
                                     <Errors
                                     model='.sentence-time'
                                     show="touched"
+                                    component={(props)=><Formerror props={props}/>}
                                     messages={{
                                         required:'Sentence Time is required !!',
                                     }}
@@ -95,6 +99,7 @@ function Addcase(props){
                                 <Errors
                                     model='.amennded-charge'
                                     show="touched"
+                                    component={(props)=><Formerror props={props}/>}
                                     messages={{
                                         required:'Amended Charge is required !!',
                                     }}

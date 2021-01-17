@@ -9,7 +9,7 @@
   color: white;
 }
 .toast-header {
-  padding: 15px;
+  padding: 11px !important;
 }
 .snack {
   position: fixed;
@@ -25,14 +25,17 @@
   color: azure;
 }
 .toast-anim {
-  animation: popup 0.3s ease-in-out;
+  animation: popup 0.5s ease-in-out;
 }
 
 @keyframes popup {
-  from {
+  0% {
     transform: scale(0.5);
   }
-  to {
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
     transform: scale(1);
   }
 }

@@ -4,7 +4,9 @@ import { Button, FormGroup, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {postusersignin} from '../../shared/actionCreators'
+import {postusersignin} from '../../../shared/actionCreators'
+import Formerror from '../../Partials/Formerror/Formerror';
+
 const mapStateToProps=state=>{
     return {
     }
@@ -37,6 +39,7 @@ function Userlogin(props){
                                      <Errors
                                      model='.email'
                                      show="touched"
+                                     component={(props)=><Formerror props={props}/>}
                                      messages={{
                                          required:'\nEmail is required !!',
                                          isemail:'\nEnter a valid email !!'
@@ -53,13 +56,14 @@ function Userlogin(props){
                                      <Errors
                                      model='.password'
                                      show="touched"
+                                     component={(props)=><Formerror props={props}/>}
                                      messages={{
                                          required:'password is required !!',
                                      }}
                                      ></Errors>
                                 </FormGroup>
                                     <Link to="/lawyer/login" className="nav-link">
-                                        <p style={{color:'white'}}>Are you a user ?</p>
+                                        <p style={{color:'white'}}>Are you a lawyer ?</p>
                                     </Link>
                                 <div className="d-flex justify-content-center">
                                 <Button color="secondary" size="md" active>Sign in</Button>

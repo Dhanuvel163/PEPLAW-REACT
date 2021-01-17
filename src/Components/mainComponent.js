@@ -2,16 +2,16 @@ import React, { Component,lazy, Suspense } from 'react';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
-import Footer from './Partials/footerComponent';
-import {fetchuserdata,clearMessage} from '../shared/actionCreators'
+import Footer from './Partials/Footer/footerComponent';
+import {fetchuserdata} from '../shared/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
 import {Spinner} from 'reactstrap'
-const Lawyerlogin = lazy(() => import('./Lawyer/lawerloginComponent'))
-const Userlogin = lazy(() => import('./User/userloginComponent'))
-const Lawersignup = lazy(() => import('./Lawyer/lawersignupComponent'))
-const Usersignup = lazy(() => import('./User/usersignupComponent'))
+const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
+const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
+const Lawersignup = lazy(() => import('./Lawyer/Signup/lawersignupComponent'))
+const Usersignup = lazy(() => import('./User/Signup/usersignupComponent'))
 const Useredit = lazy(() => import('./Common/Useredit/usereditComponent'))
-const Addcase = lazy(() => import('./User/addcaseComponent'))
+const Addcase = lazy(() => import('./User/Addcase/addcaseComponent'))
 const Mycases = lazy(() => import('./Common/Mycases/mycasesComponent'))
 const Allcases = lazy(() => import('./Common/Allcases/allcasesComponent'))
 const Home = lazy(() => import('./homeComponent'))
@@ -19,14 +19,12 @@ const Home = lazy(() => import('./homeComponent'))
 const mapStateToProps=state=>{
     return {
         users:state.users,
-        errors:state.errors,
         loading:state.loading
         // lawyers:state.lawyers
     }
 }
 const mapDispatchToProps=dispatch=>({
     fetchuserdata:()=>dispatch(fetchuserdata()),
-    clearMessage:()=>dispatch(clearMessage()),
     // fetchlawyers:()=>dispatch(fetchlawyers()),
 })
 
@@ -54,9 +52,7 @@ class Main extends Component{
                 <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata}></Header>
                 <div style={{marginTop:70,padding:10,minHeight:700,paddingBottom:30}} className='text-white' >
 
-                <SnackbarC data={this.props.errors.data} open={this.props.errors.open} 
-                close={this.props.clearMessage}
-                classN={this.props.errors.classN}></SnackbarC>
+                <SnackbarC></SnackbarC>
 
                 {
                     this.props.loading.loading
