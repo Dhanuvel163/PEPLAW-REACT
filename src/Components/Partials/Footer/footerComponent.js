@@ -1,8 +1,19 @@
-import React,{memo} from 'react';
+import React,{memo,useEffect} from 'react';
 import './footer.css'
 import {Link} from "react-router-dom";
-
+import {iframeObserver} from '../../CustomHooks/useLazyloading'
 function Footer(){
+
+    useEffect(() => {
+      const arr = document.querySelectorAll('.lzy_ifrm')
+      arr.forEach((v) => {
+          iframeObserver.observe(v);
+      })
+      return () => {
+        iframeObserver.disconnect();
+      }
+    })
+
         return(
             <div className='bg-dark one-edge-shadow footer' style={{marginBottom:8,opacity:0.8}}>
                 <div className="d-flex justify-content-between foot">
@@ -70,7 +81,7 @@ function Footer(){
                     </div>
 
                     <div className="d-flex justify-content-center align-items-center frame f-map map">
-                        <iframe className="map-embed" title="location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.0330513836493!2d77.29640273776388!3d8.950733632835957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0429edf3449fcd%3A0x99c7a4fdf1762a61!2sMelagaram%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1610875789595!5m2!1sen!2sin"
+                        <iframe className="map-embed lzy_ifrm" title="location" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.0330513836493!2d77.29640273776388!3d8.950733632835957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0429edf3449fcd%3A0x99c7a4fdf1762a61!2sMelagaram%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1610875789595!5m2!1sen!2sin"
                          frameBorder="0"  allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>                        
                     </div>
                 </div>
@@ -99,7 +110,7 @@ function Footer(){
                     </div>
 
                      <div className="d-flex justify-content-center align-items-center frame map">
-                        <iframe className="map-embed" title="location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.0330513836493!2d77.29640273776388!3d8.950733632835957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0429edf3449fcd%3A0x99c7a4fdf1762a61!2sMelagaram%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1610875789595!5m2!1sen!2sin"
+                        <iframe className="map-embed lzy_ifrm" title="location" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.0330513836493!2d77.29640273776388!3d8.950733632835957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0429edf3449fcd%3A0x99c7a4fdf1762a61!2sMelagaram%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1610875789595!5m2!1sen!2sin"
                          frameBorder="0"  allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>                        
                     </div>                   
                 </div>

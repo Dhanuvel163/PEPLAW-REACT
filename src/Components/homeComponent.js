@@ -1,40 +1,16 @@
 import React, { useState,memo,useEffect } from "react";
 import {Card,CardBody,CardTitle,CardText,Button} from "reactstrap";
 import {Link} from "react-router-dom";
-
+import {imageObserver} from '../Components/CustomHooks/useLazyloading'
 function Home(){
 
     useEffect(() => {
-    const offlineAlert = function(){
-        alert("Oh no, you lost your network connection.");
-    }
-    window.addEventListener("offline",offlineAlert);
-    const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-          entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                  const lazyImage = entry.target
-                  let img = document.createElement("IMG")
-                  img.setAttribute("alt","Card image cap")
-                  img.setAttribute("class","card-img-top")
-                  img.setAttribute("src",lazyImage.dataset.src)
-                  img.onload = function(){
-                  lazyImage.replaceWith(img)
-                  }
-
-                  // lazyImage.src = lazyImage.dataset.src
-                  lazyImage.classList.remove("lzy_img");
-
-                  imgObserver.unobserve(lazyImage);
-              }
-          })
-      });
       const arr = document.querySelectorAll('.lzy_img')
       arr.forEach((v) => {
           imageObserver.observe(v);
       })
       return () => {
         imageObserver.disconnect();
-        window.removeEventListener('offline',offlineAlert,true)
       }
     })
 
