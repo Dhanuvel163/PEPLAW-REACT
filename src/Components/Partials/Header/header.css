@@ -13,13 +13,7 @@
 }
 .dropdown-menu {
   transition: transform 1s ease-in-out !important;
-  -moz-transition: transform 1s ease-in-out !important;
-  -ms-transition: transform 1s ease-in-out !important;
-  -webkit-transition: transform 1s ease-in-out !important;
-  animation: growDown 0.5s ease-in-out;
-  -webkit-animation: growDown 0.5s ease-in-out;
-  -moz-animation: growDown 0.5s ease-in-out;
-  -o-animation: growDown 0.5s ease-in-out;
+  animation: fadein 0.5s ease-in-out;
   transform-origin: top center;
   background-color: whitesmoke !important;
   border: 1.5px solid white !important;
@@ -41,8 +35,7 @@
   color: white;
 }
 .dropdown-divider {
-  margin-left: 20px !important;
-  margin-right: 20px !important;
+  margin: 0px 20px !important;
   border-top: 1px solid white !important;
 }
 
