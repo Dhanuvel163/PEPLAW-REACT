@@ -17,10 +17,12 @@
     "reactstrap": "^8.5.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "webpack-bundle-analyzer": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "analyse": "node analyse.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,5 +41,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

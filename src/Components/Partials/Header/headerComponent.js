@@ -11,8 +11,7 @@ function Logout(props){
     return(
         isloggedin()
         ?
-        <div onClick={lout} style={{marginRight:10}}>
-            <NavItem>
+            <NavItem onClick={lout} style={{marginRight:10}}>
                 <Link to="/" className="nav-link">
                     <svg style={{marginRight:3}}
                      xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lock-fill" viewBox="0 0 16 16">
@@ -21,7 +20,6 @@ function Logout(props){
                     Logout
                 </Link>
             </NavItem>    
-        </div>
         :
         <div></div>
     )
@@ -116,7 +114,7 @@ class Header extends PureComponent{
                 <Navbar color="dark" dark expand="md">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
-                        <img src="/assets/lawlogo64.webp" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>
+                        <img src="/assets/lawlogo192.webp" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>
                         <b >PEP-LAW</b>
                         </Link>
                     </div>
