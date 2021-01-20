@@ -1,39 +1,41 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
+// import React,{useState,useEffect} from "react";
 import {Container,Button,FormGroup,Label,Row,Col,Media} from "reactstrap";
 import { Control, Errors, LocalForm  } from "react-redux-form";
-import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
-import * as country_city from '../../../shared/city-country.json'
-import * as state_country from '../../../shared/state-country.json'
+import {islawyerloggedin} from "../../../service/userservice";
+// import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
+// import * as country_city from '../../../shared/city-country.json'
+// import * as state_country from '../../../shared/state-country.json'
 import Formerror from '../../Partials/Formerror/Formerror';
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && val.length >= len;
 const maxLength = (len) => (val) => val && val.length <= len;
 const isNumber = (val) => !isNaN(Number(val));
-let countryData = country_city.default.data
-let stateData = state_country.default.data
+// let countryData = country_city.default.data
+// let stateData = state_country.default.data
 function UsereditForm(props){
-    let [country,setCountry]=useState(null)
-    let [stateCountry,setstateCountry]=useState(null)
+    // let [country,setCountry]=useState(null)
+    // let [stateCountry,setstateCountry]=useState(null)
     const  handlesubmit=(values)=> {
         props.postprofiledata(values.username,values.mobile,values.country,values.city,values.address,values.state,values.pincode);
         props.clearEdit()
     }
-    const  handlechange=(values)=> {
-        setCountry(countryData.findIndex((d)=>d.country===values.country))
-        setstateCountry(stateData.findIndex((d)=>d.name===values.country))
-    }
-    useEffect(()=>{
-        if(! country){
-        if(islawyerloggedin() && props.profiledata.profiledata.lawyer){
-            setCountry(countryData.findIndex((d)=>d.country===props.profiledata.profiledata.lawyer.country))
-            setstateCountry(stateData.findIndex((d)=>d.name===props.profiledata.profiledata.lawyer.country))
-        }else if(isuserloggedin() && props.profiledata.profiledata.user){
-            setCountry(countryData.findIndex((d)=>d.country===props.profiledata.profiledata.user.country))
-            setstateCountry(stateData.findIndex((d)=>d.name===props.profiledata.profiledata.user.country))
-        }
-        }
-    },[country,props,stateCountry])
+    // const  handlechange=(values)=> {
+    //     setCountry(countryData.findIndex((d)=>d.country===values.country))
+    //     setstateCountry(stateData.findIndex((d)=>d.name===values.country))
+    // }
+    // useEffect(()=>{
+    //     if(! country){
+    //     if(islawyerloggedin() && props.profiledata.profiledata.lawyer){
+    //         setCountry(countryData.findIndex((d)=>d.country===props.profiledata.profiledata.lawyer.country))
+    //         setstateCountry(stateData.findIndex((d)=>d.name===props.profiledata.profiledata.lawyer.country))
+    //     }else if(isuserloggedin() && props.profiledata.profiledata.user){
+    //         setCountry(countryData.findIndex((d)=>d.country===props.profiledata.profiledata.user.country))
+    //         setstateCountry(stateData.findIndex((d)=>d.name===props.profiledata.profiledata.user.country))
+    //     }
+    //     }
+    // },[country,props,stateCountry])
     return(
           <Container style={{ marginTop: 50 }}>
             <hr></hr>
@@ -70,7 +72,7 @@ function UsereditForm(props){
                     }
                   }
                   onSubmit={(values) => handlesubmit(values)}
-                  onChange={(values) => handlechange(values)}
+                  // onChange={(values) => handlechange(values)}
                 >
                   <div className="form-group">
                     <Label for="username">Username</Label>
@@ -111,11 +113,11 @@ function UsereditForm(props){
                           <Control.text model=".country" list="countries" className="form-control" name="country" placeholder="Country"
                           />
                         <datalist id="countries">
-                          {
+                          {/* {
                             countryData.map((d)=>(
                               <option key={d.country} value={d.country}></option>
                             ))
-                          }
+                          } */}
                         </datalist>
                         </FormGroup>
                       </Col>
@@ -131,42 +133,42 @@ function UsereditForm(props){
                     <Row>
                         <Col sm="6">
                           {
-                            (country && countryData[country] && countryData[country].cities)
-                            ?
+                            // (country && countryData[country] && countryData[country].cities)
+                            // ?
                             <FormGroup>
                             <Label for="city">City</Label>
                             <Control.text model=".city" list="cities" className="form-control" name="city" placeholder="City"
                             />
                             <datalist id="cities">
-                              {
+                              {/* {
                                 countryData[country].cities.map((d,index)=>(
                                   <option key={index} value={d}></option>
                                 ))
-                              }
+                              } */}
                             </datalist>
                             </FormGroup>
-                            :
-                            null
+                            // :
+                            // null
                           }
                         </Col>
                         <Col sm="6">
                           {
-                            (stateCountry && stateData[stateCountry] && stateData[stateCountry].states && stateData[stateCountry].states.length>0)
-                            ?
+                            // (stateCountry && stateData[stateCountry] && stateData[stateCountry].states && stateData[stateCountry].states.length>0)
+                            // ?
                             <FormGroup>
                             <Label for="state">State</Label>
                             <Control.text model=".state" list="states" className="form-control" name="state" placeholder="State"
                             />
                             <datalist id="states">
-                              {
+                              {/* {
                                 stateData[stateCountry].states.map((d,index)=>(
                                   <option key={index} value={d.name}></option>
                                 ))
-                              }
+                              } */}
                             </datalist>
                             </FormGroup>
-                            :
-                            null
+                            // :
+                            // null
                           }
                         </Col>
                     </Row>
