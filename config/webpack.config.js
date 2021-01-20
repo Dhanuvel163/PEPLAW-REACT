@@ -1,5 +1,9 @@
 'use strict';
 
+// import PurgeCSS webpack plugin and glob-all
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const glob = require('glob-all')
+
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -597,7 +601,16 @@ module.exports = function(webpackEnv) {
             entrypoints: entrypointFiles,
           };
         },
-      }),
+      },
+
+        // Remove unused css with PurgeCSS. See https://github.com/FullHuman/purgecss
+        // for more information about PurgeCSS.
+        // Specify the path of the html files and source files
+        new PurgecssPlugin({
+          paths: [paths.appHtml, ...glob.sync(`${paths.appSrc}/**/*`, { nodir: true })]
+        }),
+
+      ),
       // Moment.js is an extremely popular library that bundles large locale files
       // by default due to how webpack interprets its code. This is a practical
       // solution that requires the user to opt into importing specific locales.
