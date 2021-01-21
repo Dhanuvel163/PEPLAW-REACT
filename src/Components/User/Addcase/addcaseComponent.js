@@ -33,7 +33,7 @@ function Addcase(props){
             <Container style={{marginTop:50}}>
             <hr></hr>
                 <Row>
-                    <Col sm="6" className="d-flex align-items-center">
+                    <Col xs="12" sm="6" className="d-flex align-items-center">
                         <LocalForm onSubmit={(values)=>handlesubmit(values)}>
                             <div className='form-group'>
                                 <Label for="disposition-code">Disposition code</Label>

@@ -608,8 +608,13 @@ module.exports = function(webpackEnv) {
         // Specify the path of the html files and source files
         new PurgecssPlugin({
           paths: [paths.appHtml, ...glob.sync(`${paths.appSrc}/**/*`, { nodir: true })],
-          whitelistPatterns: [/col/],
-          whitelist: ['btn']
+          // whitelistPatterns: [/col/,/drop/,/nav/,/text/,/collapse/,/btn/]
+          // whitelist: ['btn']
+          safelist: {
+            // standard: ['safelisted', /^safelisted-/],
+            // deep: [/^safelisted-deep-/],
+            greedy: [/^col/,/^drop/,/^nav/,/^text/,/^collapse/,/^btn/]
+          }
         }),
 
       ),
