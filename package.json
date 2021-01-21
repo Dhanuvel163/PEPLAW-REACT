@@ -72,7 +72,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "postbuild": "purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css",
+    "postbuild(cancel)": "purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css",
     "start": "node scripts/start.js",
     "analyse": "node analyse.js",
     "build": "node scripts/build.js",
