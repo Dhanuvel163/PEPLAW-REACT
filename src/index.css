@@ -1,3 +1,4 @@
+/*! purgecss start ignore */
 .bg-dark {
   background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
 }
@@ -270,3 +271,4 @@ body::-webkit-scrollbar-thumb {
     background-size: contain;
   }
 }
+/*! purgecss end ignore */
