@@ -1,7 +1,7 @@
 import React from 'react'
 import { Toast, ToastHeader } from 'reactstrap';
 import './snackbar.css'
-import {clearMessage} from '../../../shared/actionCreators'
+import {clearMessage} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 
 const mapStateToProps=state=>{

@@ -3,7 +3,7 @@ import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
 // import Footer from './Partials/Footer/footerComponent';
-import {fetchuserdata} from '../shared/actionCreators'
+import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
 import {Spinner} from 'reactstrap'
 

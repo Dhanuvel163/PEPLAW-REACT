@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import { Button, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
-import {postusercase} from '../../../shared/actionCreators'
+import {postusercase} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import Formerror from '../../Partials/Formerror/Formerror';
 

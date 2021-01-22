@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import {Card,CardHeader,CardBody,CardTitle,CardText } from 'reactstrap';
 import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import './mycases.css'
-import {fetchusercases} from '../../../shared/actionCreators'
+import {fetchusercases} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 

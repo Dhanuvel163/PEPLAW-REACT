@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import './useredit.css'
 import UsereditForm from './usereditForm'
 import Usereditcard from './Usereditcard'
-import {postprofiledata,fetchprofiledata} from '../../../shared/actionCreators'
+import {postprofiledata,fetchprofiledata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 

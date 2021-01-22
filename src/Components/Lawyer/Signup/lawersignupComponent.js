@@ -3,7 +3,7 @@ import {Container, Button, FormGroup, Label,Row,Col,Media } from 'reactstrap';
 import {Control,Errors,Form} from 'react-redux-form';
 import {Link,useHistory
 } from "react-router-dom";
-import {postlawyersignup} from '../../../shared/actionCreators'
+import {postlawyersignup} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {actions} from 'react-redux-form';
 import Formerror from '../../Partials/Formerror/Formerror';

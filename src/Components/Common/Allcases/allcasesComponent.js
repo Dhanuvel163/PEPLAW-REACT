@@ -3,7 +3,7 @@ import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 import {fetchallcases,postaccept
-} from '../../../shared/actionCreators'
+} from '../../../shared/Actioncreators/actionCreators'
 const mapStateToProps=state=>{
     return {
         allcases:state.allcases
