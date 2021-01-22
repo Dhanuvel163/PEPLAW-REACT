@@ -2,19 +2,50 @@ import React, { Component,lazy, Suspense } from 'react';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
-import Footer from './Partials/Footer/footerComponent';
+// import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
 import {Spinner} from 'reactstrap'
-const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
-const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
-const Lawersignup = lazy(() => import('./Lawyer/Signup/lawersignupComponent'))
-const Usersignup = lazy(() => import('./User/Signup/usersignupComponent'))
-const Useredit = lazy(() => import('./Common/Useredit/usereditComponent'))
-const Addcase = lazy(() => import('./User/Addcase/addcaseComponent'))
-const Mycases = lazy(() => import('./Common/Mycases/mycasesComponent'))
-const Allcases = lazy(() => import('./Common/Allcases/allcasesComponent'))
-const Home = lazy(() => import('./homeComponent'))
+
+// const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
+// const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
+// const Lawersignup = lazy(() => import('./Lawyer/Signup/lawersignupComponent'))
+// const Usersignup = lazy(() => import('./User/Signup/usersignupComponent'))
+// const Useredit = lazy(() => import('./Common/Useredit/usereditComponent'))
+// const Addcase = lazy(() => import('./User/Addcase/addcaseComponent'))
+// const Mycases = lazy(() => import('./Common/Mycases/mycasesComponent'))
+// const Allcases = lazy(() => import('./Common/Allcases/allcasesComponent'))
+// const Home = lazy(() => import('./homeComponent'))
+
+const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
+
+const Lawyerlogin = lazyWithPreload(() => import('./Lawyer/Login/lawerloginComponent'))
+const Userlogin = lazyWithPreload(() => import('./User/Login/userloginComponent'))
+const Lawersignup = lazyWithPreload(() => import('./Lawyer/Signup/lawersignupComponent'))
+const Usersignup = lazyWithPreload(() => import('./User/Signup/usersignupComponent'))
+const Useredit = lazyWithPreload(() => import('./Common/Useredit/usereditComponent'))
+const Addcase = lazyWithPreload(() => import('./User/Addcase/addcaseComponent'))
+const Mycases = lazyWithPreload(() => import('./Common/Mycases/mycasesComponent'))
+const Allcases = lazyWithPreload(() => import('./Common/Allcases/allcasesComponent'))
+const Home = lazyWithPreload(() => import('./homeComponent'))
+
+const componentsPreload = {
+    Lawyerlogin,
+    Userlogin,
+    Lawersignup,
+    Usersignup,
+    Useredit,
+    Addcase,
+    Mycases,
+    Allcases,
+    Home
+}
+
+function lazyWithPreload(factory) {
+  const Component = lazy(factory);
+  Component.preload = factory;
+  return Component;
+}
 
 const mapStateToProps=state=>{
     return {
@@ -49,7 +80,7 @@ class Main extends Component{
     render(){
         return(
             <>
-                <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata}></Header>
+                <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata} componentsPreload={componentsPreload}></Header>
                 <div style={{marginTop:70,padding:10,minHeight:700,paddingBottom:30}} className='text-white' >
 
                 <SnackbarC></SnackbarC>
@@ -116,7 +147,8 @@ class Main extends Component{
                         </Switch>
                 }
                 </div>
-                <Footer></Footer>
+                {Lazysuspense(<Footer/>)}
+                {/* <Footer></Footer> */}
             </>
         );
     }

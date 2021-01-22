@@ -12,7 +12,7 @@ function Logout(props){
         isloggedin()
         ?
             <NavItem onClick={lout} style={{marginRight:10}}>
-                <Link to="/" className="nav-link">
+                <Link onMouseOver={()=>props.componentsPreload.Home.preload()} to="/" className="nav-link">
                     <svg style={{marginRight:3}}
                      xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lock-fill" viewBox="0 0 16 16">
                     <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
@@ -25,12 +25,12 @@ function Logout(props){
     )
 }
 
-function Mycases(){
+function Mycases(props){
     return(
         isloggedin()
         ?
         <NavItem>
-            <Link to="/user/mycases" className="nav-link">
+            <Link onMouseOver={()=>props.componentsPreload.Mycases.preload()} to="/user/mycases" className="nav-link">
                 <svg style={{marginRight:6}} 
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-journal-text" viewBox="0 0 16 16">
                 <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
@@ -50,7 +50,7 @@ function USERDATA(props){
         isloggedin()
         ?
         <NavItem>
-            <Link to="/user/edit" className="nav-link">
+            <Link onMouseOver={()=>props.componentsPreload.Useredit.preload()} to="/user/edit" className="nav-link">
                 <svg 
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -68,7 +68,7 @@ function ADDCASEDATA(props){
         isloggedin() && isuserloggedin()
         ?
         <NavItem>
-            <Link to="/user/case" className="nav-link">
+            <Link onMouseOver={()=>props.componentsPreload.Addcase.preload()} to="/user/case" className="nav-link">
                 <svg style={{marginRight:6}}
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-journal-plus" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
@@ -82,7 +82,7 @@ function ADDCASEDATA(props){
         isloggedin() && islawyerloggedin()
         ?
         <NavItem>
-            <Link to="/search/case" className="nav-link">
+            <Link onMouseOver={()=>props.componentsPreload.Allcases.preload()} to="/search/case" className="nav-link">
                 <svg style={{marginRight:6}}
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-layout-text-sidebar" viewBox="0 0 16 16">
                 <path d="M3.5 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM3 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
@@ -95,17 +95,21 @@ function ADDCASEDATA(props){
         <div></div>
     )
 }
-
+// componentsPreload
 class Header extends PureComponent{
     constructor(props){
         super(props);
         this.toggle=this.toggle.bind(this);
         this.state={
-            isOpen:false,   
+            isOpen:false,
+            componentsPreload:{}
         }
     }
     toggle(){
-        this.setState({isOpen:!this.state.isOpen});
+        this.setState({...this.state,isOpen:!this.state.isOpen});
+    }
+    preload(compnt){
+            this.props.componentsPreload[compnt].preload()
     }
 
     render(){
@@ -123,10 +127,10 @@ class Header extends PureComponent{
                     {
                         isloggedin() ?
                         <Nav className="ml-auto" navbar>
-                            <ADDCASEDATA />
-                            <USERDATA user={this.props.userdata}/>
-                            <Mycases/>
-                            <Logout fetchuserdata={this.props.fetchuserdata}></Logout>
+                            <ADDCASEDATA componentsPreload={this.props.componentsPreload} />
+                            <USERDATA user={this.props.userdata} componentsPreload={this.props.componentsPreload}/>
+                            <Mycases componentsPreload={this.props.componentsPreload}/>
+                            <Logout fetchuserdata={this.props.fetchuserdata} componentsPreload={this.props.componentsPreload}></Logout>
                         </Nav>
                         :
                         <Nav className="ml-auto" navbar>
@@ -139,11 +143,11 @@ class Header extends PureComponent{
                                 Login
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <Link  to="/lawyer/login" className="dropdown-item">
+                                    <Link onMouseOver={()=>this.preload('Lawyerlogin')}  to="/lawyer/login" className="dropdown-item">
                                         Lawyer Login
                                     </Link>
                                     <DropdownItem divider />
-                                    <Link  to="/user/login" className="dropdown-item">
+                                    <Link onMouseOver={()=>this.preload('Userlogin')}  to="/user/login" className="dropdown-item">
                                         User Login
                                     </Link>
                                 </DropdownMenu>
@@ -159,11 +163,11 @@ class Header extends PureComponent{
                                     Signup
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <Link  to="/lawyer/signup" className="dropdown-item">
+                                    <Link onMouseOver={()=>this.preload('Lawersignup')}  to="/lawyer/signup" className="dropdown-item">
                                         Lawyer Signup
                                     </Link>
                                     <DropdownItem divider />
-                                    <Link  to="/user/signup" className="dropdown-item">
+                                    <Link onMouseOver={()=>this.preload('Lawyerlogin')}  to="/user/signup" className="dropdown-item">
                                         User Signup
                                     </Link>
                                 </DropdownMenu>

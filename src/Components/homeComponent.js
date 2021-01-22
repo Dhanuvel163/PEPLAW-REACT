@@ -7,7 +7,7 @@ function Home(){
     useEffect(() => {
       const arr = document.querySelectorAll('.lzy_img')
       arr.forEach((v) => {
-          imageObserver.observe(v);
+        imageObserver.observe(v);
       })
       return () => {
         imageObserver.disconnect();
@@ -71,8 +71,8 @@ function Home(){
                         <Card className="imgbox">
                           <div data-src={data.image} className="lzy_img"> 
                             <div className="lzy_img__image loading"></div> 
-                            <div className="lzy_img__title loading"></div> 
-                            <div className="lzy_img__description loading"></div> 
+                            {/* <div className="lzy_img__title loading"></div>  */}
+                            {/* <div className="lzy_img__description loading"></div>  */}
                           </div> 
                           <CardBody>
                             <CardText

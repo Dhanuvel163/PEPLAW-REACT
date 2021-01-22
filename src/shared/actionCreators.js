@@ -58,7 +58,6 @@ export const postlawyersignup=(name,email,password,mobile,history)=>(dispatch)=>
         dispatch(fetchprofiledata())
         dispatch(fetchallcases())
         dispatch(fetchusercases())
-
         dispatch(fetchuserdata())
         history.push("/home");
         displaySuccess(dispatch,'You are logged in as Lawyer')
@@ -123,7 +122,6 @@ export const postusersignup=(name,email,password,mobile,history)=>(dispatch)=>{
             localStorage.setItem('islawyer',false)
             localStorage.setItem('name',Response.name)
             dispatch(fetchprofiledata())
-            // dispatch(fetchallcases())
             dispatch(fetchusercases())
             dispatch(fetchuserdata())
             history.push("/home");
@@ -154,7 +152,6 @@ export const postusersignin=(email,password,history)=>(dispatch)=>{
             localStorage.setItem('islawyer',false)
             localStorage.setItem('name',Response.name)
             dispatch(fetchprofiledata())
-            // dispatch(fetchallcases())
             dispatch(fetchusercases())
             dispatch(fetchuserdata())
             history.push("/home");
@@ -171,7 +168,6 @@ export const postusersignin=(email,password,history)=>(dispatch)=>{
 export const fetchuserdata=()=>(dispatch)=>{
     dispatch(adduserdata());
 }
-
 export const adduserdata=()=>{
     if(isloggedin()){
         if(islawyerloggedin()){
@@ -203,7 +199,7 @@ export const adduserdata=()=>{
     }
 }
 
-//Edit Profile
+//Fetch Profile Data
 
 export const fetchprofiledata=()=>(dispatch)=>{
     dispatch(addprofileloading(true))
@@ -249,12 +245,10 @@ export const addprofiledata=(data)=>({
     type:actionTypes.ADD_PROFILEDATA,
     payload:data
 })
-
 export const addprofilefailed=(err)=>({
     type:actionTypes.ADD_PROFILEDATAFAILED,
     payload:err
 })
-
 export const addprofileloading=()=>({
     type:actionTypes.ADD_PROFILEDATA_LOADING,
 })
@@ -286,9 +280,10 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>
                 throw new Error(error.message)
             })
             .then(res=> res.json())
-            .then(lawyer=>{
+            .then(res=>{
                 displaySuccess(dispatch,'Edited Successfully!!')
-                dispatch(fetchprofiledata())})
+                dispatch(addprofiledata({lawyer:res.profile}))
+            })
             .catch((error)=>{
                 displayError(dispatch,'Something went wrong:'+error.message)
             })
@@ -315,9 +310,10 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>
                 throw new Error(error.message)
             })
             .then(res=> res.json())
-            .then(lawyer=>{
+            .then(res=>{
                 displaySuccess(dispatch,'Edited Successfully!!')
-                dispatch(fetchprofiledata())})
+                dispatch(addprofiledata({user:res.profile}))
+            })
             .catch((error)=>{
                 displayError(dispatch,'Something went wrong:'+error.message)
             })
@@ -346,7 +342,7 @@ export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
     .then(Response=>{
         if(Response.success){
             displaySuccess(dispatch,'Added case Successfully!')
-            dispatch(fetchusercases())
+            dispatch(addtousercases(Response.case))
         }
     })
     .catch((error)=>{
@@ -420,15 +416,17 @@ export const fetchusercases=()=>(dispatch)=>{
 export const usercasesloading=()=>({
    type:actionTypes.ADD_USERCASES_LOADING 
 })
-
 export const usercasesfailed=(err)=>({
     type:actionTypes.ADD_USERCASESFAILED,
     payload:err
 })
-
 export const addusercases=(usercases)=>({
     type:actionTypes.ADD_USERCASES,
     payload:usercases
+})
+export const addtousercases=(newcase)=>({
+    type:actionTypes.ADD_TO_USERCASES,
+    payload:newcase
 })
 
 
@@ -470,17 +468,18 @@ export const fetchallcases=()=>(dispatch)=>{
 export const allcasesloading=()=>({
    type:actionTypes.ADD_ALLCASES_LOADING 
 })
-
 export const allcasesfailed=(err)=>({
     type:actionTypes.ADD_ALLCASESFAILED,
     payload:err
 })
-
 export const addallcases=(usercases)=>({
     type:actionTypes.ADD_ALLCASES,
     payload:usercases
 })
-
+export const filterallcases=(id)=>({
+    type:actionTypes.FILTER_ALLCASES,
+    payload:id
+})
 //accept Handler
 
 export const postaccept=(id)=>(dispatch)=>{
@@ -498,8 +497,8 @@ export const postaccept=(id)=>(dispatch)=>{
         .then(Response=>{
             if(Response.success){
                 displaySuccess(dispatch,'accepted!!')
-                dispatch(fetchallcases());
-                dispatch(fetchusercases());
+                dispatch(filterallcases(id));
+                dispatch(addtousercases(Response.case))
             }
         })
         .catch((error)=>{
