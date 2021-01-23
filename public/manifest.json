@@ -21,8 +21,8 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "https://pep-law-react.web.app/home",
-  "display": "standalone",
+  "start_url": "/index.html",
+  "display": "fullscreen",
   "theme_color": "#091432",
   "background_color": "#091432",
   "author":"DHANAVEL R",

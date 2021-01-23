@@ -1,6 +1,6 @@
 import React from 'react'
 import { Toast, ToastHeader } from 'reactstrap';
-import './snackbar.css'
+import './snackbar.scss'
 import {clearMessage} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import './useredit.css'
+import './useredit.scss'
 import UsereditForm from './usereditForm'
 import Usereditcard from './Usereditcard'
 import {postprofiledata,fetchprofiledata} from '../../../shared/Actioncreators/actionCreators'

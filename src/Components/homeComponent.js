@@ -44,7 +44,7 @@ function Home(){
           WELCOME !!
         </h3>
         <div className="container" style={{ marginTop: 60 }}>
-          <Card className="imgbox home-card">
+          <Card className="card-style four-box-shadow  home-card">
             <CardBody style={{ marginTop: 30, minHeight: 400 }}>
                 <CardTitle style={{ color: "black", textAlign: "left" }}>
                   <b style={{ fontWeight: 1000 }}>
@@ -68,7 +68,7 @@ function Home(){
               <div className="row">
                   {cardData.map((data)=>(
                       <div key={data.title} className="col-12 col-md-6 mt-5">
-                        <Card className="imgbox">
+                        <Card className="card-style four-box-shadow ">
                           <div data-src={data.image} className="lzy_img"> 
                             <div className="lzy_img__image loading"></div> 
                             {/* <div className="lzy_img__title loading"></div>  */}

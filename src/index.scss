@@ -41,12 +41,18 @@
 //@import "~bootstrap/scss/print";
 
 /*! purgecss start ignore */
+
+//For BG
+
 .bg-dark {
   background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
 }
 .bg-danger {
   background: linear-gradient(to right, rgb(127, 0, 255), rgb(102, 18, 158));
 }
+
+//For Button
+
 .btn-primary {
   background: linear-gradient(to right, rgb(9, 48, 40), rgb(35, 122, 87));
 }
@@ -71,62 +77,86 @@
 .text-warning {
   text-transform: uppercase;
 }
-.one-edge-shadow {
-  box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+
+//For Header-Footer
+
+.header-footer {
   margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
   border-radius: 15px;
 }
-
 @media only screen and (max-width: 600px) {
-  .one-edge-shadow {
+  .header-footer {
     margin-left: 2px;
     margin-right: 2px;
     margin-top: 2px;
     margin-bottom: 3px !important;
     border-radius: 10px;
   }
-  .navbar {
-    /* padding: 4px !important; */
-  }
   .navbar-brand > a {
     padding: 2px;
   }
 }
 
-.top-edge-shadow {
-  box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
-}
+//For Box Shadow
 
-.box {
+// .top-edge-shadow {
+//   box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
+// }
+
+.four-box-shadow {
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
-  transition: transform 0.5s ease-in-out;
-  border-radius: 5px;
-  animation: cardAnim 0.7s;
+}
+.four-box-shadow-real {
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
 }
 
-.box:hover {
+//For Cards
+
+.card-style {
+  transition: transform 0.5s ease-in-out;
+  animation: cardAnim 0.7s;
+}
+.card-style:hover {
   transform: translateX(-10px) translateY(-10px);
+}
+
+.cases .card-body {
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  border-radius: inherit;
+}
+
+.cases .card-header {
+  box-shadow: 0 8px 6px -6px black;
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  z-index: 20;
+}
+
+.home-card {
+  background-image: url(/assets/justice.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 600px) {
+  .home-card {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }
 
 img {
   box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
   border-radius: 5px;
 }
-.imgbox {
-  transition: transform 0.5s ease-in-out;
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-}
-.imgbox:hover {
-  transform: translateX(-10px) translateY(-10px);
-}
+
+//For Forms
 
 form {
   width: 100%;
@@ -174,10 +204,12 @@ form {
 .form-group .form-error:not(:first-child) {
   display: none;
 }
-
 .form-group span:not(:first-child) {
   display: none;
 }
+
+//Animation
+
 @keyframes click {
   0% {
     transform: scaleX(1) translateY(4px);
@@ -217,18 +249,7 @@ form {
   }
 }
 
-.cases .card-body {
-  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
-  border-radius: inherit;
-}
-
-.cases .card-header {
-  box-shadow: 0 8px 6px -6px black;
-  border-bottom-left-radius: 5px !important;
-  border-bottom-right-radius: 5px !important;
-  z-index: 20;
-  // border: 1px solid rgb(127, 0, 255);
-}
+//Scrollbar
 
 body::-webkit-scrollbar {
   width: 12px;
@@ -244,6 +265,8 @@ body::-webkit-scrollbar-thumb {
   border: 1px solid white;
   border-radius: 10px;
 }
+
+//Lazy Loading
 
 .lzy_img {
   background-color: #fff;
@@ -293,24 +316,9 @@ body::-webkit-scrollbar-thumb {
   animation: loading 1s infinite;
 }
 
-/* Loading Animation */
 @keyframes loading {
   100% {
     transform: translateX(40%);
-  }
-}
-
-.home-card {
-  background-image: url(/assets/justice.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-}
-
-@media only screen and (max-width: 600px) {
-  .home-card {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
   }
 }
 /*! purgecss end ignore */

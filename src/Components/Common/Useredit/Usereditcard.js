@@ -7,7 +7,7 @@ export default function Usereditcard(props) {
     {
       isloggedin() && islawyerloggedin()
       ?
-      <Card className="box" inverse color="danger">
+      <Card className="card-style four-box-shadow" inverse color="danger">
         <CardHeader style={{ textTransform: "uppercase" }}>
           <div className="d-flex justify-content-end">
             <div onClick={props.clickEdit} style={{cursor:'pointer'}}>
@@ -57,7 +57,7 @@ export default function Usereditcard(props) {
       :
       isloggedin() && isuserloggedin()
       ?
-      <Card className="box" inverse color="danger">
+      <Card className="card-style four-box-shadow" inverse color="danger">
         <CardHeader style={{ textTransform: "uppercase" }}>
           <div className="d-flex justify-content-end">
             <div onClick={props.clickEdit} style={{cursor:'pointer'}}>

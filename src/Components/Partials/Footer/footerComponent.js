@@ -1,5 +1,5 @@
 import React,{memo,useEffect} from 'react';
-import './footer.css'
+import './footer.scss'
 import {Link} from "react-router-dom";
 import {iframeObserver} from '../../CustomHooks/useLazyloading'
 function Footer(){
@@ -15,7 +15,7 @@ function Footer(){
     })
 
         return(
-            <div className='bg-dark one-edge-shadow footer' style={{marginBottom:8,opacity:0.8}}>
+            <div className='bg-dark header-footer four-box-shadow-real footer' style={{marginBottom:8,opacity:0.8}}>
                 <div className="d-flex justify-content-between foot">
 
                     <div className="d-flex justify-content-center align-items-center frame f-contact">
@@ -129,7 +129,7 @@ function Footer(){
 
 
     // <div >
-    //     <footer className="bg-dark one-edge-shadow footer footer-distributed">
+    //     <footer className="bg-dark header-footer footer footer-distributed">
 	// 	<div class="footer-left">
     //         <h3>Pep <span>- Law</span></h3>
     //         <p class="footer-links">

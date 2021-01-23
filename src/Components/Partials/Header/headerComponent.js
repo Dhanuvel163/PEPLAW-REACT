@@ -2,7 +2,7 @@ import React,{PureComponent} from 'react';
 import {isloggedin,isuserloggedin,islawyerloggedin} from '../../../service/userservice';
 import {Collapse,Navbar,NavbarToggler,Nav,NavItem,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem} from 'reactstrap';
 import {Link} from "react-router-dom";
-import './header.css'
+import './header.scss'
 function Logout(props){
     const lout = () =>{
             localStorage.removeItem('token')
@@ -114,7 +114,7 @@ class Header extends PureComponent{
 
     render(){
         return(
-            <div className="fixed-top one-edge-shadow">
+            <div className="fixed-top header-footer four-box-shadow-real">
                 <Navbar color="dark" dark expand="md">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
