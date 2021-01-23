@@ -43,6 +43,7 @@ function Home(){
           </svg>
           WELCOME !!
         </h3>
+        {/* <div style={{ marginTop: 60 }}> */}
         <div className="container" style={{ marginTop: 60 }}>
           <Card className="card-style four-box-shadow  home-card">
             <CardBody style={{ marginTop: 30, minHeight: 400 }}>
