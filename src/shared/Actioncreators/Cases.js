@@ -5,26 +5,22 @@ import {displayError,displaySuccess} from './Helpers/Error'
 import {clearLoading,load} from './Helpers/Loading'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
+const options = (data,method='GET') => {
+    return (method==='GET')?{
+        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        credentials: "same-origin"
+    }:{
+        method:method,body:JSON.stringify(data),
+        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        credentials: "same-origin"
+    }
+}
 
 //Add Case data
 
 export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
-    var newcase={
-        dcode:dcode,
-        ddate:ddate,
-        stime:stime,
-        acharge:acharge,
-        desc:desc
-    }
-    return fetchFunc(baseUrl+'api/useraccounts/cases',{
-        method: "POST",
-        body:JSON.stringify(newcase),
-        headers: {
-            "Content-Type": "application/json",
-            "authorization":localStorage.getItem('token')
-          },
-        credentials: "same-origin"
-    },dispatch)
+    const newcase={dcode,ddate,stime,acharge,desc}
+    return fetchFunc(baseUrl+'api/useraccounts/cases',options(newcase,'POST'),dispatch)
     .then(Response=>{
         if(Response.success){
             displaySuccess(dispatch,'Added case Successfully!')
@@ -38,65 +34,48 @@ export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
 
 //Load user cases
 
-export const fetchusercases=()=>(dispatch)=>{
+export const fetchusercases=()=>async(dispatch)=>{
     dispatch(usercasesloading(true));
-
     if(isloggedin() && isuserloggedin()){
-        return fetch(baseUrl+'api/useraccounts/cases',{
-            headers: {
-                "Content-Type": "application/json",
-                "authorization":localStorage.getItem('token')
-              },
-            credentials: "same-origin"
-        })
-            .then((res)=>{
-                if(res.ok){
-                    return res;
+        try{
+            const [cases,acceptedcases,pendingcases] = await Promise.all ([
+                fetch(baseUrl+'api/useraccounts/cases',options()),
+                fetch(baseUrl+'api/useraccounts/acceptedcases',options()),
+                fetch(baseUrl+'api/useraccounts/pendingcases',options())
+            ])
+            if(cases.ok && acceptedcases.ok && pendingcases.ok){
+                const casesdata =await cases.json()
+                const acceptedcasesdata =await acceptedcases.json()
+                const pendingcasesdata =await pendingcases.json()
+                if(casesdata.success && acceptedcasesdata.success && pendingcasesdata.success){
+                    dispatch(addusercases({cases:casesdata.cases,acceptedcases:acceptedcasesdata.cases,pendingcases:pendingcasesdata.cases}))
                 }else{
-                    var error=new Error('Error'+res.status+res.statusText)
-                    error.res=res;
-                    throw error;
+                    throw new Error('Error in Request')
                 }
-            },
-            (error)=>{
-                throw new Error(error.message)
-            })
-            .then(res=> res.json())
-            .then(Response=>{
-                if(Response.success){
-                    dispatch(addusercases(Response.cases))
-                }
-            })
-            .catch((error)=>{dispatch(usercasesfailed(error.message))})
-    }else{
-        return fetch(baseUrl+'api/lawyeraccounts/cases',{
-            headers: {
-                "Content-Type": "application/json",
-                "authorization":localStorage.getItem('token')
-              },
-            credentials: "same-origin"
-        })
-        .then((res)=>{
-            if(res.ok){
-                return res;
             }else{
-                var error=new Error('Error'+res.status+res.statusText)
-                error.res=res;
-                throw error;
+                throw new Error('Something Went Wrong')
             }
-        },
-        (error)=>{
-                throw new Error(error.message)
-        })
-        .then(res=> res.json())
-        .then(Response=>{
-            if(Response.success){
-                dispatch(addusercases(Response.cases))
+        }catch(e){
+            dispatch(usercasesfailed('Something Went Wrong'))
+            // dispatch(usercasesfailed(e.message))
+        }
+    }else{
+        try{
+            const res = await fetch(baseUrl+'api/lawyeraccounts/cases',options())
+            if(res.ok){
+                const data =await res.json()
+                if(data.success){
+                    dispatch(addusercases(data.cases))
+                }else{
+                    throw new Error(data.message)
+                }
+            }else{
+                throw new Error('Something Went Wrong')
             }
-        })
-        .catch((error)=>{dispatch(usercasesfailed(error.message))})
-    }
-    
+        }catch(e){
+            dispatch(usercasesfailed('Something Went Wrong'))
+        }
+    } 
 }
 
 export const usercasesloading=()=>({
@@ -118,36 +97,24 @@ export const addtousercases=(newcase)=>({
 
 //Load All unlocked cases
 
-export const fetchallcases=()=>(dispatch)=>{
+export const fetchallcases=()=>async(dispatch)=>{
     dispatch(allcasesloading(true));
-
     if(isloggedin() && islawyerloggedin()){
-        return fetch(baseUrl+'api/lawyeraccounts/allcases',{
-            headers: {
-                "Content-Type": "application/json",
-                "authorization":localStorage.getItem('token')
-              },
-            credentials: "same-origin"
-        })
-            .then((res)=>{
-                if(res.ok){
-                    return res;
-                }else{
-                    var error=new Error('Error'+res.status+res.statusText)
-                    error.res=res;
-                    throw error;
-                }
-            },
-            (error)=>{
-                throw new Error(error.message)
-            })
-            .then(res=> res.json())
-            .then(Response=>{
-                if(Response.success){
+        try{
+            const res = await fetch(baseUrl+'api/lawyeraccounts/allcases',options())
+            if(res.ok){
+                const data =await res.json()
+                if(data.success){
                     dispatch(addallcases(Response.cases))
+                }else{
+                    throw new Error(data.message)
                 }
-            })
-            .catch((error)=>{dispatch(allcasesfailed(error.message))})
+            }else{
+                throw new Error('Something Went Wrong')
+            }
+        }catch(e){
+            dispatch(allcasesfailed('Something Went Wrong'))
+        }
     }
 }
 
@@ -172,7 +139,7 @@ export const postaccept=(id)=>(dispatch)=>{
     dispatch(load())
     if(isloggedin() && islawyerloggedin()){
 
-        return fetchFunc(baseUrl+'api/lawyeraccounts/accept/'+id,{
+        return fetchFunc(baseUrl+'api/lawyeraccounts/apply/'+id,{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
@@ -182,7 +149,7 @@ export const postaccept=(id)=>(dispatch)=>{
         },dispatch)
         .then(Response=>{
             if(Response.success){
-                displaySuccess(dispatch,'accepted!!')
+                displaySuccess(dispatch,'applied successfully!!')
                 dispatch(filterallcases(id));
                 dispatch(addtousercases(Response.case))
             }

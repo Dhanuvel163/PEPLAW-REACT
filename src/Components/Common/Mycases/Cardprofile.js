@@ -1,17 +1,19 @@
+import {Card,CardHeader,CardBody,CardTitle,CardText } from 'reactstrap';
+import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import React,{useRef} from 'react';
-import './cardprofile.scss'
-import {Button,Card,CardHeader,CardBody,CardText } from 'reactstrap';
+
 export default function Cardprofile(props){
-    const acceptHandler=(id)=>{
-        props.postaccept(id);
-    }
     const toggle = () => {
-        (profile.current.style.display === 'none' || profile.current.style.display === '')
-        ? profile.current.style.display = 'block' : profile.current.style.display = 'none'
+    (profile.current.style.display === 'none' || profile.current.style.display === '')
+    ? profile.current.style.display = 'block' : profile.current.style.display = 'none'
     }
     let profile =useRef(null)
-        return(
-            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:'45px'}}>
+    return(
+        <>
+        {
+            isloggedin() && islawyerloggedin()
+            ?
+            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:50}} >
                 <CardHeader style={{textTransform:'uppercase'}}>
                     <div onMouseEnter={toggle} onMouseLeave={toggle}>
                         <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -41,41 +43,60 @@ export default function Cardprofile(props){
                             </p>
                         </div>
                     </div>
-
                 </CardHeader>
-                <CardBody className="allcases">
+                <CardBody className="mycases">
                     <CardText>
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
-                        {/* <span className="chips"> */}
                         {props.casedata.dispositioncode}
-                        {/* </span> */}
                     </CardText>
                     <CardText>
                         <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
-                        {/* <span className="chips"> */}
                         {props.casedata.amendedcharge}
-                        {/* </span> */}
                     </CardText>
                     <CardText>
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
-                        {/* <span className="chips"> */}
-                            {props.casedata.dispositiondate}
-                        {/* </span> */}
+                        {props.casedata.dispositiondate}
                     </CardText>
                     <CardText>
                         <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
-                        {/* <span className="chips"> */}
-                            {props.casedata.sentencetime}
-                        {/* </span> */}
+                        {props.casedata.sentencetime}
                     </CardText>
                     <CardText>
                         <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
-                        {/* <span className="chips"> */}
-                            {props.casedata.description?`${props.casedata.description}`:'No Data !'}
-                        {/* </span> */}
+                        {props.casedata.description}
                     </CardText>
-                    <Button style={{marginTop:10}} onClick={()=>acceptHandler(props.casedata._id)} color="primary">Apply</Button>
                 </CardBody>
             </Card>
-        )
+            :
+            isloggedin() && isuserloggedin()
+            ?
+            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:50}} >
+                <CardHeader style={{textTransform:'uppercase'}}>
+                <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
+                 {props.casedata.dispositioncode}
+                </CardHeader>
+                <CardBody className="mycases">
+                    <CardTitle>
+                        <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
+                        {props.casedata.amendedcharge}
+                    </CardTitle>
+                    <CardText>
+                        <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
+                        {props.casedata.dispositiondate}
+                    </CardText>
+                    <CardText>
+                        <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
+                        {props.casedata.sentencetime}
+                    </CardText>
+                    <CardText>
+                        <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
+                        {props.casedata.description}
+                    </CardText>
+                </CardBody>
+            </Card>
+            :
+            null
+        }
+        </>
+    )
 }
