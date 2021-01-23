@@ -4,6 +4,7 @@ import {fetchusercases} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import {islawyerloggedin,isloggedin} from '../../../service/userservice'
 import classnames from 'classnames';
 import Cardprofile from './Cardprofile'
 import Head from './Head'
@@ -82,6 +83,20 @@ function Mycases(props){
                     Accepted
                 </NavLink>
                 </NavItem>
+                {
+                (isloggedin() && islawyerloggedin() )?
+                <NavItem>
+                <NavLink
+                    className={classnames({ active: activeTab === '4' })}
+                    onClick={() => { toggle('4'); }}
+                >
+                    Rejected
+                </NavLink>
+                </NavItem>
+                :
+                ''
+                }
+
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
@@ -125,6 +140,28 @@ function Mycases(props){
                             }) 
                         }
                     </div>
+                </TabPane>
+                <TabPane tabId="4">
+                    {
+                        (isloggedin && islawyerloggedin())?
+                        <>
+                        <Head data={props.usercases.usercasedata.rejectedcases} title="Your Rejected Cases !"/>
+                        <div style={{marginTop:50}} className="row justify-content-lg-around">
+                            {
+                                props.usercases.usercasedata.rejectedcases.map((data)=>{
+                                    return(
+                                    <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
+                                        <Cardprofile casedata={data}></Cardprofile>
+                                    </div>
+                                    );
+                                }) 
+                            }
+                        </div>
+                        </>:
+                        <>
+
+                        </>
+                    }
                 </TabPane>
             </TabContent>
             </div>

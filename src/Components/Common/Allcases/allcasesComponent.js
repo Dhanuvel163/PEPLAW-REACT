@@ -72,7 +72,7 @@ function Allcases(props){
                 <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
             </div>
             :
-            (props.allcases.allcases.length!==0)
+            (props.allcases.allcases && props.allcases.allcases.length!==0)
             ?
             <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
                     <Head data={props.allcases.allcases}/>

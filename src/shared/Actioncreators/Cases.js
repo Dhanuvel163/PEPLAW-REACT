@@ -61,13 +61,26 @@ export const fetchusercases=()=>async(dispatch)=>{
         }
     }else{
         try{
-            const res = await fetch(baseUrl+'api/lawyeraccounts/cases',options())
-            if(res.ok){
-                const data =await res.json()
-                if(data.success){
-                    dispatch(addusercases(data.cases))
+            const [cases,acceptedcases,pendingcases,rejectedcases] = await Promise.all ([
+                fetch(baseUrl+'api/lawyeraccounts/cases',options()),
+                fetch(baseUrl+'api/lawyeraccounts/acceptedcases',options()),
+                fetch(baseUrl+'api/lawyeraccounts/pendingcases',options()),
+                fetch(baseUrl+'api/lawyeraccounts/rejectedcases',options())
+            ])
+            if(cases.ok && acceptedcases.ok && pendingcases.ok && rejectedcases.ok){
+                const casesdata =await cases.json()
+                const acceptedcasesdata =await acceptedcases.json()
+                const pendingcasesdata =await pendingcases.json()
+                const rejectedcasesdata =await rejectedcases.json()
+                if(casesdata.success && acceptedcasesdata.success && pendingcasesdata.success && rejectedcasesdata.success){
+                    dispatch(addusercases({
+                        cases:casesdata.cases,
+                        acceptedcases:acceptedcasesdata.cases,
+                        pendingcases:pendingcasesdata.cases,
+                        rejectedcases:rejectedcasesdata.cases
+                    }))
                 }else{
-                    throw new Error(data.message)
+                    throw new Error('Error in Request')
                 }
             }else{
                 throw new Error('Something Went Wrong')
@@ -105,7 +118,7 @@ export const fetchallcases=()=>async(dispatch)=>{
             if(res.ok){
                 const data =await res.json()
                 if(data.success){
-                    dispatch(addallcases(Response.cases))
+                    dispatch(addallcases(data.cases))
                 }else{
                     throw new Error(data.message)
                 }
