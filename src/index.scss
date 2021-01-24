@@ -56,8 +56,11 @@
 .btn-primary {
   background: linear-gradient(to right, rgb(9, 48, 40), rgb(35, 122, 87));
 }
-.btn-secondary {
-  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  // background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  background: rgb(0, 0, 204);
 }
 .btn-warning {
   background: linear-gradient(to right, rgb(247, 151, 30), rgb(255, 210, 0));
