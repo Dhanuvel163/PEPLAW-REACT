@@ -1,4 +1,4 @@
-import {Card,CardHeader,CardBody,CardText } from 'reactstrap';
+import {Card,CardHeader,CardBody,CardText,Button } from 'reactstrap';
 import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import React,{useRef,useState} from 'react';
 
@@ -131,8 +131,8 @@ export default function Cardprofile(props){
                                 {
                                     props.casedata.lawyerRequests.length === 0 ?
                                     <div className="text-center">No Requests Yet !</div>:
-                                    props.casedata.lawyerRequests.map((lawyer)=>
-                                        <RequestCardLawyerDetail key={lawyer.name} lawyer={lawyer}/>
+                                    props.casedata.lawyerRequests.map((lawyer,index)=>
+                                        <RequestCardLawyerDetail key={index} lawyer={lawyer} locked={lawyer.locked}/>
                                     )
                                 }
                         </TabPane>
@@ -148,7 +148,7 @@ export default function Cardprofile(props){
 }
 
 
-function RequestCardLawyerDetail({lawyer}){
+function RequestCardLawyerDetail({lawyer,locked}){
     const toggle = () => {
     (profile.current.style.display === 'none' || profile.current.style.display === '')
     ? profile.current.style.display = 'block' : profile.current.style.display = 'none'
@@ -184,8 +184,10 @@ function RequestCardLawyerDetail({lawyer}){
                         {lawyer.mobile}
                         </p>
                     </div>
-            <span className="btn btn-sm btn-primary" style={{float:'right'}}>
+            <span style={{float:'right'}}>
+                <Button color="primary" size="sm" disabled={locked}>
                 Accept
+                </Button>
             </span>
             </div>
         </>
