@@ -27,6 +27,7 @@ const Useredit = lazyWithPreload(() => import('./Common/Useredit/usereditCompone
 const Addcase = lazyWithPreload(() => import('./User/Addcase/addcaseComponent'))
 const Mycases = lazyWithPreload(() => import('./Common/Mycases/mycasesComponent'))
 const Allcases = lazyWithPreload(() => import('./Common/Allcases/allcasesComponent'))
+const Detailpage = lazyWithPreload(() => import('./Common/UserDetail/Userdetail'))
 const Home = lazyWithPreload(() => import('./homeComponent'))
 
 const componentsPreload = {
@@ -38,6 +39,7 @@ const componentsPreload = {
     Addcase,
     Mycases,
     Allcases,
+    Detailpage,
     Home
 }
 
@@ -83,7 +85,9 @@ class Main extends Component{
                 <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata} componentsPreload={componentsPreload}></Header>
                 <div style={{marginTop:70,padding:10,minHeight:700,paddingBottom:30}} className='text-white' >
 
+                <div style={{position:'relative'}}>
                 <SnackbarC></SnackbarC>
+                </div>
 
                 {
                     this.props.loading.loading
@@ -140,6 +144,12 @@ class Main extends Component{
                             <Route path='/search/case' component={()=>
                             Lazysuspense(
                             <Allcases/>
+                            )
+                            }>
+                            </Route>
+                            <Route path='/profile/:id' component={()=>
+                            Lazysuspense(
+                            <Detailpage/>
                             )
                             }>
                             </Route>

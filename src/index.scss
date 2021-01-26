@@ -42,6 +42,11 @@
 
 /*! purgecss start ignore */
 
+*,
+html {
+  scroll-behavior: smooth;
+}
+
 //For BG
 
 .bg-dark {
@@ -59,7 +64,12 @@
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
-  // background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  // background: rgb(0, 0, 204);
+}
+.btn-dark-blue,
+.btn-dark-blue:hover,
+.btn-dark-blue:focus {
   background: rgb(0, 0, 204);
 }
 .btn-warning {
@@ -137,7 +147,7 @@
   box-shadow: 0 8px 6px -6px black;
   border-bottom-left-radius: 5px !important;
   border-bottom-right-radius: 5px !important;
-  z-index: 20;
+  z-index: 2;
 }
 
 .home-card {
@@ -157,6 +167,7 @@
 img {
   box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
   border-radius: 5px;
+  filter: drop-shadow(2px, 4px, 8px, #585858) !important;
 }
 
 //For Forms

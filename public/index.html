@@ -31,6 +31,45 @@
 <body style="background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));">
   <div id="bg"></div>
   <div id="root"></div>
+
+  <script>
+    // window.onscroll = function () { myFunction() };
+    // function myFunction() {
+    //   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    //   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    //   var scrolled = (winScroll / height) * 100;
+    //   document.getElementById("myBar").style.width = (scrolled) + "%";
+    // }
+
+    var body = document.body;
+    var html = document.documentElement;
+
+    var height = 0;
+    var h = 0;
+
+    var initiateHeights = function () {
+      height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+      h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    }
+    initiateHeights();
+
+    var resize = function (e) {
+      var scrolled = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+      // height > 0 ? e[0].style.width = scrolled / (height - h) * 100 + "%" : e.style.width = 0 + "%";
+      document.getElementById("myBar").style.width = scrolled / (height - h) * 100 + "%"
+      // console.log(e[0].style.width)
+    }
+
+    document.onscroll = function () {
+      resize(document.getElementsByClassName("progress-bar"));
+    };
+
+    window.onresize = function () {
+      initiateHeights();
+    }
+
+  </script>
+
 </body>
 
 </html>

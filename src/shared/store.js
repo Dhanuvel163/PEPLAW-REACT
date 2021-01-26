@@ -6,6 +6,7 @@ import {users} from './Reducer/userReducer';
 import {profiledata} from './Reducer/profiledataReducer';
 import {usercases} from './Reducer/usercasesReducer';
 import {allcases} from './Reducer/allcasesReducer';
+import {detailpage} from './Reducer/DetailpageReducer';
 import {errors} from './Reducer/errorReducer';
 import {loading} from './Reducer/loadingReducer';
 
@@ -21,6 +22,7 @@ export const configStore=()=>{
             profiledata:profiledata,
             usercases,
             allcases,
+            detailpage,
             errors,
             loading,
             ...createForms({

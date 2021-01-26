@@ -5,11 +5,20 @@ import {displayError,displaySuccess} from './Helpers/Error'
 import {clearLoading,load} from './Helpers/Loading'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
-const options = (data,method='GET') => {
+const options = (method='GET',data=null) => {
     return (method==='GET')?{
         headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
         credentials: "same-origin"
-    }:{
+    }:
+    (data === null)
+    ?
+    {
+        method:method,
+        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        credentials: "same-origin"
+    }
+    :
+    {
         method:method,body:JSON.stringify(data),
         headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
         credentials: "same-origin"
@@ -20,7 +29,7 @@ const options = (data,method='GET') => {
 
 export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
     const newcase={dcode,ddate,stime,acharge,desc}
-    return fetchFunc(baseUrl+'api/useraccounts/cases',options(newcase,'POST'),dispatch)
+    return fetchFunc(baseUrl+'api/useraccounts/cases',options('POST',newcase),dispatch)
     .then(Response=>{
         if(Response.success){
             displaySuccess(dispatch,'Added case Successfully!')
@@ -146,25 +155,43 @@ export const filterallcases=(id)=>({
     type:actionTypes.FILTER_ALLCASES,
     payload:id
 })
-//accept Handler
+export const acceptbyuser=(cases)=>({
+    type:actionTypes.ACCEPT_BY_USER,
+    payload:cases
+})
 
-export const postaccept=(id)=>(dispatch)=>{
+//apply Handler
+
+export const postapply=(id)=>(dispatch)=>{
     dispatch(load())
     if(isloggedin() && islawyerloggedin()){
 
-        return fetchFunc(baseUrl+'api/lawyeraccounts/apply/'+id,{
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json",
-                "authorization":localStorage.getItem('token')
-              },
-            credentials: "same-origin"
-        },dispatch)
+        return fetchFunc(baseUrl+'api/lawyeraccounts/apply/'+id,options("POST"),dispatch)
         .then(Response=>{
             if(Response.success){
-                displaySuccess(dispatch,'applied successfully!!')
+                displaySuccess(dispatch,'Applied successfully!!')
                 dispatch(filterallcases(id));
+                console.log(Response.case)
                 dispatch(addtousercases(Response.case))
+            }
+        })
+        .catch((error)=>{
+            displayError(dispatch,error)
+        }).finally(()=>{dispatch(clearLoading())})
+    }
+}
+
+
+//accept by user Handler
+
+export const postacceptbyuser=(caseid,lawyer)=>(dispatch)=>{
+    dispatch(load())
+    if(isloggedin() && isuserloggedin()){
+        return fetchFunc(`${baseUrl}api/useraccounts/accept/${caseid}/${lawyer}`,options("POST"),dispatch)
+        .then(Response=>{
+            if(Response.success){
+                displaySuccess(dispatch,'Accepted successfully!!')
+                dispatch(acceptbyuser(Response.cases))
             }
         })
         .catch((error)=>{

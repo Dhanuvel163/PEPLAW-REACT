@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
-import {fetchallcases,postaccept
+import {fetchallcases,postapply
 } from '../../../shared/Actioncreators/actionCreators'
 const mapStateToProps=state=>{
     return {
@@ -11,7 +11,7 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>({
     fetchallcases:()=>dispatch(fetchallcases()),
-    postaccept:(id)=>dispatch(postaccept(id))
+    postapply:(id)=>dispatch(postapply(id))
 })
 function Head(props){
 
@@ -81,7 +81,7 @@ function Allcases(props){
                             props.allcases.allcases.map((data)=>{
                                 return(
                                 <div className="col-sm-12 col-md-6 col-lg-3" key={data.dispositioncode} >
-                                <Cardprofile postaccept={props.postaccept} casedata={data}></Cardprofile>
+                                <Cardprofile postapply={props.postapply} casedata={data}></Cardprofile>
                                 </div>
                                 )
                             })                        

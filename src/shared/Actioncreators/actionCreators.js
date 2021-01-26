@@ -3,13 +3,15 @@ import {baseUrl} from '../url';
 
 import {fetchuserdata} from './Fetchuserdata'
 import {fetchprofiledata,postprofiledata} from './Profiledata'
-import {fetchallcases,fetchusercases,postaccept,postusercase} from './Cases'
+import {fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser} from './Cases'
+import {fetchdetailpagedata} from './Detailpage'
 
 import {clearLoading} from './Helpers/Loading'
 import {displayError,displaySuccess,clearMessage} from './Helpers/Error'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
-export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchallcases,fetchusercases,postaccept,postusercase}
+export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
+    fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser}
 
 
 //Lawyer Signup and login

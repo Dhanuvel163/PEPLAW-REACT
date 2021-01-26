@@ -1,26 +1,32 @@
 import React,{useRef} from 'react';
 import './cardprofile.scss'
 import {Button,Card,CardHeader,CardBody,CardText } from 'reactstrap';
+import {Link} from 'react-router-dom'
 export default function Cardprofile(props){
     const acceptHandler=(id)=>{
-        props.postaccept(id);
+        props.postapply(id);
     }
-    const toggle = () => {
-        (profile.current.style.display === 'none' || profile.current.style.display === '')
-        ? profile.current.style.display = 'block' : profile.current.style.display = 'none'
+    const toggleIn = () => {
+    profile.current.style.display = 'block'
+    }
+    const toggleOut = () => {
+    profile.current.style.display = 'none'
     }
     let profile =useRef(null)
         return(
             <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:'45px'}}>
                 <CardHeader>
-                    <div onMouseEnter={toggle} onMouseLeave={toggle}>
+                    <div onMouseEnter={toggleIn} onMouseLeave={toggleOut}>
+                        <Link to={`/profile/${props.casedata.User._id}`} style={{color:'white'}}>
                         <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                         </svg>
                         <span style={{textTransform:'uppercase'}}>
                         {props.casedata.User.name}                        
-                        </span>                      
+                        </span>                                                  
+                        </Link>
+
                         <div className="User-view four-box-shadow" ref={profile}>
                             <p>
                             <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">

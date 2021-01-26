@@ -47,9 +47,9 @@ function Home(){
         {/* //rgb(0, 0, 204) */}
         {/* <div style={{ marginTop: 60 }}> */}
         <div className="container" style={{ marginTop: 60 }}>
-          <Card className="card-style four-box-shadow  home-card text-uppercase">
+          <div className="card-style four-box-shadow  home-card text-uppercase">
             <CardBody style={{ marginTop: 20, minHeight: 400 }}>
-                <CardTitle style={{ color: "black", textAlign: "left" }}> 
+                <CardTitle style={{  textAlign: "left" }}> 
                   <b style={{ fontWeight: 1000 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-award-fill" viewBox="0 0 16 16">
                       <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
@@ -58,7 +58,7 @@ function Home(){
 
                     Find the best Lawyers for your Case !
                   </b>
-                  <hr style={{backgroundColor:'black'}}/>
+                  <hr style={{backgroundColor:'white'}}/>
                 </CardTitle>
               <div className="d-flex justify-content-start">
                 <Link to="/user/signup" className="nav-link">
@@ -73,7 +73,7 @@ function Home(){
                 </Link>
               </div>
             </CardBody>
-          </Card>
+          </div>
               <h5 className="text-left" style={{marginTop:60}}>
                 <svg style={{marginRight:7,marginBottom:4}}
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lightbulb-fill" viewBox="0 0 16 16">
@@ -122,19 +122,19 @@ function Home(){
                   <div className="col-12 col-sm-6">
                     <FormGroup>
                       <Label for="mail">Email</Label>
-                      <Input type="mail" name="mail" placeholder="Your mail" required/>
+                      <Input id="mail" type="mail" name="mail" placeholder="Your mail" required/>
                     </FormGroup>
                   </div>
                   <div className="col-12 col-sm-6">
                     <FormGroup>
                       <Label for="name">Name</Label>
-                      <Input type="name" name="name" placeholder="Your name" required/>
+                      <Input id="name" type="name" name="name" placeholder="Your name" required/>
                     </FormGroup>
                   </div>
                 </div>
                 <FormGroup>
                   <Label for="comment">Detail</Label>
-                  <Input type="textarea" name="comment" required/>
+                  <Input style={{height:200}} id="comment" type="textarea" name="comment" required/>
                 </FormGroup>
                 <div className="d-flex justify-content-center">
                 <Button>SEND</Button>
@@ -142,6 +142,7 @@ function Home(){
               </Form>
 
               <div style={{height:40}}></div>
+
         </div>
       </>
     );

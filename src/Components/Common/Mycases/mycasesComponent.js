@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import './mycases.scss'
-import {fetchusercases} from '../../../shared/Actioncreators/actionCreators'
+import {fetchusercases,postacceptbyuser} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
@@ -17,6 +17,7 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>({
     fetchusercases:()=>dispatch(fetchusercases()),
+    postacceptbyuser:(caseid,lawyer)=>dispatch(postacceptbyuser(caseid,lawyer))
 })
 
 let fetchedusercases = false
@@ -44,7 +45,7 @@ function Mycases(props){
         props.usercases.err
         ?
         <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}>            
-        <div>Something went wrong ! {props.usercases.err} !</div>
+        <div>{props.usercases.err} !</div>
         </div>
         :
         props.usercases.isloading
@@ -106,7 +107,7 @@ function Mycases(props){
                             props.usercases.usercasedata.cases.map((data)=>{
                                 return(
                                 <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data}></Cardprofile>
+                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                 </div>
                                 );
                             }) 
@@ -120,7 +121,7 @@ function Mycases(props){
                             props.usercases.usercasedata.pendingcases.map((data)=>{
                                 return(
                                 <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data}></Cardprofile>
+                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                 </div>
                                 );
                             }) 
@@ -134,7 +135,7 @@ function Mycases(props){
                             props.usercases.usercasedata.acceptedcases.map((data)=>{
                                 return(
                                 <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                    <Cardprofile casedata={data}></Cardprofile>
+                                    <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                 </div>
                                 );
                             }) 
@@ -151,7 +152,7 @@ function Mycases(props){
                                 props.usercases.usercasedata.rejectedcases.map((data)=>{
                                     return(
                                     <div key={data.dispositioncode}  className="col-sm-12 col-md-6 col-lg-3">
-                                        <Cardprofile casedata={data}></Cardprofile>
+                                        <Cardprofile casedata={data} postacceptbyuser={props.postacceptbyuser}></Cardprofile>
                                     </div>
                                     );
                                 }) 
