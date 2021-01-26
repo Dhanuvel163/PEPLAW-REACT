@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <link rel="image_src" href="%PUBLIC_URL%/assets/lawlogo192.webp">
-  <link rel="icon" href="%PUBLIC_URL%/assets/lawlogo192.webp" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#091432" />
-  <meta name="description" content="A Website to search for Lawyers by Users For their case !" />
-  <meta name="author" content="Dhanavel R" />
   <meta name="google-site-verification" content="--CEN_dwDXEvIoF1rojLbR_P2GEmiF3AFilRp9L0dWQ" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/lawlogo192.webp" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
   <title>PEP_LAW</title>
   <!-- <script>
     console.log(navigator.onLine)
@@ -27,49 +21,8 @@
     </div>
   </div>
 </noscript>
-
 <body style="background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));">
   <div id="bg"></div>
   <div id="root"></div>
-
-  <script>
-    // window.onscroll = function () { myFunction() };
-    // function myFunction() {
-    //   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    //   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    //   var scrolled = (winScroll / height) * 100;
-    //   document.getElementById("myBar").style.width = (scrolled) + "%";
-    // }
-
-    var body = document.body;
-    var html = document.documentElement;
-
-    var height = 0;
-    var h = 0;
-
-    var initiateHeights = function () {
-      height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-      h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    }
-    initiateHeights();
-
-    var resize = function (e) {
-      var scrolled = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-      // height > 0 ? e[0].style.width = scrolled / (height - h) * 100 + "%" : e.style.width = 0 + "%";
-      document.getElementById("myBar").style.width = scrolled / (height - h) * 100 + "%"
-      // console.log(e[0].style.width)
-    }
-
-    document.onscroll = function () {
-      resize(document.getElementsByClassName("progress-bar"));
-    };
-
-    window.onresize = function () {
-      initiateHeights();
-    }
-
-  </script>
-
 </body>
-
 </html>

@@ -1,4 +1,4 @@
-import React,{PureComponent,useEffect} from 'react';
+import React,{PureComponent} from 'react';
 import {isloggedin,isuserloggedin,islawyerloggedin} from '../../../service/userservice';
 import {Collapse,Navbar,NavbarToggler,Nav,NavItem,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem} from 'reactstrap';
 import {Link} from "react-router-dom";
@@ -26,37 +26,6 @@ function Logout(props){
 }
 
 function Mycases(props){
-        useEffect(() => {
-        var body = document.body;
-        var html = document.documentElement;
-
-        var height = 0;
-        var h = 0;
-
-        var initiateHeights = function () {
-        height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        }
-        initiateHeights();
-
-        var resize = function (e) {
-        var scrolled = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-        // height > 0 ? e[0].style.width = scrolled / (height - h) * 100 + "%" : e.style.width = 0 + "%";
-        document.getElementById("myBar").style.width = scrolled / (height - h) * 100 + "%"
-        // console.log(e[0].style.width)
-        }
-
-        document.onscroll = function () {
-        resize(document.getElementsByClassName("progress-bar"));
-        };
-
-        window.onresize = function () {
-        initiateHeights();
-        }
-
-        return () => {
-        }
-    })
     return(
         isloggedin()
         ?
@@ -141,6 +110,28 @@ class Header extends PureComponent{
     }
     preload(compnt){
             this.props.componentsPreload[compnt].preload()
+    }
+    componentDidMount(){
+        var body = document.body;
+        var html = document.documentElement;
+        var height = 0;
+        var h = 0;
+        var initiateHeights = function () {
+        height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        }
+        var resize = function (e) {
+        initiateHeights();
+        var scrolled = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        // height > 0 ? e[0].style.width = scrolled / (height - h) * 100 + "%" : e.style.width = 0 + "%";
+        document.getElementById("myBar").style.width = scrolled / (height - h) * 100 + "%"
+        }
+        document.onscroll = function () {
+        resize(document.getElementsByClassName("progress-bar"));
+        };
+        window.onresize = function () {
+        initiateHeights();
+        }
     }
 
     render(){
