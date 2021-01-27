@@ -2,6 +2,8 @@ import React,{useEffect} from 'react';
 import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
+// import {Helmet} from 'react-helmet'
+
 import {fetchallcases,postapply
 } from '../../../shared/Actioncreators/actionCreators'
 const mapStateToProps=state=>{
@@ -75,6 +77,11 @@ function Allcases(props){
             (props.allcases.allcases && props.allcases.allcases.length!==0)
             ?
             <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
+                {/* <Helmet>
+                    <title>ALLCASES | PEPLAW</title>
+                <meta name="description" content="Here you can see every registered cases"/>
+                </Helmet> */}
+                {( true && (document.title='ALLCASES | PEPLAW'))?null:null}
                     <Head data={props.allcases.allcases}/>
                     <div style={{marginTop:50}} className="row justify-content-lg-around">
                         {

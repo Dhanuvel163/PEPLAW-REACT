@@ -5,6 +5,7 @@ import Usereditcard from './Usereditcard'
 import {postprofiledata,fetchprofiledata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
+// import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
     return {
@@ -56,6 +57,11 @@ function Useredit(props){
         props.profiledata.profiledata
         ?
         <div>
+          {/* <Helmet>
+            <title>USEREDIT | PEPLAW</title>
+            <meta name="description" content="Page to edit your profile data"/>
+          </Helmet> */}
+                {true && (document.title=`PROFILE | PEPLAW`)?null:null}
           {
             (edit===true)
             ?

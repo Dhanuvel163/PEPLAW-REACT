@@ -47,7 +47,7 @@ function Home(){
         {/* //rgb(0, 0, 204) */}
         {/* <div style={{ marginTop: 60 }}> */}
         <div className="container" style={{ marginTop: 60 }}>
-          <div className="card-style four-box-shadow  home-card text-uppercase">
+          <div className="card-style glass four-box-shadow  home-card text-uppercase">
             <CardBody style={{ marginTop: 20, minHeight: 400 }}>
                 <CardTitle style={{  textAlign: "left" }}> 
                   <b style={{ fontWeight: 1000 }}>

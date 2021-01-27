@@ -8,6 +8,7 @@ import {islawyerloggedin,isloggedin} from '../../../service/userservice'
 import classnames from 'classnames';
 import Cardprofile from './Cardprofile'
 import Head from './Head'
+// import {Helmet} from 'react-helmet'
 
 
 const mapStateToProps=state=>{
@@ -57,7 +58,11 @@ function Mycases(props){
         (props.usercases.usercasedata && props.usercases.usercasedata.cases && props.usercases.usercasedata.acceptedcases && props.usercases.usercasedata.pendingcases)
         ?
         <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
-
+            {/* <Helmet>
+                <title>MYCASES | PEPLAW</title>
+                <meta name="description" content="Here you can see your cases"/>
+            </Helmet> */}
+                {true && (document.title='MYCASES | PEPLAW')?null:null}
             <div>
             <Nav tabs>
                 <NavItem>

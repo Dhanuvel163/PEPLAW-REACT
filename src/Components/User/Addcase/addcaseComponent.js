@@ -5,6 +5,7 @@ import {Control,LocalForm,Errors} from 'react-redux-form';
 import {postusercase} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import Formerror from '../../Partials/Formerror/Formerror';
+// import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
     return {
@@ -22,6 +23,11 @@ function Addcase(props){
     }
     return(
         <div className="container" style={{marginTop:50,marginBottom:50}}>
+            {/* <Helmet>
+                <title>ADD CASE | PEPLAW</title>
+                <meta name="description" content="Add case page" />
+            </Helmet> */}
+                {true && (document.title='ADD CASE | PEPLAW')?null:null}
             <h4 className="text-center">
                     <svg style={{marginRight:11}}
                     xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-journal-plus" viewBox="0 0 16 16">

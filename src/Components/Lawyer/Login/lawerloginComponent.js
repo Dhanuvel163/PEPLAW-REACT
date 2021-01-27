@@ -6,6 +6,7 @@ import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {postlawyersignin} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
+// import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
     return {
@@ -23,6 +24,11 @@ function Lawyerlogin(props){
     }
         return(
             <div className="container" style={{marginTop:50,marginBottom:50}}>
+                {/* <Helmet>
+                    <title>LAWYER LOGIN | PEPAW</title>
+                    <meta name="description" content="lawyer login page"/>
+                </Helmet> */}
+                {true && (document.title='LAWYER LOGIN | PEPLAW')?null:null}
                 <h4 className="text-center">Lawyer Login</h4>
                 <Container style={{marginTop:50}}>
                 <hr></hr>

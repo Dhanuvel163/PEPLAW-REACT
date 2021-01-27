@@ -6,7 +6,7 @@ import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {postusersignin} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
-
+// import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
     return {
     }
@@ -23,6 +23,11 @@ function Userlogin(props){
     }
         return(
             <div className="container" style={{marginTop:50,marginBottom:50}}>
+                {/* <Helmet>
+                    <title>USER LOGIN | PEPLAW</title>
+                    <meta name="description" content="user login page" />
+                </Helmet> */}
+                {true && (document.title='USER LOGIN | PEPLAW')?null:null}
                 <h4 className="text-center">User Login</h4>
                 <Container style={{marginTop:50}}>
                 <hr></hr>

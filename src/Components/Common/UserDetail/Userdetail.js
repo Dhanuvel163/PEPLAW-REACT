@@ -4,6 +4,7 @@ import {fetchdetailpagedata} from '../../../shared/Actioncreators/actionCreators
 import {connect} from 'react-redux';
 import {Spinner} from 'reactstrap'
 import { useParams} from 'react-router-dom'
+// import {Helmet} from 'react-helmet'
 import '../Useredit/useredit.scss'
 const mapStateToProps=state=>{
     return {
@@ -45,6 +46,11 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                (detailpage.detailpage && detailpage.detailpage.name)
                 ?
             <Card className="card-style four-box-shadow" inverse color="danger">
+                {/* <Helmet>
+                    <title>{detailpage.detailpage.name.toUpperCase()} | PEPLAW </title>
+                <meta name="description" content="Peplaw profile detail page"/>
+                </Helmet> */}
+                {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
                 <CardHeader>
                     <div className="mb-3">
                     <img  src={detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>

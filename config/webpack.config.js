@@ -325,6 +325,16 @@ module.exports = function(webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
+
+        {
+        test: /\.json$/,
+        type: "javascript/auto",
+        use: {
+          loader: path.resolve(__dirname, "./optimized-json-loader.js"),
+        }
+        },
+
+
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
 

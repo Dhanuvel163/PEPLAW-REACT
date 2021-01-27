@@ -40,6 +40,30 @@
 //@import "~bootstrap/scss/carousel";
 //@import "~bootstrap/scss/print";
 
+//css opti
+.opti-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 700 px;
+}
+@font-face {
+  font-display: swap;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  // backdrop-filter: blur(10px);
+  // -webkit-backdrop-filter: blur(10px);
+  // border-radius: 10px;
+
+  // background: rgba(136, 25, 234, 0.3);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  // backdrop-filter: blur(3.5px);
+  // -webkit-backdrop-filter: blur(3.5px);
+  // border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 /*! purgecss start ignore */
 
 *,
@@ -133,6 +157,7 @@ html {
 .card-style {
   transition: transform 0.5s ease-in-out;
   animation: cardAnim 0.7s;
+  border-radius: 10px;
 }
 .card-style:hover {
   transform: translateX(-10px) translateY(-10px);

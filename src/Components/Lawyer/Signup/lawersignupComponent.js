@@ -7,6 +7,7 @@ import {postlawyersignup} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import {actions} from 'react-redux-form';
 import Formerror from '../../Partials/Formerror/Formerror';
+// import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
     return {
@@ -30,6 +31,11 @@ function Lawyersignup(props){
     }
     return(
             <div className="container" style={{marginTop:50,marginBottom:50}}>
+                {/* <Helmet>
+                    <title>LAWYER SIGNUP | PEPLAW</title>
+                    <meta name="description" content="lawyer signup page"/>
+                </Helmet> */}
+                {true && (document.title='LAWYER SIGNUP | PEPLAW')?null:null}
                 <h4 className="text-center">Lawyer Signup</h4>
                 <Container style={{marginTop:50}}>
                 <hr></hr>

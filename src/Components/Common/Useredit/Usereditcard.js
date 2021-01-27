@@ -7,6 +7,7 @@ export default function Usereditcard(props) {
     {
       isloggedin() && islawyerloggedin()
       ?
+      // <Card className="card-style glass four-box-shadow" inverse>
       <Card className="card-style four-box-shadow" inverse color="danger">
         <CardHeader style={{ textTransform: "uppercase" }}>
           <div className="d-flex justify-content-end">
