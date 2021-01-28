@@ -47,6 +47,7 @@ function Home(){
         {/* //rgb(0, 0, 204) */}
         {/* <div style={{ marginTop: 60 }}> */}
         <div className="container" style={{ marginTop: 60 }}>
+                {true && (document.title='HOME | PEPLAW')?null:null}
           <div className="card-style glass four-box-shadow  home-card text-uppercase">
             <CardBody style={{ marginTop: 20, minHeight: 400 }}>
                 <CardTitle style={{  textAlign: "left" }}> 

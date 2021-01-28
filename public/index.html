@@ -17,6 +17,62 @@
     console.log(navigator.connection.saveData)
     console.log(navigator.connection.effectiveType)
   </script> -->
+  <style>
+    #splash {
+      background-color: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
+      ;
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: 10;
+      transition-property: top;
+      transition-duration: 300ms;
+      transition-delay: 300ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    }
+
+    #splash.animate {
+      top: -100vh;
+
+    }
+
+    #splash-icon {
+      box-shadow: none;
+    }
+
+    .fade-splash {
+      animation: fade 330ms;
+    }
+
+    @keyframes fade {
+      from {
+        display: block;
+      }
+
+      to {
+        display: none;
+      }
+    }
+  </style>
+
+  <script>
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   document.querySelector('#splash').addEventListener('transitionend', (event) => {
+    //     document.querySelector('#root').style.display = 'block'
+    //     event.target.remove();
+    //   });
+    //   requestAnimationFrame(() => {
+    //     document.querySelector('#splash').classList.add('animate');
+    //   });
+    // });
+    window.onload = function () {
+      document.querySelector('#splash').classList.add('animate');
+      document.querySelector('#root').style.display = 'block'
+      // document.querySelector('#splash').classList.add('fade-splash')
+      // document.querySelector('#splash-icon').classList.add('fade-splash')
+    }
+  </script>
 </head>
 <noscript>
   <div style="display:flex;justify-content:center;align-items:center;color:white;min-height: 600px;">
@@ -27,8 +83,10 @@
 </noscript>
 
 <body style="background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));">
-  <div id="bg"></div>
-  <div id="root"></div>
+  <div id="splash" style="display:flex;justify-content:center;align-items:center">
+    <img src="%PUBLIC_URL%/assets/lawlogo192.webp" id="splash-icon" />
+  </div>
+  <div id="root" style="display: none;"></div>
 </body>
 
 </html>

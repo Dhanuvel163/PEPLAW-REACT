@@ -2,7 +2,7 @@ import React, { Component,lazy, Suspense } from 'react';
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
-// import Footer from './Partials/Footer/footerComponent';
+import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
 import {Spinner} from 'reactstrap'
@@ -17,7 +17,7 @@ import {Spinner} from 'reactstrap'
 // const Allcases = lazy(() => import('./Common/Allcases/allcasesComponent'))
 // const Home = lazy(() => import('./homeComponent'))
 
-const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
+// const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
 
 const Lawyerlogin = lazyWithPreload(() => import('./Lawyer/Login/lawerloginComponent'))
 const Userlogin = lazyWithPreload(() => import('./User/Login/userloginComponent'))
@@ -74,6 +74,26 @@ function Lazysuspense(component){
 }
 class Main extends Component{
     componentDidMount(){
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('install prompt');
+            // Prevent the mini-infobar from appearing on mobile
+            // e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI notify the user they can install the PWA
+            // showInstallPromotion();
+        });
+        function pr() {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+            })
+        }
         // this.props.fetchlawyers();
         this.props.fetchuserdata();
     }
@@ -157,8 +177,8 @@ class Main extends Component{
                         </Switch>
                 }
                 </div>
-                {Lazysuspense(<Footer/>)}
-                {/* <Footer></Footer> */}
+                {/* {Lazysuspense(<Footer/>)} */}
+                <Footer></Footer>
             </>
         );
     }
