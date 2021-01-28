@@ -1,6 +1,6 @@
 import React,{PureComponent} from 'react';
 import {isloggedin,isuserloggedin,islawyerloggedin} from '../../../service/userservice';
-import {Collapse,Navbar,NavbarToggler,Nav,NavItem,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem} from 'reactstrap';
+import {Collapse,UncontrolledDropdown,DropdownToggle,DropdownMenu} from 'reactstrap';
 import {Link} from "react-router-dom";
 import './header.scss'
 function Logout(props){
@@ -11,7 +11,7 @@ function Logout(props){
     return(
         isloggedin()
         ?
-            <NavItem onClick={lout} style={{marginRight:10}}>
+            <div className="nav-item" onClick={lout} style={{marginRight:10}}>
                 <Link onMouseOver={()=>props.componentsPreload.Home.preload()} to="/" className="nav-link">
                     <svg style={{marginRight:3}}
                      xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lock-fill" viewBox="0 0 16 16">
@@ -19,7 +19,7 @@ function Logout(props){
                     </svg>
                     Logout
                 </Link>
-            </NavItem>    
+            </div>    
         :
         <div></div>
     )
@@ -29,7 +29,7 @@ function Mycases(props){
     return(
         isloggedin()
         ?
-        <NavItem>
+        <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Mycases.preload()} to="/user/mycases" className="nav-link">
                 <svg style={{marginRight:6}} 
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-journal-text" viewBox="0 0 16 16">
@@ -39,7 +39,7 @@ function Mycases(props){
                 </svg>
                 My Cases
             </Link>
-        </NavItem>
+        </div>
         :
         <div></div>
     )
@@ -49,7 +49,7 @@ function USERDATA(props){
     return(
         isloggedin()
         ?
-        <NavItem>
+        <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Useredit.preload()} to="/user/edit" className="nav-link">
                 <svg 
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -57,7 +57,7 @@ function USERDATA(props){
                 <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg> {props.user.user}
             </Link>
-        </NavItem>
+        </div>
         :
         <div></div>
     )
@@ -67,7 +67,7 @@ function ADDCASEDATA(props){
     return(
         isloggedin() && isuserloggedin()
         ?
-        <NavItem>
+        <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Addcase.preload()} to="/user/case" className="nav-link">
                 <svg style={{marginRight:6}}
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-journal-plus" viewBox="0 0 16 16">
@@ -77,11 +77,11 @@ function ADDCASEDATA(props){
                 </svg> 
                 Add Case
             </Link>
-        </NavItem>
+        </div>
         :
         isloggedin() && islawyerloggedin()
         ?
-        <NavItem>
+        <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Allcases.preload()} to="/search/case" className="nav-link">
                 <svg style={{marginRight:6}}
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-layout-text-sidebar" viewBox="0 0 16 16">
@@ -90,7 +90,7 @@ function ADDCASEDATA(props){
                 </svg>
                 See Cases
             </Link>
-        </NavItem>
+        </div>
         :
         <div></div>
     )
@@ -137,25 +137,29 @@ class Header extends PureComponent{
     render(){
         return(
             <div className="fixed-top header-footer four-box-shadow-real">
-                <Navbar color="dark" dark expand="md">
+
+
+                <div className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
                         <img src="/assets/lawlogo192.webp" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>
                         <b >PEP-LAW</b>
                         </Link>
                     </div>
-                    <NavbarToggler onClick={this.toggle} />
+                    <div className="navbar-toggler" onClick={this.toggle} >
+                        <div className="navbar-toggler-icon"></div>
+                    </div>
                     <Collapse isOpen={this.state.isOpen} navbar>
                     {
                         isloggedin() ?
-                        <Nav className="ml-auto" navbar>
+                        <ul className="ml-auto navbar-nav">
                             <ADDCASEDATA componentsPreload={this.props.componentsPreload} />
                             <USERDATA user={this.props.userdata} componentsPreload={this.props.componentsPreload}/>
                             <Mycases componentsPreload={this.props.componentsPreload}/>
                             <Logout fetchuserdata={this.props.fetchuserdata} componentsPreload={this.props.componentsPreload}></Logout>
-                        </Nav>
+                        </ul>
                         :
-                        <Nav className="ml-auto" navbar>
+                        <ul className="ml-auto navbar-nav">
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                 <svg style={{marginRight:4}}
@@ -168,7 +172,7 @@ class Header extends PureComponent{
                                     <Link onMouseOver={()=>this.preload('Lawyerlogin')}  to="/lawyer/login" className="dropdown-item">
                                         Lawyer Login
                                     </Link>
-                                    <DropdownItem divider />
+                                    <div tabindex="-1" className="dropdown-divider"></div>
                                     <Link onMouseOver={()=>this.preload('Userlogin')}  to="/user/login" className="dropdown-item">
                                         User Login
                                     </Link>
@@ -188,16 +192,16 @@ class Header extends PureComponent{
                                     <Link onMouseOver={()=>this.preload('Lawersignup')}  to="/lawyer/signup" className="dropdown-item">
                                         Lawyer Signup
                                     </Link>
-                                    <DropdownItem divider />
+                                    <div tabindex="-1" className="dropdown-divider"></div>
                                     <Link onMouseOver={()=>this.preload('Lawyerlogin')}  to="/user/signup" className="dropdown-item">
                                         User Signup
                                     </Link>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
-                        </Nav>
+                        </ul>
                     }
                     </Collapse>
-                </Navbar>
+                </div>
                 <div className="progress-container">
                 <div className="progress-bar" id="myBar"></div>
                 </div>
