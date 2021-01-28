@@ -18,15 +18,19 @@
     console.log(navigator.connection.effectiveType)
   </script> -->
   <style>
+    * {
+      margin: 0%;
+      padding: 0%;
+    }
+
     #splash {
-      background-color: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
-      ;
+      background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
+      /* background-color: #311b92; */
       position: fixed;
       top: 0;
       height: 100vh;
       width: 100vw;
       z-index: 10;
-      transition-property: top;
       transition-duration: 300ms;
       transition-delay: 300ms;
       transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
@@ -34,43 +38,39 @@
 
     #splash.animate {
       top: -100vh;
-
     }
 
     #splash-icon {
-      box-shadow: none;
+      animation: spl 1s ease-in-out infinite;
+      box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+      border-radius: 50%;
+
+      background: #311b92;
+      width: 56px;
+      height: 56px;
     }
 
-    .fade-splash {
-      animation: fade 330ms;
-    }
-
-    @keyframes fade {
-      from {
-        display: block;
+    @keyframes spl {
+      0% {
+        transform: scale(1);
       }
 
-      to {
-        display: none;
+      50% {
+        transform: scale(0.5);
+      }
+
+      100% {
+        transform: scale(1);
       }
     }
   </style>
 
   <script>
-    // document.addEventListener('DOMContentLoaded', () => {
-    //   document.querySelector('#splash').addEventListener('transitionend', (event) => {
-    //     document.querySelector('#root').style.display = 'block'
-    //     event.target.remove();
-    //   });
-    //   requestAnimationFrame(() => {
-    //     document.querySelector('#splash').classList.add('animate');
-    //   });
-    // });
     window.onload = function () {
       document.querySelector('#splash').classList.add('animate');
-      document.querySelector('#root').style.display = 'block'
-      // document.querySelector('#splash').classList.add('fade-splash')
-      // document.querySelector('#splash-icon').classList.add('fade-splash')
+      setTimeout(() => {
+        document.querySelector('#root').style.display = 'block'
+      }, 330)
     }
   </script>
 </head>
@@ -84,7 +84,17 @@
 
 <body style="background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));">
   <div id="splash" style="display:flex;justify-content:center;align-items:center">
-    <img src="%PUBLIC_URL%/assets/lawlogo192.webp" id="splash-icon" />
+    <!-- <img src="%PUBLIC_URL%/assets/lawlogo192.webp" id="splash-icon" /> -->
+    <div id="splash-icon" style="display:flex;justify-content:center;align-items:center;color:white;margin-right: 0px;">
+      <img src="%PUBLIC_URL%/assets/lawlogo192.webp" id="splash-icon" />
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi-bullseye"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+        <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+      </svg> -->
+    </div>
   </div>
   <div id="root" style="display: none;"></div>
 </body>
