@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom'
 export default function Cardprofile(props){
     const acceptHandler=(id)=>{
         props.postapply(id);
+        setTimeout(() => {
+            props.install()
+        }, 2000);
     }
     const toggleIn = () => {
     profile.current.style.display = 'block'

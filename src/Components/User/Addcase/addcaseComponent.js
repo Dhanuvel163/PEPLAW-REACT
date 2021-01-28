@@ -20,6 +20,9 @@ function Addcase(props){
     const handlesubmit=(values)=>{
         props.postusercase(values['disposition-code'],values['disposition-date'],
         values['sentence-time'],values['amended-charge'],values['description']);
+        setTimeout(()=>{
+        props.install();
+        },2000)
     }
     return(
         <div className="container" style={{marginTop:50,marginBottom:50}}>

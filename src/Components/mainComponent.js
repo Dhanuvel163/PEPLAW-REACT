@@ -72,11 +72,11 @@ function Lazysuspense(component){
         </Suspense>
     )
 }
+let deferredPrompt;
 class Main extends Component{
     componentDidMount(){
-        let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('install prompt');
+            console.log('beforeinstallprompt')
             // Prevent the mini-infobar from appearing on mobile
             // e.preventDefault();
             // Stash the event so it can be triggered later.
@@ -84,16 +84,18 @@ class Main extends Component{
             // Update UI notify the user they can install the PWA
             // showInstallPromotion();
         });
-        function pr() {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
-                } else {
-                    console.log('User dismissed the install prompt');
-                }
-            })
-        }
+        // function pr() {
+        //     deferredPrompt.prompt();
+        //     deferredPrompt.userChoice.then((choiceResult) => {
+        //         if (choiceResult.outcome === 'accepted') {
+        //             console.log('User accepted the install prompt');
+        //         } else {
+        //             console.log('User dismissed the install prompt');
+        //         }
+        //     })
+        // }
+
+
         // this.props.fetchlawyers();
         this.props.fetchuserdata();
     }
@@ -151,7 +153,7 @@ class Main extends Component{
                             </Route>
                             <Route path='/user/case' component={()=>
                             Lazysuspense(
-                            <Addcase/>
+                            <Addcase install={deferredPrompt.prompt} />
                             )
                             }>
                             </Route>
@@ -163,7 +165,7 @@ class Main extends Component{
                             </Route>
                             <Route path='/search/case' component={()=>
                             Lazysuspense(
-                            <Allcases/>
+                            <Allcases install={deferredPrompt.prompt} />
                             )
                             }>
                             </Route>

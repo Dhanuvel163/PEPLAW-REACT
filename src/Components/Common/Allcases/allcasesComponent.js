@@ -88,7 +88,7 @@ function Allcases(props){
                             props.allcases.allcases.map((data)=>{
                                 return(
                                 <div className="col-sm-12 col-md-6 col-lg-3" key={data.dispositioncode} >
-                                <Cardprofile postapply={props.postapply} casedata={data}></Cardprofile>
+                                <Cardprofile postapply={props.postapply} casedata={data} install={props.install}></Cardprofile>
                                 </div>
                                 )
                             })                        
