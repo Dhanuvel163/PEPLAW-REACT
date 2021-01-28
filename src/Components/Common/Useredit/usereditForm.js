@@ -1,6 +1,5 @@
 import React from "react";
 // import React,{useState,useEffect} from "react";
-import {Container,Button,FormGroup,Label,Row,Col,Media} from "reactstrap";
 import { Control, Errors, LocalForm  } from "react-redux-form";
 import {islawyerloggedin} from "../../../service/userservice";
 // import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
@@ -37,7 +36,7 @@ function UsereditForm(props){
     //     }
     // },[country,props,stateCountry])
     return(
-          <Container style={{ marginTop: 50 }}>
+          <div className="container" style={{ marginTop: 50 }}>
             <hr></hr>
                 <h4 className="text-center"> 
                   <svg style={{marginRight:6}}
@@ -45,8 +44,8 @@ function UsereditForm(props){
                     <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
                   </svg>
                  Edit Here! </h4>
-            <Row style={{ marginTop: 50, marginBottom: 50 }}>
-              <Col sm="6" className="mb-5">
+            <div className="row" style={{ marginTop: 50, marginBottom: 50 }}>
+              <div className="col-12 col-sm-6 mb-5">
                 <LocalForm
                   initialState={
                     islawyerloggedin()
@@ -75,7 +74,7 @@ function UsereditForm(props){
                   // onChange={(values) => handlechange(values)}
                 >
                   <div className="form-group">
-                    <Label for="username">Username</Label>
+                    <label htmlFor="username">Username</label>
                     <Control.text model=".username" className="form-control" name="username" id="username" placeholder="Username"
                       validators={{required, minLength: minLength(6), maxLength: maxLength(20),}}
                     />
@@ -88,10 +87,10 @@ function UsereditForm(props){
                     ></Errors>
                   </div>
 
-                  <Row>
-                      <Col sm="6">
-                        <FormGroup>
-                          <Label for="mobile">Phone Number</Label>
+                  <div className="row">
+                      <div className="col-12 col-sm-6">
+                        <div className="form-group">
+                          <label htmlFor="mobile">Phone Number</label>
                           <Control.text
                             model=".mobile" className="form-control" name="mobile" id="mobile" placeholder="mobile"
                             validators={{required, minLength: minLength(10), maxLength: maxLength(10), isNumber, }}
@@ -105,11 +104,11 @@ function UsereditForm(props){
                               isNumber: "\nEnter a valid phone Number !!",
                             }}
                           ></Errors>
-                        </FormGroup>
-                      </Col>
-                      <Col sm="6">
-                        <FormGroup>
-                        <Label for="country">Country</Label>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="form-group">
+                        <label htmlFor="country">Country</label>
                           <Control.text model=".country" list="countries" className="form-control" name="country" placeholder="Country"
                           />
                         <datalist id="countries">
@@ -119,24 +118,24 @@ function UsereditForm(props){
                             ))
                           } */}
                         </datalist>
-                        </FormGroup>
-                      </Col>
-                  </Row>
+                        </div>
+                      </div>
+                  </div>
 
-                  <FormGroup>
-                    <Label for="address">Address</Label>
+                  <div className="form-group">
+                    <label htmlFor="address">Address</label>
                     <Control.text
                       model=".address" className="form-control" name="address" id="address" placeholder="address"
                     />
-                  </FormGroup>
+                  </div>
 
-                    <Row>
-                        <Col sm="6">
+                    <div className="row">
+                        <div className="col-12 col-sm-6">
                           {
                             // (country && countryData[country] && countryData[country].cities)
                             // ?
-                            <FormGroup>
-                            <Label for="city">City</Label>
+                            <div className="form-group">
+                            <label htmlFor="city">City</label>
                             <Control.text model=".city" list="cities" className="form-control" name="city" placeholder="City"
                             />
                             <datalist id="cities">
@@ -146,17 +145,17 @@ function UsereditForm(props){
                                 ))
                               } */}
                             </datalist>
-                            </FormGroup>
+                            </div>
                             // :
                             // null
                           }
-                        </Col>
-                        <Col sm="6">
+                        </div>
+                        <div className="col-12 col-sm-6">
                           {
                             // (stateCountry && stateData[stateCountry] && stateData[stateCountry].states && stateData[stateCountry].states.length>0)
                             // ?
-                            <FormGroup>
-                            <Label for="state">State</Label>
+                            <div className="form-group">
+                            <label htmlFor="state">State</label>
                             <Control.text model=".state" list="states" className="form-control" name="state" placeholder="State"
                             />
                             <datalist id="states">
@@ -166,15 +165,15 @@ function UsereditForm(props){
                                 ))
                               } */}
                             </datalist>
-                            </FormGroup>
+                            </div>
                             // :
                             // null
                           }
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
 
-                  <FormGroup>
-                    <Label for="pincode">Pincode</Label>
+                  <div className="form-group">
+                    <label htmlFor="pincode">Pincode</label>
                     <Control.text
                       model=".pincode" className="form-control" name="pincode" id="pincode" placeholder="Pincode"
                       validators={{minLength: minLength(6), maxLength: maxLength(6), isNumber, }}
@@ -186,23 +185,23 @@ function UsereditForm(props){
                         isNumber: "\nEnter a valid phone Number !!"
                       }}
                     ></Errors>
-                  </FormGroup>
+                  </div>
 
                   <div  className="d-flex justify-content-center">
-                    <Button type="submit" color="secondary" size="md" active >
+                    <button className="btn btn-secondary" type="submit" >
                       Edit
-                    </Button>
+                    </button>
                   </div>
 
                 </LocalForm>
-              </Col>
-              <Col className="container d-flex justify-content-center align-items-center mb-5 p-5">
-                  <Media alt="LAWYER IMAGE" style={{width:'inherit',height:'inherit'}} 
-                  src="/assets/edit.svg"></Media>
-              </Col>
-            </Row>
+              </div>
+              <div className="col container d-flex justify-content-center align-items-center mb-5 p-5">
+                  <img alt="EDIT" style={{width:'inherit',height:'inherit'}} 
+                  src="/assets/edit.svg"/>
+              </div>
+            </div>
             <hr></hr>
-          </Container>
+          </div>
 
     )
 }

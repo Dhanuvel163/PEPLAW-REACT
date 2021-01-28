@@ -4,7 +4,6 @@ import UsereditForm from './usereditForm'
 import Usereditcard from './Usereditcard'
 import {postprofiledata,fetchprofiledata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
-import {Spinner} from 'reactstrap'
 // import {Helmet} from 'react-helmet'
 
 const mapStateToProps=state=>{
@@ -51,7 +50,9 @@ function Useredit(props){
         props.profiledata.isloading
         ?
         <div style={{height:'100%',minHeight:'500px'}} className="d-flex align-items-center justify-content-center">
-                    <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+                <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+                <span className="sr-only">Loading...</span>
+                </div>
         </div>
         :
         props.profiledata.profiledata

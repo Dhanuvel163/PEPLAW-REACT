@@ -1,8 +1,6 @@
 import React,{useEffect} from 'react'
-import {Card,CardBody,CardHeader} from "reactstrap";
 import {fetchdetailpagedata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
-import {Spinner} from 'reactstrap'
 import { useParams} from 'react-router-dom'
 // import {Helmet} from 'react-helmet'
 import '../Useredit/useredit.scss'
@@ -40,26 +38,28 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                detailpage.isloading
                 ?
                 <div style={{height:'100%',minHeight:'500px'}} className="d-flex align-items-center justify-content-center">
-                            <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+                    <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+                    <span className="sr-only">Loading...</span>
+                    </div>
                 </div>
                 :
                (detailpage.detailpage && detailpage.detailpage.name)
                 ?
-            <Card className="card-style four-box-shadow" inverse color="danger">
+            <div className="card bg-danger card-style four-box-shadow">
                 {/* <Helmet>
                     <title>{detailpage.detailpage.name.toUpperCase()} | PEPLAW </title>
                 <meta name="description" content="Peplaw profile detail page"/>
                 </Helmet> */}
                 {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
-                <CardHeader>
+                <div className="card-header">
                     <div className="mb-3">
                     <img  src={detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>
                     <span style={{marginLeft:'15px'}}>
                     {detailpage.detailpage.name}
                     </span>
                     </div>
-                </CardHeader>
-                <CardBody className="profile">
+                </div>
+                <div className="card-body profile">
                     <pre>
                     <span>Mail         : </span>   {detailpage.detailpage.email}
                     </pre>
@@ -87,8 +87,8 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                             </pre>               
                         </div>
                     </div>
-                </CardBody>
-            </Card>
+                </div>
+            </div>
             :<div></div>
             }
 

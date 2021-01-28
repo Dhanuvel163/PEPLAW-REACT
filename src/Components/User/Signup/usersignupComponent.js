@@ -1,6 +1,4 @@
 import React from 'react';
-import {Container} from 'reactstrap';
-import { Button, FormGroup, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -33,13 +31,13 @@ function Usersignup(props){
                 </Helmet> */}
                 {true && (document.title='USER SIGNUP | PEPLAW')?null:null}
                 <h4 className="text-center">User Signup</h4>
-                <Container style={{marginTop:50}}>
+                <div className="container" style={{marginTop:50}}>
                 <hr></hr>
-                    <Row>
-                        <Col sm="6">
+                    <div className="row">
+                        <div className="col-12 col-sm-6">
                             <LocalForm onSubmit={(values)=>handlesubmit(values)}>
                                 <div className='form-group'>
-                                    <Label for="username">Username</Label>
+                                    <label htmlFor="username">Username</label>
                                     <Control.text model=".username" className='form-control' name="username" id="username"
                                      placeholder="Username"
                                      validators={{
@@ -56,8 +54,8 @@ function Usersignup(props){
                                      }}
                                      ></Errors>
                                 </div>
-                                <FormGroup>
-                                    <Label for="exampleEmail">Email</Label>
+                                <div className="form-group">
+                                    <label htmlFor="exampleEmail">Email</label>
                                     <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
                                      placeholder="Email"
                                      validators={{
@@ -72,9 +70,9 @@ function Usersignup(props){
                                          isemail:'\nEnter a valid email !!'
                                      }}
                                      ></Errors>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="examplePassword">Password</Label>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="examplePassword">Password</label>
                                     <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
                                     placeholder="password"
                                     validators={{
@@ -90,9 +88,9 @@ function Usersignup(props){
                                          maxLength:'\npassword should has maximum 20 characters only !!'
                                      }}
                                      ></Errors>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="mobile">Phone Number</Label>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="mobile">Phone Number</label>
                                     <Control.text model=".mobile" className='form-control' name="mobile" id="mobile"
                                      placeholder="mobile"
                                      validators={{
@@ -109,23 +107,23 @@ function Usersignup(props){
                                          isNumber:'\nEnter a valid phone Number !!'
                                      }}
                                      ></Errors>
-                                </FormGroup>
+                                </div>
                                     <Link to="/lawyer/signup" className="nav-link">
                                         <p style={{color:'white'}}>Are you a lawyer ?</p>
                                     </Link>
                                 <div className="d-flex justify-content-center">
-                                <Button color="secondary" size="md" active>Sign Up</Button>
+                                <button className="btn btn-secondary">Sign Up</button>
                                 </div>
                             </LocalForm>        
-                        </Col>
-                        <Col>
+                        </div>
+                        <div className="col">
                             <div className="container">
-                            <Media alt="LAWYER IMAGE" style={{width:'inherit',marginTop:30}} src="/assets/usersignup.svg"></Media>
+                            <img className="media" alt="USER SIGNUP" style={{width:'inherit',marginTop:30}} src="/assets/usersignup.svg"></img>
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                     <hr></hr>
-                </Container>
+                </div>
             </div>
         );
 }

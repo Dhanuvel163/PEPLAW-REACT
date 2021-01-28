@@ -1,9 +1,6 @@
-import {Card,CardHeader,CardBody,CardText,Button } from 'reactstrap';
 import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import React,{useRef,useState} from 'react';
 import {Link} from 'react-router-dom'
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import classnames from 'classnames';
 
 export default function Cardprofile(props){
     const [activeTab, setActiveTab] = useState('1');
@@ -23,8 +20,8 @@ export default function Cardprofile(props){
         {
             isloggedin() && islawyerloggedin()
             ?
-            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:50}} >
-                <CardHeader>
+            <div className="card bg-danger card-style four-box-shadow" style={{marginTop:50}} >
+                <div className="card-header">
                     <div onMouseEnter={toggleIn} onMouseLeave={toggleOut}>
                         <Link to={`/profile/${props.casedata.User._id}`} style={{color:'white'}}>
                         <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -57,79 +54,73 @@ export default function Cardprofile(props){
                             </p>
                         </div>
                     </div>
-                </CardHeader>
-                <CardBody className="mycases">
-                    <CardText>
+                </div>
+                <div className="card-body mycases">
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
                         {props.casedata.dispositioncode}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
                         {props.casedata.amendedcharge}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
                         {props.casedata.dispositiondate}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
                         {props.casedata.sentencetime}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
                         {props.casedata.description}
-                    </CardText>
-                </CardBody>
-            </Card>
+                    </div>
+                </div>
+            </div>
             :
             isloggedin() && isuserloggedin()
             ?
-            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:50}} >
-                <CardHeader style={{textTransform:'uppercase'}}>
+            <div className="card bg-danger card-style four-box-shadow"style={{marginTop:50}} >
+                <div className="card-header" style={{textTransform:'uppercase'}}>
                 <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
                  {props.casedata.dispositioncode}
-                </CardHeader>
-                <CardBody className="mycases">
+                </div>
+                <div className="card-body mycases">
 
                     <div>
-                    <Nav tabs>
-                        <NavItem>
-                        <NavLink
-                            className={classnames({ active: activeTab === '1' })}
-                            onClick={() => { toggleTab('1'); }}
-                        >
-                            Detail
-                        </NavLink>
-                        </NavItem>
-                        <NavItem>
-                        <NavLink
-                            className={classnames({ active: activeTab === '2' })}
-                            onClick={() => { toggleTab('2'); }}
-                        >
-                            Requests
-                        </NavLink>
-                        </NavItem>
-                    </Nav>
-                    <TabContent activeTab={activeTab}>
-                        <TabPane tabId="1">
-                            <CardText style={{marginTop:15}}>
+                    <ul className="nav nav-tabs">
+                        <div className="nav-item">
+                            <div className={activeTab === '1'?"nav-link active":"nav-link"} onClick={() => { toggleTab('1'); }}> 
+                                Detail
+                            </div>
+                        </div>
+                        <div className="nav-item">
+                            <div className={activeTab === '2'?"nav-link active":"nav-link"} onClick={() => { toggleTab('2'); }}> 
+                                Requests
+                            </div>
+                        </div>
+                    </ul>
+                    <div className="tab-content">
+                        <div className={activeTab === '1'?"tab-pane active":"tab-pane"}>
+                            <div style={{marginTop:15}}>
                                 <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
                                 {props.casedata.amendedcharge}
-                            </CardText>
-                            <CardText>
+                            </div>
+                            <div className="card-text">
                                 <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
                                 {props.casedata.dispositiondate}
-                            </CardText>
-                            <CardText>
+                            </div>
+                            <div className="card-text">
                                 <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
                                 {props.casedata.sentencetime}
-                            </CardText>
-                            <CardText>
+                            </div>
+                            <div className="card-text">
                                 <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
                                 {props.casedata.description}
-                            </CardText>
-                        </TabPane>
-                        <TabPane tabId="2" className="font-weight-bold">
+                            </div>
+                        </div>
+                        <div className={activeTab === '2'?"tab-pane active font-weight-bold":"tab-pane "}>
                             <div style={{height:15}}></div>
                             {
                                 props.casedata.lawyerRequests.length === 0 ?
@@ -140,11 +131,11 @@ export default function Cardprofile(props){
                                     />
                                 )
                             }
-                        </TabPane>
-                    </TabContent>
+                        </div>
                     </div>
-                </CardBody>
-            </Card>
+                    </div>
+                </div>
+            </div>
             :
             null
         }
@@ -181,9 +172,9 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
                 </svg>
                     
                 <span style={{float:'right'}}>
-                    <Button onClick={()=>{postacceptbyuser(id,lawyer._id)}} color="primary" size="sm" disabled={locked}>
+                    <button className="btn btn-sm btn-primary" onClick={()=>{postacceptbyuser(id,lawyer._id)}} disabled={locked}>
                     Accept
-                    </Button>
+                    </button>
                 </span>
             </div>
             

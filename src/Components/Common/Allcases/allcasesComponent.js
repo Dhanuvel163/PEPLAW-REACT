@@ -1,7 +1,6 @@
 import React,{useEffect} from 'react';
 import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
-import {Spinner} from 'reactstrap'
 // import {Helmet} from 'react-helmet'
 
 import {fetchallcases,postapply
@@ -71,7 +70,9 @@ function Allcases(props){
             (props.allcases.isloading)
             ?
             <div style={{height:'100%',minHeight:'500px'}} className="d-flex align-items-center justify-content-center">
-                <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+                <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+                <span className="sr-only">Loading...</span>
+                </div>
             </div>
             :
             (props.allcases.allcases && props.allcases.allcases.length!==0)

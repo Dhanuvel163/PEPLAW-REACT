@@ -1,6 +1,4 @@
 import React from 'react';
-import {Container} from 'reactstrap';
-import { Button, FormGroup, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -30,13 +28,13 @@ function Lawyerlogin(props){
                 </Helmet> */}
                 {true && (document.title='LAWYER LOGIN | PEPLAW')?null:null}
                 <h4 className="text-center">Lawyer Login</h4>
-                <Container style={{marginTop:50}}>
+                <div className="container" style={{marginTop:50}}>
                 <hr></hr>
-                    <Row>
-                        <Col xs="12" sm="6" className="d-flex align-items-center">
+                    <div className="row">
+                        <div className="col-12 col-sm-6 d-flex align-items-center">
                             <LocalForm onSubmit={(values)=>handlesubmit(values)}>
-                            <FormGroup>
-                                    <Label for="exampleEmail">Email</Label>
+                            <div className="form-group">
+                                    <label htmlFor="exampleEmail">Email</label>
                                     <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
                                      placeholder="Email"
                                      validators={{required,isemail}}/>
@@ -49,9 +47,9 @@ function Lawyerlogin(props){
                                          isemail:'\nEnter a valid email !!'
                                      }}
                                      ></Errors>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="examplePassword">Password</Label>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="examplePassword">Password</label>
                                     <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
                                     placeholder="password"
                                     validators={{required}}/>
@@ -63,29 +61,29 @@ function Lawyerlogin(props){
                                          required:'password is required !!',
                                      }}
                                      ></Errors>
-                                </FormGroup>
+                                </div>
                                     <Link to="/user/login" className="nav-link">
                                         <p style={{color:'white'}}>Are you a user ?</p>
                                     </Link>
                                 <div className="d-flex justify-content-center">
-                                <Button color="secondary" size="md" active>Sign in</Button>
+                                <button className="btn btn-secondary">Sign in</button>
                                 </div>
                             </LocalForm>        
-                        </Col>
-                        <Col>
+                        </div>
+                        <div className="col">
                             <div className="container">
-                            <Media style={{width:'inherit',marginTop:30}} src="/assets/loginlawyer.svg"></Media>
+                            <img className="media" style={{width:'inherit',marginTop:30}} alt="LAWYER LOGIN" src="/assets/loginlawyer.svg"/>
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                     <hr></hr>
                     <h5 style={{textAlign:'center'}}>OR</h5>
                     <div  style={{color:'white',display:'flex',justifyContent:'center'}}>
                         <Link to="/lawyer/signup" className="nav-link">
-                        <Button color='warning'size="md">Click here to Signup</Button>
+                        <button className="btn btn-warning">Click here to Signup</button>
                         </Link>
                     </div>
-                </Container>
+                </div>
             </div>
         );
 

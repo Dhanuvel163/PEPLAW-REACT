@@ -2,10 +2,7 @@ import React,{useEffect,useState} from 'react';
 import './mycases.scss'
 import {fetchusercases,postacceptbyuser} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
-import {Spinner} from 'reactstrap'
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import {islawyerloggedin,isloggedin} from '../../../service/userservice'
-import classnames from 'classnames';
 import Cardprofile from './Cardprofile'
 import Head from './Head'
 // import {Helmet} from 'react-helmet'
@@ -52,7 +49,9 @@ function Mycases(props){
         props.usercases.isloading
         ?
         <div style={{height:'100%',minHeight:500}} className="d-flex align-items-center justify-content-center">
-                    <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+                <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+                <span className="sr-only">Loading...</span>
+                </div>
         </div>
         :
         (props.usercases.usercasedata && props.usercases.usercasedata.cases && props.usercases.usercasedata.acceptedcases && props.usercases.usercasedata.pendingcases)
@@ -64,48 +63,37 @@ function Mycases(props){
             </Helmet> */}
                 {true && (document.title='MYCASES | PEPLAW')?null:null}
             <div>
-            <Nav tabs>
-                <NavItem>
-                <NavLink
-                    className={classnames({ active: activeTab === '1' })}
-                    onClick={() => { toggle('1'); }}
-                >
-                    Allcases
-                </NavLink>
-                </NavItem>
-                <NavItem>
-                <NavLink
-                    className={classnames({ active: activeTab === '2' })}
-                    onClick={() => { toggle('2'); }}
-                >
-                    Pending
-                </NavLink>
-                </NavItem>
-                <NavItem>
-                <NavLink
-                    className={classnames({ active: activeTab === '3' })}
-                    onClick={() => { toggle('3'); }}
-                >
-                    Accepted
-                </NavLink>
-                </NavItem>
-                {
-                (isloggedin() && islawyerloggedin() )?
-                <NavItem>
-                <NavLink
-                    className={classnames({ active: activeTab === '4' })}
-                    onClick={() => { toggle('4'); }}
-                >
-                    Rejected
-                </NavLink>
-                </NavItem>
-                :
-                ''
-                }
 
-            </Nav>
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId="1">
+                <ul className="nav nav-tabs">
+                    <div className="nav-item">
+                        <div className={activeTab === '1'?"nav-link active":"nav-link"} onClick={() => { toggle('1'); }}> 
+                            Allcases
+                        </div>
+                    </div>
+                    <div className="nav-item">
+                        <div className={activeTab === '2'?"nav-link active":"nav-link"} onClick={() => { toggle('2'); }}> 
+                            Pending
+                        </div>
+                    </div>
+                    <div className="nav-item">
+                        <div className={activeTab === '3'?"nav-link active":"nav-link"} onClick={() => { toggle('3'); }}> 
+                            Accepted
+                        </div>
+                    </div>
+                    {
+                    (isloggedin() && islawyerloggedin() )?
+                    <div className="nav-item">
+                        <div className={activeTab === '4'?"nav-link active":"nav-link"} onClick={() => { toggle('4'); }}> 
+                            Rejected
+                        </div>
+                    </div>
+                    :
+                    ''
+                    }
+                </ul>
+
+            <div className="tab-content">
+                <div className={activeTab === '1'?"tab-pane active":"tab-pane"}>
                     <Head data={props.usercases.usercasedata.cases} title="Your Cases !"/>
                     <div style={{marginTop:50}} className="row justify-content-lg-around">
                         {
@@ -118,8 +106,8 @@ function Mycases(props){
                             }) 
                         }
                     </div>
-                </TabPane>
-                <TabPane tabId="2">
+                </div>
+                <div className={activeTab === '2'?"tab-pane active":"tab-pane"}>
                     <Head data={props.usercases.usercasedata.pendingcases} title="Your Pending Cases !"/>
                     <div style={{marginTop:50}} className="row justify-content-lg-around">
                         {
@@ -132,8 +120,8 @@ function Mycases(props){
                             }) 
                         }
                     </div>
-                </TabPane>
-                <TabPane tabId="3">
+                </div>
+                <div className={activeTab === '3'?"tab-pane active":"tab-pane"}>
                     <Head data={props.usercases.usercasedata.acceptedcases} title="Your Accepted Cases !"/>
                     <div style={{marginTop:50}} className="row justify-content-lg-around">
                         {
@@ -146,8 +134,8 @@ function Mycases(props){
                             }) 
                         }
                     </div>
-                </TabPane>
-                <TabPane tabId="4">
+                </div>
+                <div className={activeTab === '4'?"tab-pane active":"tab-pane"}>
                     {
                         (isloggedin && islawyerloggedin())?
                         <>
@@ -168,8 +156,8 @@ function Mycases(props){
 
                         </>
                     }
-                </TabPane>
-            </TabContent>
+                </div>
+            </div>
             </div>
 
         </div>    

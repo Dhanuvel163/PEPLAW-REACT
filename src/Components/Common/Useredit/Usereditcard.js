@@ -1,5 +1,4 @@
 import {islawyerloggedin,isuserloggedin,isloggedin} from "../../../service/userservice";
-import {Card,CardHeader,CardBody} from "reactstrap";
 import React from "react";
 export default function Usereditcard(props) {
   return(
@@ -7,9 +6,9 @@ export default function Usereditcard(props) {
     {
       isloggedin() && islawyerloggedin()
       ?
-      // <Card className="card-style glass four-box-shadow" inverse>
-      <Card className="card-style four-box-shadow" inverse color="danger">
-        <CardHeader style={{ textTransform: "uppercase" }}>
+      // <div className="card-style glass four-box-shadow" inverse>
+      <div className="card bg-danger card-style four-box-shadow">
+        <div className="card-header" style={{ textTransform: "uppercase" }}>
           <div className="d-flex justify-content-end">
             <div onClick={props.clickEdit} style={{cursor:'pointer'}}>
               <svg 
@@ -18,8 +17,8 @@ export default function Usereditcard(props) {
               </svg>
             </div>
           </div>
-        </CardHeader>
-        <CardBody className="profile">
+        </div>
+        <div className="card-body profile">
             <div className="mb-3">
             <img  src={props.profiledata.profiledata.lawyer.picture} className="profile-img" alt={props.profiledata.profiledata.lawyer.name}/>
             <span style={{marginLeft:'15px'}}>
@@ -53,13 +52,13 @@ export default function Usereditcard(props) {
                     </pre>               
                 </div>
             </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
       :
       isloggedin() && isuserloggedin()
       ?
-      <Card className="card-style four-box-shadow" inverse color="danger">
-        <CardHeader style={{ textTransform: "uppercase" }}>
+      <div className="card bg-danger card-style four-box-shadow">
+        <div className="card-header" style={{ textTransform: "uppercase" }}>
           <div className="d-flex justify-content-end">
             <div onClick={props.clickEdit} style={{cursor:'pointer'}}>
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-pen" viewBox="0 0 16 16">
@@ -67,8 +66,8 @@ export default function Usereditcard(props) {
               </svg>
             </div>
           </div>
-        </CardHeader>
-        <CardBody className="profile">
+        </div>
+        <div className="card-body profile">
             <div className="mb-3">
             <img  src={props.profiledata.profiledata.user.picture} className="profile-img" alt={props.profiledata.profiledata.user.name}/>
             <span style={{marginLeft:'15px'}}>
@@ -102,8 +101,8 @@ export default function Usereditcard(props) {
                     </pre>               
                 </div>
             </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
       :
       null
     }

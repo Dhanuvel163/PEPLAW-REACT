@@ -5,7 +5,6 @@ import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
-import {Spinner} from 'reactstrap'
 
 // const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
 // const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
@@ -65,7 +64,9 @@ function Lazysuspense(component){
     return(
         <Suspense fallback={
         <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}>   
-        <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+        <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+        <span className="sr-only">Loading...</span>
+        </div>
         </div>
         }>
         {component}
@@ -115,7 +116,9 @@ class Main extends Component{
                     this.props.loading.loading
                     ?
                     <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}> 
-                    <Spinner color="#a01ba7" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} />
+                        <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
+                        <span className="sr-only">Loading...</span>
+                        </div>
                     </div>
                     :
                         <Switch>

@@ -1,6 +1,5 @@
 import React,{useRef} from 'react';
 import './cardprofile.scss'
-import {Button,Card,CardHeader,CardBody,CardText } from 'reactstrap';
 import {Link} from 'react-router-dom'
 export default function Cardprofile(props){
     const acceptHandler=(id)=>{
@@ -17,8 +16,8 @@ export default function Cardprofile(props){
     }
     let profile =useRef(null)
         return(
-            <Card inverse className="card-style four-box-shadow" color="danger" style={{marginTop:'45px'}}>
-                <CardHeader>
+            <div className="card bg-danger card-style four-box-shadow"style={{marginTop:'45px'}}>
+                <div className="card-header">
                     <div onMouseEnter={toggleIn} onMouseLeave={toggleOut}>
                         <Link to={`/profile/${props.casedata.User._id}`} style={{color:'white'}}>
                         <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -53,40 +52,40 @@ export default function Cardprofile(props){
                         </div>
                     </div>
 
-                </CardHeader>
-                <CardBody className="allcases">
-                    <CardText>
+                </div>
+                <div className="allcases card-body">
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
                         {/* <span className="chips"> */}
                         {props.casedata.dispositioncode}
                         {/* </span> */}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
                         {/* <span className="chips"> */}
                         {props.casedata.amendedcharge}
                         {/* </span> */}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
                         {/* <span className="chips"> */}
                             {props.casedata.dispositiondate}
                         {/* </span> */}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
                         {/* <span className="chips"> */}
                             {props.casedata.sentencetime}
                         {/* </span> */}
-                    </CardText>
-                    <CardText>
+                    </div>
+                    <div className="card-text">
                         <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
                         {/* <span className="chips"> */}
                             {props.casedata.description?`${props.casedata.description}`:'No Data !'}
                         {/* </span> */}
-                    </CardText>
-                    <Button style={{marginTop:10}} onClick={()=>acceptHandler(props.casedata._id)} color="primary">APPLY</Button>
-                </CardBody>
-            </Card>
+                    </div>
+                    <button className="btn btn-primary mt-5" onClick={()=>acceptHandler(props.casedata._id)}>APPLY</button>
+                </div>
+            </div>
         )
 }

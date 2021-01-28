@@ -1,6 +1,4 @@
 import React from 'react';
-import {Container} from 'reactstrap';
-import { Button, Label,Row,Col,Media } from 'reactstrap';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {postusercase} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
@@ -39,13 +37,13 @@ function Addcase(props){
                     <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                     </svg> 
                  Add Case</h4>
-            <Container style={{marginTop:50}}>
+            <div className="container" style={{marginTop:50}}>
             <hr></hr>
-                <Row>
-                    <Col xs="12" sm="6" className="d-flex align-items-center">
+                <div className="row">
+                    <div className="col-12 col-sm-6 d-flex align-items-center">
                         <LocalForm onSubmit={(values)=>handlesubmit(values)}>
                             <div className='form-group'>
-                                <Label for="disposition-code">Disposition code</Label>
+                                <label htmlFor="disposition-code">Disposition code</label>
                                 <Control.text model=".disposition-code" className='form-control'
                                     placeholder="Disposition code"
                                     validators={{
@@ -60,10 +58,10 @@ function Addcase(props){
                                 }}
                                 ></Errors>
                             </div>
-                            <Row>
-                                <Col sm="6">
+                            <div className="row">
+                                <div className="col-12 col-sm-6">
                                     <div className='form-group'>
-                                    <Label for="disposition-date">Disposition Date</Label>
+                                    <label htmlFor="disposition-date">Disposition Date</label>
                                     <Control.text model=".disposition-date" className='form-control'
                                     placeholder="Disposition date"
                                     validators={{
@@ -78,10 +76,10 @@ function Addcase(props){
                                     }}
                                     ></Errors>
                                     </div>
-                                </Col>
-                                <Col sm="6">
+                                </div>
+                                <div className="col-12 col-sm-6">
                                     <div className='form-group'>
-                                    <Label for="sentence-time">Sentence Time</Label>
+                                    <label htmlFor="sentence-time">Sentence Time</label>
                                     <Control.text model=".sentence-time" className='form-control'
                                     placeholder="sentence-time"
                                     validators={{
@@ -96,10 +94,10 @@ function Addcase(props){
                                     }}
                                     ></Errors>
                                     </div>
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                             <div className='form-group'>
-                                <Label for="sentence-time">Amended Charge</Label>
+                                <label htmlFor="sentence-time">Amended Charge</label>
                                 <Control.text model=".amended-charge" className='form-control'
                                     placeholder="Amended Charge"
                                     validators={{
@@ -115,26 +113,25 @@ function Addcase(props){
                                     ></Errors>
                             </div>
                             <div className='form-group'>
-                                <Label for="sentence-time">Description</Label>
+                                <label htmlFor="sentence-time">Description</label>
                                 <Control.textarea model=".description" className='form-control'
                                     placeholder="Description"
                                     />
                             </div>
                             <div className="d-flex justify-content-center">
-                            <Button color="secondary" size="md" active>Add</Button>
+                            <button className="btn btn-secondary">Add</button>
                             </div>
                         </LocalForm>        
-                    </Col>
-                    <Col >
+                    </div>
+                    <div className="col" >
                         <div className="container">
-                        <Media style={{width:'inherit',marginTop:30}} 
-                        src="/assets/add1.svg">
-                        </Media>
+                        <img alt="PROFILE EDIT" style={{width:'inherit',marginTop:30}} 
+                        src="/assets/add1.svg" />
                         </div>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
                 <hr></hr>
-            </Container>
+            </div>
         </div>
     );
 }

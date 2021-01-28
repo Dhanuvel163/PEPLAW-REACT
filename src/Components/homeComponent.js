@@ -1,6 +1,4 @@
 import React, { useState,memo,useEffect } from "react";
-import {Card,CardBody,CardTitle,CardText} from "reactstrap";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {Link} from "react-router-dom";
 import {imageObserver} from '../Components/CustomHooks/useLazyloading'
 function Home(){
@@ -49,8 +47,8 @@ function Home(){
         <div className="container" style={{ marginTop: 60 }}>
                 {true && (document.title='HOME | PEPLAW')?null:null}
           <div className="card-style glass four-box-shadow  home-card text-uppercase">
-            <CardBody style={{ marginTop: 20, minHeight: 400 }}>
-                <CardTitle style={{  textAlign: "left" }}> 
+            <div className="card-body" style={{ marginTop: 20, minHeight: 400 }}>
+                <div className="card-title" style={{  textAlign: "left" }}> 
                   <b style={{ fontWeight: 1000 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-award-fill" viewBox="0 0 16 16">
                       <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
@@ -60,20 +58,20 @@ function Home(){
                     Find the best Lawyers for your Case !
                   </b>
                   <hr style={{backgroundColor:'white'}}/>
-                </CardTitle>
+                </div>
               <div className="d-flex justify-content-start">
                 <Link to="/user/signup" className="nav-link">
-                  <Button>
+                  <button className="btn btn-secondary">
                     Get Started 
                       <svg style={{marginLeft:6,marginBottom:3}}
                       xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                       </svg>
                     {" "}
-                  </Button>
+                  </button>
                 </Link>
               </div>
-            </CardBody>
+            </div>
           </div>
               <h5 className="text-left" style={{marginTop:60}}>
                 <svg style={{marginRight:7,marginBottom:4}}
@@ -86,14 +84,14 @@ function Home(){
               <div className="row">
                   {cardData.map((data)=>(
                       <div key={data.title} className="col-12 col-md-6 mt-5">
-                        <Card className="card-style four-box-shadow ">
+                        <div className="card card-style four-box-shadow ">
                           <div data-src={data.image} className="lzy_img"> 
                             <div className="lzy_img__image loading"></div> 
                             {/* <div className="lzy_img__title loading"></div>  */}
                             {/* <div className="lzy_img__description loading"></div>  */}
                           </div> 
-                          <CardBody>
-                            <CardText
+                          <div className="card-body">
+                            <div className="card-text"
                               style={{
                                 color: "black",
                                 fontWeight: "bold",
@@ -104,9 +102,9 @@ function Home(){
                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                               </svg>
                               {data.title}
-                            </CardText>
-                          </CardBody>
-                        </Card>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                   ))}
               </div>
@@ -118,29 +116,33 @@ function Home(){
                 Facing Any Problem ?
               </h5>
               <hr style={{backgroundColor:'white',marginBottom:48}}/>
-              <Form action="mailto:dhanuram99@gmail.com">
+              <form action="mailto:dhanuram99@gmail.com">
                 <div className="row">
                   <div className="col-12 col-sm-6">
-                    <FormGroup>
-                      <Label for="mail">Email</Label>
-                      <Input id="mail" type="mail" name="mail" placeholder="Your mail" required/>
-                    </FormGroup>
+                    
+                    <div className="form-group">
+                      <label htmlFor="mail">Email</label>
+                      <input id="mail" type="mail" name="mail" placeholder="Your mail" className="form-control" required/>
+                    </div>
+
                   </div>
                   <div className="col-12 col-sm-6">
-                    <FormGroup>
-                      <Label for="name">Name</Label>
-                      <Input id="name" type="name" name="name" placeholder="Your name" required/>
-                    </FormGroup>
+                    <div className="form-group">
+                      <label htmlFor="name">Name</label>
+                      <input id="name" type="name" name="name" placeholder="Your name" className="form-control" required/>
+                    </div>
+
                   </div>
                 </div>
-                <FormGroup>
-                  <Label for="comment">Detail</Label>
-                  <Input style={{height:200}} id="comment" type="textarea" name="comment" required/>
-                </FormGroup>
-                <div className="d-flex justify-content-center">
-                <Button>SEND</Button>
+                <div className="form-group">
+                  <label htmlFor="comment">Detail</label>
+                  <input style={{height:200}} id="comment" type="textarea" name="comment" className="form-control" required/>
                 </div>
-              </Form>
+
+                <div className="d-flex justify-content-center">
+                <button className="btn btn-secondary">SEND</button>
+                </div>
+              </form>
 
               <div style={{height:40}}></div>
 
