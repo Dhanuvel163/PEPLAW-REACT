@@ -72,18 +72,18 @@ function Lazysuspense(component){
         </Suspense>
     )
 }
-let deferredPrompt;
+// let deferredPrompt;
 class Main extends Component{
     componentDidMount(){
-        window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('beforeinstallprompt')
+        // window.addEventListener('beforeinstallprompt', (e) => {
+        //     console.log('beforeinstallprompt')
             // Prevent the mini-infobar from appearing on mobile
             // e.preventDefault();
             // Stash the event so it can be triggered later.
-            deferredPrompt = e;
+            // deferredPrompt = e;
             // Update UI notify the user they can install the PWA
             // showInstallPromotion();
-        });
+        // });
         // function pr() {
         //     deferredPrompt.prompt();
         //     deferredPrompt.userChoice.then((choiceResult) => {
@@ -153,7 +153,7 @@ class Main extends Component{
                             </Route>
                             <Route path='/user/case' component={()=>
                             Lazysuspense(
-                            <Addcase install={deferredPrompt.prompt} />
+                            <Addcase />
                             )
                             }>
                             </Route>
@@ -165,7 +165,7 @@ class Main extends Component{
                             </Route>
                             <Route path='/search/case' component={()=>
                             Lazysuspense(
-                            <Allcases install={deferredPrompt.prompt} />
+                            <Allcases />
                             )
                             }>
                             </Route>
