@@ -35,20 +35,10 @@ function Home(){
     )
     return (
       <>
-        {/* <h3 className="text-center" style={{marginTop:60}}>
-          <svg style={{marginRight:7,marginBottom:4}}
-          xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-lightbulb-fill" viewBox="0 0 16 16">
-            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
-          </svg>
-          WELCOME !!
-        </h3> */}
-        {/* //rgb(0, 0, 204) */}
-        {/* <div style={{ marginTop: 60 }}> */}
         <div className="container" style={{ marginTop: 60 }}>
                 {true && (document.title='HOME | PEPLAW')?null:null}
-          <div className="card-style glass four-box-shadow  home-card text-uppercase">
-            <div className="card-body" style={{ marginTop: 20, minHeight: 400 }}>
-                <div className="card-title" style={{  textAlign: "left" }}> 
+
+                <div className="card-title text-uppercase" style={{  textAlign: "left" }}> 
                   <b style={{ fontWeight: 1000 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-award-fill" viewBox="0 0 16 16">
                       <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
@@ -59,16 +49,19 @@ function Home(){
                   </b>
                   <hr style={{backgroundColor:'white'}}/>
                 </div>
-              <div className="d-flex justify-content-start">
+
+          <div className="card-style glass four-box-shadow  home-card text-uppercase mt-5">
+            <div className="card-body" style={{ minHeight: 400 }}>
+              <div className="d-flex justify-content-start" style={{height:400}}>
                 <Link to="/user/signup" className="nav-link">
-                  <button className="btn btn-secondary">
+                <button className="btn btn-secondary">
                     Get Started 
                       <svg style={{marginLeft:6,marginBottom:3}}
                       xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                       </svg>
                     {" "}
-                  </button>
+                </button>
                 </Link>
               </div>
             </div>
@@ -84,7 +77,7 @@ function Home(){
               <div className="row">
                   {cardData.map((data)=>(
                       <div key={data.title} className="col-12 col-md-6 mt-5">
-                        <div className="card card-style four-box-shadow ">
+                        <div className="card card-style four-box-shadow glass">
                           <div data-src={data.image} className="lzy_img"> 
                             <div className="lzy_img__image loading"></div> 
                             {/* <div className="lzy_img__title loading"></div>  */}
@@ -93,7 +86,7 @@ function Home(){
                           <div className="card-body">
                             <div className="card-text"
                               style={{
-                                color: "black",
+                                color: "white",
                                 fontWeight: "bold",
                                 textAlign: "left",
                               }}

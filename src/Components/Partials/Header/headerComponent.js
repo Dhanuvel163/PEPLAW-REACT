@@ -153,10 +153,18 @@ class Header extends PureComponent{
                     {
                         isloggedin() ?
                         <ul className="ml-auto navbar-nav">
+                            <li>
                             <ADDCASEDATA componentsPreload={this.props.componentsPreload} />
+                            </li>
+                            <li>
                             <USERDATA user={this.props.userdata} componentsPreload={this.props.componentsPreload}/>
+                            </li>
+                            <li>
                             <Mycases componentsPreload={this.props.componentsPreload}/>
+                            </li>
+                            <li>
                             <Logout fetchuserdata={this.props.fetchuserdata} componentsPreload={this.props.componentsPreload}></Logout>
+                            </li>
                         </ul>
                         :
                         <ul className="ml-auto navbar-nav">
@@ -178,7 +186,6 @@ class Header extends PureComponent{
                                     </Link>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
-
                             <UncontrolledDropdown nav inNavbar >
                                 <DropdownToggle nav caret>
                                     <svg style={{marginRight:4}}

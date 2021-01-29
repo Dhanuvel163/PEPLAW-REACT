@@ -1,18 +1,18 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/mixins"; //EDITED
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/type"; //EDITED
+@import "~bootstrap/scss/utilities"; //EDITED
 
 @import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/forms"; //Edited
+@import "~bootstrap/scss/buttons"; //Edited
 @import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/nav"; //Edited
+@import "~bootstrap/scss/navbar"; //Edited
+@import "~bootstrap/scss/card"; //Edited
 
 @import "~bootstrap/scss/spinners"; //Edited
 @import "~bootstrap/scss/toasts";
@@ -156,12 +156,12 @@ html {
 
 .card-style {
   transition: transform 0.5s ease-in-out;
-  animation: cardAnim 0.7s;
+  animation: fadein 0.1s;
   border-radius: 10px;
   overflow: hidden;
 }
 .card-style:hover {
-  transform: translateX(-10px) translateY(-10px);
+  transform: translateX(-6px) translateY(-6px);
 }
 
 .cases .card-body {
@@ -185,7 +185,6 @@ html {
 @media only screen and (max-width: 600px) {
   .home-card {
     background-position: center;
-    background-repeat: no-repeat;
     background-size: contain;
   }
 }
@@ -261,17 +260,17 @@ form {
     transform: scaleY(1) translateY(-4px);
   }
 }
-@keyframes cardAnim {
-  0% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(0.8);
-  }
-  99% {
-    transform: scale(1);
-  }
-}
+// @keyframes cardAnim {
+//   0% {
+//     transform: scale(1.2);
+//   }
+//   50% {
+//     transform: scale(0.8);
+//   }
+//   99% {
+//     transform: scale(1);
+//   }
+// }
 @keyframes growDown {
   0% {
     transform: scaleY(0);
@@ -291,17 +290,17 @@ form {
 
 //Scrollbar
 
-body::-webkit-scrollbar {
-  width: 12px;
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 16px black !important;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: blueviolet;
-  width: 10px;
+  width: 8px;
   border: 1px solid white;
   border-radius: 10px;
 }
@@ -323,21 +322,22 @@ body::-webkit-scrollbar-thumb {
   width: 100%;
 }
 
-.lzy_img__title.loading {
-  height: 1rem;
-  width: 50%;
-  margin: 1rem;
-  border-radius: 3px;
-}
+// .lzy_img__title.loading {
+//   height: 1rem;
+//   width: 50%;
+//   margin: 1rem;
+//   border-radius: 3px;
+// }
 
-.lzy_img__description.loading {
-  height: 3rem;
-  margin: 1rem;
-  border-radius: 3px;
-}
+// .lzy_img__description.loading {
+//   height: 3rem;
+//   margin: 1rem;
+//   border-radius: 3px;
+// }
 .loading {
   position: relative;
   background-color: #e2e2e2;
+  border-radius: 10px;
 }
 .loading::after {
   display: block;
