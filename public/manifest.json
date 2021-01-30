@@ -7,7 +7,7 @@
       "url":"/home",
       "icons":[
         {
-          "src":"/assets/lawlogo192.webp",
+          "src":"/assets/lawlogo192.jpg",
           "sizes": "192x192"
         }
       ]
@@ -35,7 +35,7 @@
   ],
   "short_name": "PEPLAW",
   "name": "PEPLAW",
-  "start_url": "/index.html",
+  "start_url": "/home",
   "display": "standalone",
   "theme_color": "#091432",
   "background_color": "#091432",
@@ -44,19 +44,19 @@
   "developer": {"name": "Dhanavel","url": "https://github.com/Dhanuvel163"},
   "icons": [
     {
-      "src": "assets/lawlogo64.webp",
+      "src": "assets/lawlogo64.jpg",
       "sizes": "64x64",
       "type": "image/x-icon",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/lawlogo192.webp",
+      "src": "assets/lawlogo192.jpg",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/lawlogo512.webp",
+      "src": "assets/lawlogo512.jpg",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

@@ -151,7 +151,7 @@ class Header extends PureComponent{
                 <div className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
-                        <img src="/assets/lawlogo192.webp" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>
+                        <img src="/assets/lawlogo192.jpg" alt="logo'" height="30" style={{marginRight:10,borderRadius:'50%'}}/>
                         <b >PEP-LAW</b>
                         </Link>
                     </div>
