@@ -50,7 +50,7 @@ function Mycases(props){
         ?
         <div style={{height:'100%',minHeight:500}} className="d-flex align-items-center justify-content-center">
                 <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-                <span className="sr-only">Loading...</span>
+                
                 </div>
         </div>
         :

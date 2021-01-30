@@ -1,7 +1,6 @@
 import React from "react";
 // import React,{useState,useEffect} from "react";
 import { Control, Errors, LocalForm  } from "react-redux-form";
-import {islawyerloggedin} from "../../../service/userservice";
 // import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
 // import * as country_city from '../../../shared/city-country.json'
 // import * as state_country from '../../../shared/state-country.json'
@@ -48,26 +47,14 @@ function UsereditForm(props){
               <div className="col-12 col-sm-6 mb-5">
                 <LocalForm
                   initialState={
-                    islawyerloggedin()
-                    ?
                     {
-                      username:props.profiledata.profiledata.lawyer.name,
-                      country:props.profiledata.profiledata.lawyer.country,
-                      city:props.profiledata.profiledata.lawyer.city,
-                      mobile:props.profiledata.profiledata.lawyer.mobile,
-                      address:props.profiledata.profiledata.lawyer.address ? props.profiledata.profiledata.lawyer.address.addr1 : '',
-                      pincode:props.profiledata.profiledata.lawyer.address ? props.profiledata.profiledata.lawyer.address.postalCode : '',
-                      state:props.profiledata.profiledata.lawyer.address ? props.profiledata.profiledata.lawyer.address.state : ''
-                    }
-                    :
-                    {
-                      username:props.profiledata.profiledata.user.name,
-                      country:props.profiledata.profiledata.user.country,
-                      city:props.profiledata.profiledata.user.city,
-                      mobile:props.profiledata.profiledata.user.mobile,
-                      address:props.profiledata.profiledata.user.address ? props.profiledata.profiledata.user.address.addr1 : '',
-                      pincode:props.profiledata.profiledata.user.address ? props.profiledata.profiledata.user.address.postalCode : '',
-                      state:props.profiledata.profiledata.user.address ? props.profiledata.profiledata.user.address.state : ''
+                      username:props.profiledata.profiledata.name,
+                      country:props.profiledata.profiledata.country,
+                      city:props.profiledata.profiledata.city,
+                      mobile:props.profiledata.profiledata.mobile,
+                      address:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : '',
+                      pincode:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.postalCode : '',
+                      state:props.profiledata.profiledata.address ? props.profiledata.profiledata.address.state : ''
                     }
                   }
                   onSubmit={(values) => handlesubmit(values)}

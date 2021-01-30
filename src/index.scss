@@ -339,22 +339,22 @@ form {
   background-color: #e2e2e2;
   border-radius: 10px;
 }
-.loading::after {
-  display: block;
-  content: "";
-  position: absolute;
-  width: 80%;
-  height: 100%;
-  transform: translateX(0%);
+// .loading::after {
+//   display: block;
+//   content: "";
+//   position: absolute;
+//   width: 80%;
+//   height: 100%;
+//   transform: translateX(0%);
 
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(148, 110, 110, 0.2),
-    transparent
-  );
-  animation: loading 1s infinite;
-}
+//   background: linear-gradient(
+//     90deg,
+//     transparent,
+//     rgba(148, 110, 110, 0.2),
+//     transparent
+//   );
+//   animation: loading 1s infinite;
+// }
 
 @keyframes loading {
   100% {

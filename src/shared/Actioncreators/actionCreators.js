@@ -7,11 +7,11 @@ import {fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser} fr
 import {fetchdetailpagedata} from './Detailpage'
 
 import {clearLoading} from './Helpers/Loading'
-import {displayError,displaySuccess,clearMessage} from './Helpers/Error'
+import {displayError,displaySuccess,clearMessage,successMessage,errorMessage} from './Helpers/Error'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
 export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
-    fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser}
+    fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser,successMessage,errorMessage}
 
 
 //Lawyer Signup and login
@@ -143,8 +143,6 @@ export const postusersignin=(email,password,history)=>(dispatch)=>{
         displayError(dispatch,error)
     }).finally(()=>{dispatch(clearLoading())})
 }
-
-
 
 
 

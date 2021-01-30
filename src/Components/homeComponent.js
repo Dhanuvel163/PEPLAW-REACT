@@ -109,7 +109,7 @@ function Home(){
                 Facing Any Problem ?
               </h5>
               <hr style={{backgroundColor:'white',marginBottom:48}}/>
-              <form action="mailto:dhanuram99@gmail.com">
+              <form>
                 <div className="row">
                   <div className="col-12 col-sm-6">
                     

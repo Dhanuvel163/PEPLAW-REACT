@@ -1,7 +1,7 @@
 import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import React,{useRef,useState} from 'react';
 import {Link} from 'react-router-dom'
-
+import {debounce} from '../../../service/debounce'
 export default function Cardprofile(props){
     const [activeTab, setActiveTab] = useState('1');
     const toggleTab = tab => {
@@ -56,26 +56,7 @@ export default function Cardprofile(props){
                     </div>
                 </div>
                 <div className="card-body mycases">
-                    <div className="card-text">
-                        <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
-                        {props.casedata.dispositioncode}
-                    </div>
-                    <div className="card-text">
-                        <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
-                        {props.casedata.amendedcharge}
-                    </div>
-                    <div className="card-text">
-                        <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
-                        {props.casedata.dispositiondate}
-                    </div>
-                    <div className="card-text">
-                        <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
-                        {props.casedata.sentencetime}
-                    </div>
-                    <div className="card-text">
-                        <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
-                        {props.casedata.description}
-                    </div>
+                    <DetailPart casedata={props.casedata}/>
                 </div>
             </div>
             :
@@ -103,22 +84,8 @@ export default function Cardprofile(props){
                     </ul>
                     <div className="tab-content">
                         <div className={activeTab === '1'?"tab-pane active":"tab-pane"}>
-                            <div style={{marginTop:15}}>
-                                <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
-                                {props.casedata.amendedcharge}
-                            </div>
-                            <div className="card-text">
-                                <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
-                                {props.casedata.dispositiondate}
-                            </div>
-                            <div className="card-text">
-                                <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
-                                {props.casedata.sentencetime}
-                            </div>
-                            <div className="card-text">
-                                <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
-                                {props.casedata.description}
-                            </div>
+                            <div className="mt-3"></div>
+                            <DetailPart casedata={props.casedata}/>
                         </div>
                         <div className={activeTab === '2'?"tab-pane active font-weight-bold":"tab-pane "}>
                             <div style={{height:15}}></div>
@@ -142,10 +109,41 @@ export default function Cardprofile(props){
         </>
     )
 }
-var  timerId;
-var  debounceFunction  =  function (func, delay) {
-	clearTimeout(timerId)
-	timerId  =  setTimeout(func, delay)
+
+
+
+
+
+
+
+
+
+
+function DetailPart(props){
+    return(
+        <>
+        <div className="card-text">
+            <span className="text-warning" style={{fontWeight:'bold'}}> Disposition Code : </span>
+            {props.casedata.dispositioncode}
+        </div>
+        <div className="card-text">
+            <span className="text-warning" style={{fontWeight:'bold'}}> Amended Charge : </span>
+            {props.casedata.amendedcharge}
+        </div>
+        <div className="card-text">
+            <span className="text-warning" style={{fontWeight:'bold'}}> Disposition date : </span>
+            {props.casedata.dispositiondate}
+        </div>
+        <div className="card-text">
+            <span className="text-warning" style={{fontWeight:'bold'}}> Sentencetime : </span>
+            {props.casedata.sentencetime}
+        </div>
+        <div className="card-text">
+            <span className="text-warning" style={{fontWeight:'bold'}}> Description : </span>
+            {props.casedata.description}
+        </div>
+        </>
+    )
 }
 
 function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
@@ -166,7 +164,7 @@ function RequestCardLawyerDetail({lawyer,locked,id,postacceptbyuser}){
                 <Link to={`/profile/${lawyer._id}`} style={{color:'white'}}>
                 {lawyer.name}                
                 </Link>
-                <svg style={{marginLeft:10}} onMouseEnter={(e)=>debounceFunction(toggleIn(e),200)} onMouseLeave={toggleOut}
+                <svg style={{marginLeft:10}} onMouseEnter={(e)=>debounce(toggleIn(e),200)} onMouseLeave={toggleOut}
                 xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" className="bi bi-info-circle-fill" viewBox="0 0 16 16">
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                 </svg>

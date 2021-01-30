@@ -1,7 +1,7 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Toast, ToastHeader } from 'reactstrap';
 import './snackbar.scss'
-import {clearMessage} from '../../../shared/Actioncreators/actionCreators'
+import {clearMessage,successMessage,errorMessage} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 
 const mapStateToProps=state=>{
@@ -11,8 +11,39 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>({
     clearMessage:()=>dispatch(clearMessage()),
+    successMessage:(msg)=>dispatch(successMessage(msg)),
+    errorMessage:(msg)=>dispatch(errorMessage(msg))
 })
-function SnackbarC({errors:{data,open,classN},clearMessage}) {
+function SnackbarC({errors:{data,open,classN},clearMessage,successMessage,errorMessage}) {
+  useEffect(()=>{
+    // window.addEventListener('devicelight',(e)=>{
+    //   console.log(e)
+    // })
+    // setInterval(()=>{
+    //  console.log(
+    // document.visibilityState
+    //  ) 
+    // },1000)
+    // console.log(document.visibilityState)
+    const offlineAlert = function(){
+      errorMessage("Oops, you lost your network connection !")
+      setTimeout(()=>{
+        clearMessage()
+      },2000)
+    }
+    const onlineAlert = function(){
+      successMessage("You are back online !")
+      setTimeout(()=>{
+        clearMessage()
+      },2000)
+    }
+    window.addEventListener("offline",offlineAlert);
+    window.addEventListener("online",onlineAlert);
+    return ()=>{
+    window.removeEventListener("offline",offlineAlert);
+    window.removeEventListener("online",onlineAlert);
+    }
+  })
     return (
       <div className="snack">
       <div className={`d-flex justify-content-center align-items-center ${classN}`} style={{marginTop:10}}>  

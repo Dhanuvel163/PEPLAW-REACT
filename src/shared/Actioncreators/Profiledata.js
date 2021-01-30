@@ -23,7 +23,7 @@ export const fetchprofiledata=()=>(dispatch)=>{
         throw new Error(error.message)
         })
         .then(res=> res.json())
-        .then(lawyer=>{dispatch(addprofiledata(lawyer))})
+        .then(res=>{dispatch(addprofiledata(res.lawyer))})
         .catch((error)=>{dispatch(addprofilefailed(error.message))})
     }else if(isloggedin() && isuserloggedin()){
         return fetch(baseUrl+'api/useraccounts/profile',{headers: {'authorization':localStorage.getItem('token')}})
@@ -40,7 +40,7 @@ export const fetchprofiledata=()=>(dispatch)=>{
         throw new Error(error.message)
         })
         .then(res=> res.json())
-        .then(lawyer=>{dispatch(addprofiledata(lawyer))})
+        .then(res=>{dispatch(addprofiledata(res.user))})
         .catch((error)=>{dispatch(addprofilefailed(error.message))})
     }
 }
@@ -86,7 +86,7 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>
             .then(res=> res.json())
             .then(res=>{
                 displaySuccess(dispatch,'Edited Successfully!!')
-                dispatch(addprofiledata({lawyer:res.profile}))
+                dispatch(addprofiledata(res.profile))
             })
             .catch((error)=>{
                 displayError(dispatch,'Something went wrong:'+error.message)
@@ -116,7 +116,7 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>
             .then(res=> res.json())
             .then(res=>{
                 displaySuccess(dispatch,'Edited Successfully!!')
-                dispatch(addprofiledata({user:res.profile}))
+                dispatch(addprofiledata(res.profile))
             })
             .catch((error)=>{
                 displayError(dispatch,'Something went wrong:'+error.message)

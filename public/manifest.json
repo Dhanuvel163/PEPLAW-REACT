@@ -1,36 +1,4 @@
 {
-  "short_name": "PEPLAW",
-  "name": "PEPLAW",
-  "icons": [
-    {
-      "src": "assets/lawlogo64.webp",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/lawlogo192.webp",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/lawlogo512.webp",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
-    }
-  ],
-  "start_url": "/index.html",
-  "display": "standalone",
-  "theme_color": "#091432",
-  "background_color": "#091432",
-  "author":"DHANAVEL R",
-  "description":"A Website to search for Lawyers by Users For their case !",
-  "developer": {
-  "name": "Dhanavel",
-  "url": "https://github.com/Dhanuvel163"
-  },
   "shortcuts": [
     {
       "name":"Home Page",
@@ -50,7 +18,8 @@
       "description": "Login as a lawyer",
       "url": "/lawyer/login",
       "icons": [
-        { "src": "/assets/loginlawyer.svg", "sizes": "192x192" }
+        { "src": "/assets/shortcuts/loginlawyer192.png", "sizes": "192x192" },
+        { "src": "/assets/shortcuts/loginlawyer96.png", "sizes": "96x96" }
       ]
     },
     {
@@ -59,17 +28,39 @@
       "description": "Login as a user",
       "url": "/user/login",
       "icons": [
-        { "src": "/assets/userlogin.svg", "sizes": "192x192" }
+        { "src": "/assets/shortcuts/userlogin192.png", "sizes": "192x192" },
+        { "src": "/assets/shortcuts/userlogin96.png", "sizes": "96x96" }
       ]
     }
   ],
-  "share_target": {
-    "action": "/home",
-    "params": {
-        "title": "PEPLAW",
-        "text": "Get to know about Peplaw",
-        "url": "/home"
+  "short_name": "PEPLAW",
+  "name": "PEPLAW",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#091432",
+  "background_color": "#091432",
+  "author":"DHANAVEL R",
+  "description":"A Website to search for Lawyers by Users For their case !",
+  "developer": {"name": "Dhanavel","url": "https://github.com/Dhanuvel163"},
+  "icons": [
+    {
+      "src": "assets/lawlogo64.webp",
+      "sizes": "64x64",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/lawlogo192.webp",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/lawlogo512.webp",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
-  },
+  ],
   "categories": ["social media", "cases", "law","lawyer","civil","criminal"]
 }

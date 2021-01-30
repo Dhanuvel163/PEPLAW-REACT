@@ -5,6 +5,8 @@ import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
+import '../index.scss';
+// const indexCss = lazyWithPreload(() => import('../index.scss'))
 
 // const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
 // const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
@@ -65,7 +67,7 @@ function Lazysuspense(component){
         <Suspense fallback={
         <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}>   
         <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-        <span className="sr-only">Loading...</span>
+        
         </div>
         </div>
         }>
@@ -95,7 +97,7 @@ class Main extends Component{
         //         }
         //     })
         // }
-
+        // indexCss.preload()
 
         // this.props.fetchlawyers();
         this.props.fetchuserdata();
@@ -117,7 +119,7 @@ class Main extends Component{
                     ?
                     <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}> 
                         <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-                        <span className="sr-only">Loading...</span>
+                        
                         </div>
                     </div>
                     :
