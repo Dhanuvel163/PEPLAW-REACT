@@ -48,10 +48,14 @@ function Mycases(props){
         :
         props.usercases.isloading
         ?
-        <div style={{height:'100%',minHeight:500}} className="d-flex align-items-center justify-content-center">
-                <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-                
-                </div>
+        <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+                {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
+                </div> */}
+                <div  style={{minWidth:'300px'}}> 
+                <div className="lzy_img__image loading"></div> 
+                <div className="lzy_img__title loading"></div> 
+                <div className="lzy_img__description loading"></div> 
+                </div> 
         </div>
         :
         (props.usercases.usercasedata && props.usercases.usercasedata.cases && props.usercases.usercasedata.acceptedcases && props.usercases.usercasedata.pendingcases)

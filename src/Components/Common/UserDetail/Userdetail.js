@@ -21,7 +21,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
         }
     },[params.id,fetchdetailpagedata])
     return (
-        <div className="container" style={{marginTop:100}}>
+        <>
             {
                 (!detailpage)
                 ?
@@ -37,62 +37,68 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                 :
                detailpage.isloading
                 ?
-                <div style={{height:'100%',minHeight:'500px'}} className="d-flex align-items-center justify-content-center">
-                    <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-                    
-                    </div>
+                <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+                        {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
+                        </div> */}
+                        <div  style={{minWidth:'300px'}}> 
+                        <div className="lzy_img__image loading"></div> 
+                        <div className="lzy_img__title loading"></div> 
+                        <div className="lzy_img__description loading"></div> 
+                        </div> 
                 </div>
                 :
                (detailpage.detailpage && detailpage.detailpage.name)
                 ?
-            <div className="card bg-danger card-style four-box-shadow">
-                {/* <Helmet>
-                    <title>{detailpage.detailpage.name.toUpperCase()} | PEPLAW </title>
-                <meta name="description" content="Peplaw profile detail page"/>
-                </Helmet> */}
-                {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
-                <div className="card-header">
-                    <div className="mb-3">
-                    <img  src={detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>
-                    <span style={{marginLeft:'15px'}}>
-                    {detailpage.detailpage.name}
-                    </span>
-                    </div>
-                </div>
-                <div className="card-body profile">
-                    <pre>
-                    <span>Mail         : </span>   {detailpage.detailpage.email}
-                    </pre>
-                    <pre>
-                    <span>Mobile     : </span>   {detailpage.detailpage.mobile}
-                    </pre>
-                    <pre>
-                    <span>Address  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.addr1 : 'No Data !'}
-                    </pre>
-                    <div className="row">
-                        <div className="col-12 col-md-6">
+                <div className="container" style={{marginTop:100}}>
+                    <div className="card bg-danger card-style four-box-shadow">
+                        {/* <Helmet>
+                            <title>{detailpage.detailpage.name.toUpperCase()} | PEPLAW </title>
+                        <meta name="description" content="Peplaw profile detail page"/>
+                        </Helmet> */}
+                        {true && (document.title=`${detailpage.detailpage.name.toUpperCase()} | PEPLAW`)?null:null}
+                        <div className="card-header">
+                            <div className="mb-3">
+                            <img  src={detailpage.detailpage.picture} className="profile-img" alt={detailpage.detailpage.name}/>
+                            <span style={{marginLeft:'15px'}}>
+                            {detailpage.detailpage.name}
+                            </span>
+                            </div>
+                        </div>
+                        <div className="card-body profile">
                             <pre>
-                            <span>State       : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.state ? detailpage.detailpage.address.state : 'No Data !' : 'No Data !'}
+                            <span>Mail         : </span>   {detailpage.detailpage.email}
                             </pre>
                             <pre>
-                            <span>Country : </span>   {detailpage.detailpage.country || 'No Data !'}
+                            <span>Mobile     : </span>   {detailpage.detailpage.mobile}
                             </pre>
-                        </div>
-                        <div className="col-12 col-md-6">
                             <pre>
-                            <span>Pincode  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.postalCode ? detailpage.detailpage.address.postalCode : 'No Data !': 'No Data !'}
-                            </pre> 
-                            <pre>
-                            <span>City         : </span>   {detailpage.detailpage.city || 'No Data !'}
-                            </pre>               
+                            <span>Address  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.addr1 : 'No Data !'}
+                            </pre>
+                            <div className="row">
+                                <div className="col-12 col-md-6">
+                                    <pre>
+                                    <span>State       : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.state ? detailpage.detailpage.address.state : 'No Data !' : 'No Data !'}
+                                    </pre>
+                                    <pre>
+                                    <span>Country : </span>   {detailpage.detailpage.country || 'No Data !'}
+                                    </pre>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <pre>
+                                    <span>Pincode  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.postalCode ? detailpage.detailpage.address.postalCode : 'No Data !': 'No Data !'}
+                                    </pre> 
+                                    <pre>
+                                    <span>City         : </span>   {detailpage.detailpage.city || 'No Data !'}
+                                    </pre>               
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             :<div></div>
             }
 
-        </div>
+        </>
     )
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Userdetail);

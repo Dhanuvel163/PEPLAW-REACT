@@ -14,7 +14,7 @@
 @import "~bootstrap/scss/navbar"; //Edited
 @import "~bootstrap/scss/card"; //Edited
 
-@import "~bootstrap/scss/spinners"; //Edited
+// @import "~bootstrap/scss/spinners"; //Edited
 @import "~bootstrap/scss/toasts";
 @import "~bootstrap/scss/close";
 @import "~bootstrap/scss/transitions";
@@ -309,6 +309,8 @@ form {
 
 .lzy_img {
   background-color: #fff;
+  width: fit-content;
+  // min-width: 300px;
   height: auto;
   width: auto;
   overflow: hidden;
@@ -322,22 +324,23 @@ form {
   width: 100%;
 }
 
-// .lzy_img__title.loading {
-//   height: 1rem;
-//   width: 50%;
-//   margin: 1rem;
-//   border-radius: 3px;
-// }
+.lzy_img__title.loading {
+  height: 1rem;
+  width: 50%;
+  margin: 1rem;
+  border-radius: 3px;
+}
 
-// .lzy_img__description.loading {
-//   height: 3rem;
-//   margin: 1rem;
-//   border-radius: 3px;
-// }
+.lzy_img__description.loading {
+  height: 3rem;
+  margin: 1rem;
+  border-radius: 3px;
+}
 .loading {
   position: relative;
-  background-color: #e2e2e2;
+  background-color: #f5f3f3;
   border-radius: 10px;
+  animation: loadingfade 0.8s infinite;
 }
 // .loading::after {
 //   display: block;
@@ -356,9 +359,17 @@ form {
 //   animation: loading 1s infinite;
 // }
 
-@keyframes loading {
+// @keyframes loading {
+//   100% {
+//     transform: translateX(40%);
+//   }
+// }
+@keyframes loadingfade {
+  0% {
+    opacity: 1;
+  }
   100% {
-    transform: translateX(40%);
+    opacity: 0.7;
   }
 }
 /*! purgecss end ignore */

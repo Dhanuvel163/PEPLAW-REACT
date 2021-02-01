@@ -28,7 +28,7 @@ const Useredit = lazyWithPreload(() => import('./Common/Useredit/usereditCompone
 const Addcase = lazyWithPreload(() => import('./User/Addcase/addcaseComponent'))
 const Mycases = lazyWithPreload(() => import('./Common/Mycases/mycasesComponent'))
 const Allcases = lazyWithPreload(() => import('./Common/Allcases/allcasesComponent'))
-const Detailpage = lazyWithPreload(() => import('./Common/UserDetail/Userdetail'))
+const Userdetail = lazyWithPreload(() => import('./Common/UserDetail/Userdetail'))
 const Home = lazyWithPreload(() => import('./homeComponent'))
 
 const componentsPreload = {
@@ -40,7 +40,7 @@ const componentsPreload = {
     Addcase,
     Mycases,
     Allcases,
-    Detailpage,
+    Userdetail,
     Home
 }
 
@@ -65,11 +65,15 @@ const mapDispatchToProps=dispatch=>({
 function Lazysuspense(component){
     return(
         <Suspense fallback={
-        <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}>   
-        <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-        
-        </div>
-        </div>
+            <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+                    {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
+                    </div> */}
+                    <div  style={{minWidth:'300px'}}> 
+                    <div className="lzy_img__image loading"></div> 
+                    <div className="lzy_img__title loading"></div> 
+                    <div className="lzy_img__description loading"></div> 
+                    </div> 
+            </div>
         }>
         {component}
         </Suspense>
@@ -108,7 +112,7 @@ class Main extends Component{
         return(
             <>
                 <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata} componentsPreload={componentsPreload}></Header>
-                <div style={{marginTop:70,padding:10,minHeight:700,paddingBottom:30}} className='text-white' >
+                <div style={{marginTop:70,padding:10,minHeight:'100vh',paddingBottom:30}} className='text-white' >
 
                 <div style={{position:'relative'}}>
                 <SnackbarC></SnackbarC>
@@ -117,10 +121,14 @@ class Main extends Component{
                 {
                     this.props.loading.loading
                     ?
-                    <div className="d-flex justify-content-center align-items-center" style={{height:'100%',minHeight:500}}> 
-                        <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">
-                        
-                        </div>
+                    <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+                            {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
+                            </div> */}
+                            <div  style={{minWidth:'300px'}}> 
+                            <div className="lzy_img__image loading"></div> 
+                            <div className="lzy_img__title loading"></div> 
+                            <div className="lzy_img__description loading"></div> 
+                            </div> 
                     </div>
                     :
                         <Switch>
@@ -176,7 +184,7 @@ class Main extends Component{
                             </Route>
                             <Route path='/profile/:id' component={()=>
                             Lazysuspense(
-                            <Detailpage/>
+                            <Userdetail/>
                             )
                             }>
                             </Route>
