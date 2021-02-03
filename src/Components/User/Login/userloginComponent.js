@@ -2,8 +2,9 @@ import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {postusersignin} from '../../../shared/Actioncreators/actionCreators'
+import {postusersignin,createuser} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
+import {signInWithGoogle} from '../../../firebase/index'
 // import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
     return {
@@ -11,6 +12,7 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>({
     postusersignin:(email,password,history)=>dispatch(postusersignin(email,password,history)),
+    createuser:(name,email,password,mobile,picture,token,history)=>dispatch(createuser(name,email,password,mobile,picture,token,history)),
 })
 const required=(val)=>(val)&&(val.length)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
@@ -18,6 +20,14 @@ function Userlogin(props){
     let history = useHistory()
     const handlesubmit=(values)=>{
         props.postusersignin(values.email,values.password,history);
+    }
+    const signInGoogle = async()=>{
+        const data = await signInWithGoogle()
+        const token = await data.user.getIdToken()
+        props.createuser(
+            data.user.displayName,data.user.email,null,data.user.phoneNumber,
+            data.additionalUserInfo.profile.picture,token,history
+        )
     }
         return(
             <div className="container" style={{marginTop:50,marginBottom:50}}>
@@ -75,10 +85,14 @@ function Userlogin(props){
                         </div>
                         <div className="col">
                             <div className="container">
-                            <img className="media" alt="USER LOGIN" style={{
+                            {/* <img className="media" alt="USER LOGIN" style={{
                                 width:'inherit',
                                 marginTop:30}} 
-                            src="/assets/userlogin.svg"></img>
+                            src="/assets/userlogin.svg"></img> */}
+                            <div className="btn btn-danger" onClick={signInGoogle}>
+                            google
+                            </div>
+
                             </div>
                         </div>
                     </div>

@@ -5,19 +5,9 @@ import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
+import {AuthProvider} from '../Context/Auth'
 import '../index.scss';
 // const indexCss = lazyWithPreload(() => import('../index.scss'))
-
-// const Lawyerlogin = lazy(() => import('./Lawyer/Login/lawerloginComponent'))
-// const Userlogin = lazy(() => import('./User/Login/userloginComponent'))
-// const Lawersignup = lazy(() => import('./Lawyer/Signup/lawersignupComponent'))
-// const Usersignup = lazy(() => import('./User/Signup/usersignupComponent'))
-// const Useredit = lazy(() => import('./Common/Useredit/usereditComponent'))
-// const Addcase = lazy(() => import('./User/Addcase/addcaseComponent'))
-// const Mycases = lazy(() => import('./Common/Mycases/mycasesComponent'))
-// const Allcases = lazy(() => import('./Common/Allcases/allcasesComponent'))
-// const Home = lazy(() => import('./homeComponent'))
-
 // const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
 
 const Lawyerlogin = lazyWithPreload(() => import('./Lawyer/Login/lawerloginComponent'))
@@ -112,7 +102,7 @@ class Main extends Component{
         return(
             <>
                 <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata} componentsPreload={componentsPreload}></Header>
-                <div style={{marginTop:70,padding:10,minHeight:'100vh',paddingBottom:30}} className='text-white' >
+                <div style={{marginTop:120,minHeight:'100vh',paddingBottom:30}} className='text-white' >
 
                 <div style={{position:'relative'}}>
                 <SnackbarC></SnackbarC>
@@ -131,6 +121,7 @@ class Main extends Component{
                             </div> 
                     </div>
                     :
+                    <AuthProvider>
                         <Switch>
                             <Route path='/home' component={()=>Lazysuspense(<Home/>)
                             }></Route>
@@ -190,6 +181,7 @@ class Main extends Component{
                             </Route>
                             <Redirect to="/home"></Redirect>
                         </Switch>
+                    </AuthProvider>
                 }
                 </div>
                 {/* {Lazysuspense(<Footer/>)} */}

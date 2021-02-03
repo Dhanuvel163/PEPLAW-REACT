@@ -6,12 +6,12 @@ import {fetchprofiledata,postprofiledata} from './Profiledata'
 import {fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser} from './Cases'
 import {fetchdetailpagedata} from './Detailpage'
 
-import {clearLoading} from './Helpers/Loading'
+import {clearLoading,load} from './Helpers/Loading'
 import {displayError,displaySuccess,clearMessage,successMessage,errorMessage} from './Helpers/Error'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
 export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
-    fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser,successMessage,errorMessage}
+    fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser,successMessage,errorMessage,load,clearLoading}
 
 
 //Lawyer Signup and login
@@ -144,7 +144,37 @@ export const postusersignin=(email,password,history)=>(dispatch)=>{
     }).finally(()=>{dispatch(clearLoading())})
 }
 
-
+export const createuser=(name,email,password,mobile,picture,token,history)=>(dispatch)=>{
+    var newuser={
+            name,email,password,mobile,picture
+    }
+    newuser.date = new Date().toISOString();
+    return fetchFunc(baseUrl+'api/useraccounts/createUser',{
+        method: "POST",
+        body:JSON.stringify(newuser),
+        headers: {
+          "Content-Type": "application/json",
+          "authorization":token
+        },
+        credentials: "same-origin"
+    },dispatch)
+    .then(Response=>{
+        if(Response.success){
+            console.log(Response)
+            // localStorage.setItem('token',Response.token)
+            localStorage.setItem('islawyer',false)
+            // localStorage.setItem('name',Response.name)
+            // dispatch(fetchprofiledata())
+            // dispatch(fetchusercases())
+            dispatch(fetchuserdata())
+            history.push("/home");
+            // displaySuccess(dispatch,'You are logged in as User')
+        }
+    })
+    .catch((error)=>{
+        // displayError(dispatch,error)
+    }).finally(()=>{dispatch(clearLoading())})
+}
 
 
 
