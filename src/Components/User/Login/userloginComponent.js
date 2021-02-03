@@ -2,107 +2,149 @@ import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {postusersignin,createuser} from '../../../shared/Actioncreators/actionCreators'
+import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
-import {signInWithGoogle} from '../../../firebase/index'
+import { useAuth } from "../../../Context/userauth"
+import './googlebtn.scss';
+import './userlogin.scss';
 // import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
     return {
     }
 }
 const mapDispatchToProps=dispatch=>({
-    postusersignin:(email,password,history)=>dispatch(postusersignin(email,password,history)),
+    successMessage:(msg)=>dispatch(successMessage(msg)),
+    errorMessage:(msg)=>dispatch(errorMessage(msg)),
+    clearMessage:()=>dispatch(clearMessage()),
+    load:()=>dispatch(load()),
+    clearLoading:()=>dispatch(clearLoading()),
     createuser:(name,email,password,mobile,picture,token,history)=>dispatch(createuser(name,email,password,mobile,picture,token,history)),
 })
 const required=(val)=>(val)&&(val.length)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Userlogin(props){
     let history = useHistory()
-    const handlesubmit=(values)=>{
-        props.postusersignin(values.email,values.password,history);
+    const { login,signInWithGoogle } = useAuth()
+    const handlesubmit=async(values)=>{
+        props.load()
+        try{
+            await login(values.email,values.password)
+            props.successMessage('Signed in successfully')
+        }catch(e){
+            props.errorMessage(e.message)
+        }finally{
+            setTimeout(()=>{props.clearMessage()},4000)
+            props.clearLoading()
+        }
     }
     const signInGoogle = async()=>{
-        const data = await signInWithGoogle()
-        const token = await data.user.getIdToken()
-        props.createuser(
-            data.user.displayName,data.user.email,null,data.user.phoneNumber,
-            data.additionalUserInfo.profile.picture,token,history
-        )
+        props.load()
+        try{
+            const data = await signInWithGoogle()
+            const token = await data.user.getIdToken()
+            props.createuser(
+                data.user.displayName,data.user.email,null,data.user.phoneNumber,
+                data.additionalUserInfo.profile.picture,token,history
+            )
+            props.successMessage('Signed in successfully')
+        }catch(e){
+            props.errorMessage(e.message)
+        }finally{
+            props.clearLoading()
+            setTimeout(()=>{props.clearMessage()},2000)
+        }
     }
         return(
-            <div className="container" style={{marginTop:50,marginBottom:50}}>
+            <div style={{marginTop:50,marginBottom:50}} className="login">
                 {/* <Helmet>
                     <title>USER LOGIN | PEPLAW</title>
                     <meta name="description" content="user login page" />
                 </Helmet> */}
                 {true && (document.title='USER LOGIN | PEPLAW')?null:null}
-                <h4 className="text-center">User Login</h4>
+                <h5 className="text-center">
+                    <svg style={{marginRight:10}} xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg>
+                    User Login</h5>
                 <div className="container" style={{marginTop:50}}>
                 <hr></hr>
-                    <div className="row">
-                        <div xs="12" sm="6" className="col-12 col-sm-6 d-flex align-items-center">
-                            <LocalForm onSubmit={(values)=>handlesubmit(values)}>
-                            <div className="form-group">
-                                    <label htmlFor="exampleEmail">Email</label>
-                                    <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
-                                     placeholder="Email"
-                                     validators={{
-                                        required,isemail
-                                     }}/>
-                                     <Errors
-                                     model='.email'
-                                     show="touched"
-                                     component={(props)=><Formerror props={props}/>}
-                                     messages={{
-                                         required:'\nEmail is required !!',
-                                         isemail:'\nEnter a valid email !!'
-                                     }}
-                                     ></Errors>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="examplePassword">Password</label>
-                                    <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
-                                    placeholder="password"
-                                    validators={{
-                                        required
-                                     }}/>
-                                     <Errors
-                                     model='.password'
-                                     show="touched"
-                                     component={(props)=><Formerror props={props}/>}
-                                     messages={{
-                                         required:'password is required !!',
-                                     }}
-                                     ></Errors>
-                                </div>
-                                    <Link to="/lawyer/login" className="nav-link">
-                                        <p style={{color:'white'}}>Are you a lawyer ?</p>
-                                    </Link>
-                                <div className="d-flex justify-content-center">
-                                <button className="btn btn-secondary">Sign in</button>
-                                </div>
-                            </LocalForm>        
-                        </div>
-                        <div className="col">
-                            <div className="container">
-                            {/* <img className="media" alt="USER LOGIN" style={{
-                                width:'inherit',
-                                marginTop:30}} 
-                            src="/assets/userlogin.svg"></img> */}
-                            <div className="btn btn-danger" onClick={signInGoogle}>
-                            google
-                            </div>
+                        <div className="d-flex justify-content-center align-items-center">
+                            <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
+                                <div>
+                                    <LocalForm onSubmit={(values)=>handlesubmit(values)}>
+                                    {/* <div className="row">
+                                        <div className="col-12 col-sm-6"> */}
+                                            <div className="form-group">
+                                                <label htmlFor="exampleEmail">Email</label>
+                                                <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
+                                                placeholder="Email"
+                                                validators={{
+                                                    required,isemail
+                                                }}/>
+                                                <Errors
+                                                model='.email'
+                                                show="touched"
+                                                component={(props)=><Formerror props={props}/>}
+                                                messages={{
+                                                    required:'\nEmail is required !!',
+                                                    isemail:'\nEnter a valid email !!'
+                                                }}
+                                                ></Errors>
+                                            </div>
+                                        {/* </div>
+                                        <div className="col-12 col-sm-6"> */}
+                                            <div className="form-group">
+                                                <label htmlFor="examplePassword">Password</label>
+                                                <Control.password model=".password" className='form-control' name="password" id="examplePassword" 
+                                                placeholder="password"
+                                                validators={{
+                                                    required
+                                                }}/>
+                                                <Errors
+                                                model='.password'
+                                                show="touched"
+                                                component={(props)=><Formerror props={props}/>}
+                                                messages={{
+                                                    required:'password is required !!',
+                                                }}
+                                                ></Errors>
+                                            </div>
+                                        {/* </div> */}
+                                    {/* </div> */}
 
+                                        <Link to="/lawyer/login" className="nav-link">
+                                            <p style={{color:'white'}}>Are you a lawyer ?</p>
+                                        </Link>
+                                        <div className="d-flex justify-content-center">
+                                            <button className="btn btn-secondary">Sign in</button>
+                                        </div>
+
+                                        <hr className="bg-light"/>
+                                        <div className="container d-flex justify-content-center align-items-center">
+                                            <div className="google-btn" onClick={signInGoogle}>
+                                            <div className="google-icon-wrapper">
+                                                <img className="google-icon" alt="google logo"
+                                                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                                            </div>
+                                            <p className="btn-text"><b>Sign in with google</b></p>
+                                            </div>
+                                        </div>
+                                        <div  style={{display:'flex',justifyContent:'center'}}>
+                                            <Link to="/user/signup" className="nav-link">
+                                            <button className="btn btn-warning text-white btn-text font-weight-bold">
+                                                <svg style={{marginRight:10}}
+                                                width="16" height="16" fill="currentColor" className="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                                </svg>
+                                                Click here to Signup</button>
+                                            </Link>
+                                        </div>
+                                    </LocalForm>        
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <hr></hr>
-                    <h5 style={{textAlign:'center'}}>OR</h5>
-                    <div  style={{color:'white',display:'flex',justifyContent:'center'}}>
-                        <Link to="/user/signup" className="nav-link">
-                        <button className="btn btn-warning">Click here to Signup</button>
-                        </Link>
-                    </div>
                 </div>
             </div>
         );

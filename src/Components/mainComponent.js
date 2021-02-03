@@ -5,7 +5,8 @@ import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/Footer/footerComponent';
 import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
-import {AuthProvider} from '../Context/Auth'
+import {AuthProvider} from '../Context/userauth'
+import { LawyerAuthProvider } from "../Context/lawyerauth"
 import '../index.scss';
 // const indexCss = lazyWithPreload(() => import('../index.scss'))
 // const Footer = lazyWithPreload(() => import('./Partials/Footer/footerComponent')) ;
@@ -122,6 +123,7 @@ class Main extends Component{
                     </div>
                     :
                     <AuthProvider>
+                        <LawyerAuthProvider>
                         <Switch>
                             <Route path='/home' component={()=>Lazysuspense(<Home/>)
                             }></Route>
@@ -181,6 +183,7 @@ class Main extends Component{
                             </Route>
                             <Redirect to="/home"></Redirect>
                         </Switch>
+                        </LawyerAuthProvider>
                     </AuthProvider>
                 }
                 </div>

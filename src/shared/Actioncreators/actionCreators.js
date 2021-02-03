@@ -7,142 +7,11 @@ import {fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser} fr
 import {fetchdetailpagedata} from './Detailpage'
 
 import {clearLoading,load} from './Helpers/Loading'
-import {displayError,displaySuccess,clearMessage,successMessage,errorMessage} from './Helpers/Error'
+import {clearMessage,successMessage,errorMessage} from './Helpers/Error'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
 export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
     fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser,successMessage,errorMessage,load,clearLoading}
-
-
-//Lawyer Signup and login
-
-export const postlawyersignup=(name,email,password,mobile,history)=>(dispatch)=>{
-    var newlawyer={
-        name:name,
-        email:email,
-        password:password,
-        mobile:mobile
-    }
-    newlawyer.date = new Date().toISOString();
-    return fetchFunc(baseUrl+'api/lawyeraccounts/signup',{
-        method: "POST",
-        body:JSON.stringify(newlawyer),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-    },dispatch)
-    .then(Response=>{
-        localStorage.setItem('token',Response.token)
-        localStorage.setItem('islawyer',true)
-        localStorage.setItem('name',Response.name)
-        dispatch(fetchprofiledata())
-        dispatch(fetchallcases())
-        dispatch(fetchusercases())
-        dispatch(fetchuserdata())
-        history.push("/home");
-        displaySuccess(dispatch,'You are logged in as Lawyer')
-    })
-    .catch((error)=>{
-        displayError(dispatch,error)
-    }).finally(()=>{dispatch(clearLoading())})
-}
-
-
-export const postlawyersignin=(email,password,history)=>(dispatch)=>{
-    var newlawyer={
-        email:email,
-        password:password
-    }
-    return fetchFunc(baseUrl+'api/lawyeraccounts/login',{
-        method: "POST",
-        body:JSON.stringify(newlawyer),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-    },dispatch)
-    .then(Response=>{
-        localStorage.setItem('token',Response.token)
-        localStorage.setItem('islawyer',true)
-        localStorage.setItem('name',Response.name)
-        dispatch(fetchprofiledata())
-        dispatch(fetchallcases())
-        dispatch(fetchusercases())
-        dispatch(fetchuserdata())
-        history.push("/home");
-        displaySuccess(dispatch,'You are logged in as Lawyer')
-    })
-    .catch((error)=>{
-        displayError(dispatch,error)
-    }).finally(()=>{dispatch(clearLoading())})
-}
-
-
-//User Signup and login
-
-export const postusersignup=(name,email,password,mobile,history)=>(dispatch)=>{
-    var newuser={
-            name:name,
-            email:email,
-            password:password,
-            mobile:mobile
-    }
-    newuser.date = new Date().toISOString();
-    return fetchFunc(baseUrl+'api/useraccounts/signup',{
-        method: "POST",
-        body:JSON.stringify(newuser),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-    },dispatch)
-    .then(Response=>{
-        if(Response.success){
-            localStorage.setItem('token',Response.token)
-            localStorage.setItem('islawyer',false)
-            localStorage.setItem('name',Response.name)
-            dispatch(fetchprofiledata())
-            dispatch(fetchusercases())
-            dispatch(fetchuserdata())
-            history.push("/home");
-            displaySuccess(dispatch,'You are logged in as User')
-        }
-    })
-    .catch((error)=>{
-        displayError(dispatch,error)
-    }).finally(()=>{dispatch(clearLoading())})
-}
-
-export const postusersignin=(email,password,history)=>(dispatch)=>{
-    var newuser={
-            email:email,
-            password:password,
-    }
-    return fetchFunc(baseUrl+'api/useraccounts/login',{
-        method: "POST",
-        body:JSON.stringify(newuser),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-    },dispatch)
-    .then(Response=>{
-        if(Response.success){
-            localStorage.setItem('token',Response.token)
-            localStorage.setItem('islawyer',false)
-            localStorage.setItem('name',Response.name)
-            dispatch(fetchprofiledata())
-            dispatch(fetchusercases())
-            dispatch(fetchuserdata())
-            history.push("/home");
-            displaySuccess(dispatch,'You are logged in as User')
-        }
-    })
-    .catch((error)=>{
-        displayError(dispatch,error)
-    }).finally(()=>{dispatch(clearLoading())})
-}
 
 export const createuser=(name,email,password,mobile,picture,token,history)=>(dispatch)=>{
     var newuser={
@@ -160,15 +29,8 @@ export const createuser=(name,email,password,mobile,picture,token,history)=>(dis
     },dispatch)
     .then(Response=>{
         if(Response.success){
-            console.log(Response)
-            // localStorage.setItem('token',Response.token)
             localStorage.setItem('islawyer',false)
-            // localStorage.setItem('name',Response.name)
-            // dispatch(fetchprofiledata())
-            // dispatch(fetchusercases())
-            dispatch(fetchuserdata())
-            history.push("/home");
-            // displaySuccess(dispatch,'You are logged in as User')
+            // dispatch(fetchuserdata())
         }
     })
     .catch((error)=>{
@@ -176,6 +38,30 @@ export const createuser=(name,email,password,mobile,picture,token,history)=>(dis
     }).finally(()=>{dispatch(clearLoading())})
 }
 
+export const createlawyer=(name,email,password,mobile,picture,token,history)=>(dispatch)=>{
+    var newlawyer={
+            name,email,password,mobile,picture
+    }
+    newlawyer.date = new Date().toISOString();
+    return fetchFunc(baseUrl+'api/lawyeraccounts/createLawyer',{
+        method: "POST",
+        body:JSON.stringify(newlawyer),
+        headers: {
+          "Content-Type": "application/json",
+          "authorization":token
+        },
+        credentials: "same-origin"
+    },dispatch)
+    .then(Response=>{
+        if(Response.success){
+            localStorage.setItem('islawyer',true)
+            // dispatch(fetchuserdata())
+        }
+    })
+    .catch((error)=>{
+        // displayError(dispatch,error)
+    }).finally(()=>{dispatch(clearLoading())})
+}
 
 
 

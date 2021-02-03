@@ -1,10 +1,10 @@
 import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {postusersignup,successMessage,errorMessage,clearMessage,load,clearLoading} from '../../../shared/Actioncreators/actionCreators';
+import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser} from '../../../shared/Actioncreators/actionCreators';
 import Formerror from '../../Partials/Formerror/Formerror';
-import { useAuth } from "../../../Context/Auth"
+import { useAuth } from "../../../Context/userauth"
 
 // import {Helmet} from 'react-helmet'
 const mapStateToProps=state=>{
@@ -12,12 +12,12 @@ const mapStateToProps=state=>{
     }
 }
 const mapDispatchToProps=dispatch=>({
-    postusersignup:(name,email,password,mobile,history)=>dispatch(postusersignup(name,email,password,mobile,history)),
     successMessage:(msg)=>dispatch(successMessage(msg)),
     errorMessage:(msg)=>dispatch(errorMessage(msg)),
     clearMessage:()=>dispatch(clearMessage()),
     load:()=>dispatch(load()),
-    clearLoading:()=>dispatch(clearLoading())
+    clearLoading:()=>dispatch(clearLoading()),
+    createuser:(name,email,password,mobile,picture,token,history)=>dispatch(createuser(name,email,password,mobile,picture,token,history)),
 })
 const required=(val)=>(val)&&(val.length)
 const minLength=(len)=>(val)=>(val)&&(val.length>=len)
@@ -26,23 +26,28 @@ const maxLength=(len)=>(val)=>(val)&&(val.length<=len)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 
 function Usersignup(props){
-    // let history = useHistory()
+    let history = useHistory()
     const { signup } = useAuth()
     const handlesubmit=async(values)=>{
         if(values.password !== values.cpass){
             props.errorMessage('Passwords not matching !')
             setTimeout(()=>{props.clearMessage()},2000)
+            return
         }
         props.load()
         try{
             const data = await signup(values.email,values.password)
             // data.user.updatePhoneNumber(values.mobile)
             data.user.updateProfile({displayName:values.username})
+            const token = await data.user.getIdToken()
+            props.createuser(
+                values.username,values.email,values.password,null,
+                null,token,history
+            )
             props.successMessage('Signed up successfully')
         }catch(e){
             props.errorMessage(e.message)
-        }
-        finally{
+        }finally{
             props.clearLoading()
             setTimeout(()=>{props.clearMessage()},2000)
         }
@@ -65,8 +70,8 @@ function Usersignup(props){
                 <div className="container" style={{marginTop:50}}>
                 <hr></hr>
                 <div className="d-flex justify-content-center align-items-center">
-                    <div className="glass card-style card p-3 pt-5 pb-5 four-box-shadow">
-                        <div className="card-body">
+                    <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
+                        <div>
                         <LocalForm onSubmit={(values)=>handlesubmit(values)}>
                             <div className='form-group'>
                                 <label htmlFor="username">Username</label>
@@ -127,7 +132,7 @@ function Usersignup(props){
                                 <div className="col-12 col-sm-6">
                                     <div className="form-group">
                                         <label htmlFor="cpass">Confirm Password</label>
-                                        <Control.text model=".cpass" className='form-control' name="cpass" id="cpass"
+                                        <Control.password model=".cpass" className='form-control' name="cpass" id="cpass"
                                         placeholder="Confirm password"
                                         validators={{
                                             required

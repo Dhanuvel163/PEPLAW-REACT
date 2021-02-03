@@ -84,11 +84,17 @@ html {
 
 .btn-primary {
   background: linear-gradient(to right, rgb(9, 48, 40), rgb(35, 122, 87));
+  &:hover {
+    box-shadow: 0 0 6px rgb(35, 122, 87) !important;
+  }
 }
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
   background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+  &:hover {
+    box-shadow: 0 0 6px rgb(142, 45, 226) !important;
+  }
   // background: rgb(0, 0, 204);
 }
 .btn-dark-blue,
@@ -98,18 +104,21 @@ html {
 }
 .btn-warning {
   background: linear-gradient(to right, rgb(247, 151, 30), rgb(255, 210, 0));
+  &:hover {
+    box-shadow: 0 0 6px rgb(255, 210, 0) !important;
+  }
 }
 
-.btn,
-.btn:focus {
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12) !important;
-}
-.btn:active {
-  animation: click 0.2s ease-in-out !important;
-}
+// .btn,
+// .btn:focus {
+//   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+//     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+//     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+//     0 100px 80px rgba(0, 0, 0, 0.12) !important;
+// }
+// .btn:active {
+//   animation: click 0.2s ease-in-out !important;
+// }
 
 .text-warning {
   text-transform: uppercase;
@@ -190,9 +199,9 @@ html {
 }
 
 img {
-  box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
+  // box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
   border-radius: 5px;
-  filter: drop-shadow(2px, 4px, 8px, #585858) !important;
+  // filter: drop-shadow(2px, 4px, 8px, #585858) !important;
 }
 
 //For Forms
