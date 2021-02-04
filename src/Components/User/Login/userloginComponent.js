@@ -2,7 +2,7 @@ import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser} from '../../../shared/Actioncreators/actionCreators'
+import {successMessage,errorMessage,clearMessage,load,clearLoading,createuser,fetchprofiledata,fetchusercases} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
 import { useAuth } from "../../../Context/userauth"
 import './googlebtn.scss';
@@ -19,16 +19,22 @@ const mapDispatchToProps=dispatch=>({
     load:()=>dispatch(load()),
     clearLoading:()=>dispatch(clearLoading()),
     createuser:(name,email,password,mobile,picture,token,history)=>dispatch(createuser(name,email,password,mobile,picture,token,history)),
+
+    fetchprofiledata:(token,type)=>dispatch(fetchprofiledata(token,type)),
+    fetchusercases:(token,type)=>dispatch(fetchusercases(token,type)),
 })
 const required=(val)=>(val)&&(val.length)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Userlogin(props){
     let history = useHistory()
-    const { login,signInWithGoogle } = useAuth()
+    const { login,signInWithGoogle,currentUser } = useAuth()
     const handlesubmit=async(values)=>{
         props.load()
         try{
             await login(values.email,values.password)
+            let token =await currentUser.getIdToken()
+            props.fetchprofiledata(token,"USER")
+            props.fetchusercases(token,"USER")
             props.successMessage('Signed in successfully')
         }catch(e){
             props.errorMessage(e.message)
@@ -46,6 +52,8 @@ function Userlogin(props){
                 data.user.displayName,data.user.email,null,data.user.phoneNumber,
                 data.additionalUserInfo.profile.picture,token,history
             )
+            props.fetchprofiledata(token,"USER")
+            props.fetchusercases(token,"USER")
             props.successMessage('Signed in successfully')
         }catch(e){
             props.errorMessage(e.message)

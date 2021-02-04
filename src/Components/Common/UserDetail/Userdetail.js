@@ -1,25 +1,43 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useCallback} from 'react'
 import {fetchdetailpagedata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import { useParams} from 'react-router-dom'
 // import {Helmet} from 'react-helmet'
 import '../Useredit/useredit.scss'
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+import {useAuth} from '../../../Context/userauth'
 const mapStateToProps=state=>{
     return {
         detailpage:state.detailpage,
     }
 }
 const mapDispatchToProps=dispatch=>({
-    fetchdetailpagedata:(id)=>dispatch(fetchdetailpagedata(id)),
+    fetchdetailpagedata:(id,token,type)=>dispatch(fetchdetailpagedata(id,token,type)),
 })
 
 function Userdetail({detailpage,fetchdetailpagedata}) {
+    const { currentLawyer } = useLawyerAuth()
+    const { currentUser } = useAuth()
     let params = useParams();
+    /* eslint-disable */
+    const fetchDetail = useCallback(
+     async()=>{
+        let token,type
+        if(currentUser){
+            token = await currentUser.getIdToken()
+            type='USER'
+        }else if(currentLawyer){
+            token =await currentLawyer.getIdToken()
+            type = 'LAWYER'
+        }
+        fetchdetailpagedata(params.id,token,type)
+    },[params.id])
+    /* eslint-enable */
     useEffect(()=>{
-           fetchdetailpagedata(params.id)
+        fetchDetail()
         return ()=>{
         }
-    },[params.id,fetchdetailpagedata])
+    },[fetchDetail])
     return (
         <>
             {
@@ -69,7 +87,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                             <span>Mail         : </span>   {detailpage.detailpage.email}
                             </pre>
                             <pre>
-                            <span>Mobile     : </span>   {detailpage.detailpage.mobile}
+                            <span>Mobile     : </span>   {detailpage.detailpage.mobile || 'No Data !'}
                             </pre>
                             <pre>
                             <span>Address  : </span>   {detailpage.detailpage.address ? detailpage.detailpage.address.addr1 : 'No Data !'}

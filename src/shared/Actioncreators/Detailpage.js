@@ -1,14 +1,13 @@
 import * as  actionTypes from '../actionTypes';
 import {baseUrl} from '../url';
-import {isloggedin,islawyerloggedin,isuserloggedin} from '../../service/userservice';
 
 //Fetch detailpage Data
 
-export const fetchdetailpagedata=(id)=>(dispatch)=>{
+export const fetchdetailpagedata=(id,token,type)=>(dispatch)=>{
     dispatch(adddetailpageloading(true))
 
-    if(isloggedin() && islawyerloggedin()){
-        return fetch(baseUrl+'api/lawyeraccounts/userprofiledetail/'+id,{headers: {'authorization':localStorage.getItem('token')}})
+    if(type==='LAWYER'){
+        return fetch(baseUrl+'api/lawyeraccounts/userprofiledetail/'+id,{headers: {'authorization':token}})
         .then((res)=>{
             if(res.ok){
                 return res;
@@ -24,8 +23,8 @@ export const fetchdetailpagedata=(id)=>(dispatch)=>{
         .then(res=> res.json())
         .then(res=>{dispatch(adddetailpage(res.user))})
         .catch((error)=>{dispatch(adddetailpagefailed(error.message))})
-    }else if(isloggedin() && isuserloggedin()){
-        return fetch(baseUrl+'api/useraccounts/lawyerprofiledetail/'+id,{headers: {'authorization':localStorage.getItem('token')}})
+    }else if(type==="USER"){
+        return fetch(baseUrl+'api/useraccounts/lawyerprofiledetail/'+id,{headers: {'authorization':token}})
         .then((res)=>{
             if(res.ok){
                 return res;

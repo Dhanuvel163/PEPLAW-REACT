@@ -1,7 +1,6 @@
 import React from "react";
 // import React,{useState,useEffect} from "react";
 import { Control, Errors, LocalForm  } from "react-redux-form";
-// import {islawyerloggedin,isuserloggedin} from "../../../service/userservice";
 // import * as country_city from '../../../shared/city-country.json'
 // import * as state_country from '../../../shared/state-country.json'
 import Formerror from '../../Partials/Formerror/Formerror';

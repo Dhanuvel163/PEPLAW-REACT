@@ -1,6 +1,5 @@
 import * as  actionTypes from '../actionTypes';
 import {baseUrl} from '../url';
-import {isloggedin,islawyerloggedin,isuserloggedin} from '../../service/userservice';
 import {displayError,displaySuccess} from './Helpers/Error'
 import {clearLoading,load} from './Helpers/Loading'
 import {fetchFunc} from './Helpers/Fetchfunction'
@@ -161,11 +160,9 @@ export const acceptbyuser=(cases)=>({
 
 //apply Handler
 
-export const postapply=(id)=>(dispatch)=>{
+export const postapply=(id,token)=>(dispatch)=>{
     dispatch(load())
-    if(isloggedin() && islawyerloggedin()){
-
-        return fetchFunc(baseUrl+'api/lawyeraccounts/apply/'+id,options("POST"),dispatch)
+        return fetchFunc(baseUrl+'api/lawyeraccounts/apply/'+id,options("POST",null,token),dispatch)
         .then(Response=>{
             if(Response.success){
                 displaySuccess(dispatch,'Applied successfully!!')
@@ -177,16 +174,15 @@ export const postapply=(id)=>(dispatch)=>{
         .catch((error)=>{
             displayError(dispatch,error)
         }).finally(()=>{dispatch(clearLoading())})
-    }
 }
 
 
 //accept by user Handler
 
-export const postacceptbyuser=(caseid,lawyer)=>(dispatch)=>{
+export const postacceptbyuser=(caseid,lawyer,token,type)=>(dispatch)=>{
     dispatch(load())
-    if(isloggedin() && isuserloggedin()){
-        return fetchFunc(`${baseUrl}api/useraccounts/accept/${caseid}/${lawyer}`,options("POST"),dispatch)
+    if(type==="USER"){
+        return fetchFunc(`${baseUrl}api/useraccounts/accept/${caseid}/${lawyer}`,options("POST",null,token),dispatch)
         .then(Response=>{
             if(Response.success){
                 displaySuccess(dispatch,'Accepted successfully!!')
@@ -197,4 +193,5 @@ export const postacceptbyuser=(caseid,lawyer)=>(dispatch)=>{
             displayError(dispatch,error)
         }).finally(()=>{dispatch(clearLoading())})
     }
+
 }

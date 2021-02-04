@@ -2,7 +2,8 @@ import React from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import {successMessage,errorMessage,clearMessage,load,clearLoading,createlawyer} from '../../../shared/Actioncreators/actionCreators'
+import {successMessage,errorMessage,clearMessage,load,clearLoading,createlawyer,
+    fetchprofiledata,fetchusercases,fetchallcases} from '../../../shared/Actioncreators/actionCreators'
 import Formerror from '../../Partials/Formerror/Formerror';
 // import {Helmet} from 'react-helmet'
 import '../../User/Login/googlebtn.scss'
@@ -19,16 +20,24 @@ const mapDispatchToProps=dispatch=>({
     load:()=>dispatch(load()),
     clearLoading:()=>dispatch(clearLoading()),
     createlawyer:(name,email,password,mobile,picture,token,history)=>dispatch(createlawyer(name,email,password,mobile,picture,token,history)),
+
+    fetchprofiledata:(token,type)=>dispatch(fetchprofiledata(token,type)),
+    fetchusercases:(token,type)=>dispatch(fetchusercases(token,type)),
+    fetchallcases:(token)=>dispatch(fetchallcases(token)),
 })
 const required=(val)=>(val)&&(val.length)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Lawyerlogin(props){
     let history = useHistory()
-    const { login,signInWithGoogle } = useLawyerAuth()
+    const { login,signInWithGoogle,currentLawyer } = useLawyerAuth()
     const handlesubmit=async(values)=>{
         props.load()
         try{
             await login(values.email,values.password)
+            let token =await currentLawyer.getIdToken()
+            props.fetchprofiledata(token,"LAWYER")
+            props.fetchusercases(token,"LAWYER")
+            props.fetchallcases(token)
             props.successMessage('Signed in successfully')
         }catch(e){
             props.errorMessage(e.message)
@@ -46,6 +55,9 @@ function Lawyerlogin(props){
                 data.user.displayName,data.user.email,null,data.user.phoneNumber,
                 data.additionalUserInfo.profile.picture,token,history
             )
+            props.fetchprofiledata(token,"LAWYER")
+            props.fetchusercases(token,"LAWYER")
+            props.fetchallcases(token)
             props.successMessage('Signed in successfully')
         }catch(e){
             props.errorMessage(e.message)
