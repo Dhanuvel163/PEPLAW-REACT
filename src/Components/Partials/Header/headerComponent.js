@@ -1,18 +1,18 @@
-import React,{PureComponent} from 'react';
-import {isloggedin,isuserloggedin,islawyerloggedin} from '../../../service/userservice';
+import React,{useEffect,useState} from 'react';
 import {Collapse,UncontrolledDropdown,DropdownToggle,DropdownMenu} from 'reactstrap';
 import {Link} from "react-router-dom";
 import {debounce} from '../../../service/debounce'
+import { useLawyerAuth } from "../../../Context/lawyerauth"
+import { useAuth } from "../../../Context/userauth"
+
 import './header.scss'
 function Logout(props){
-    const lout = () =>{
-            localStorage.removeItem('token')
-            setTimeout(()=>{props.fetchuserdata()},200)       
-    }
+    const { lawyerlogout } = useLawyerAuth()
+    const { logout } = useAuth()
     return(
-        isloggedin()
+        (props.currentUser || props.currentLawyer)
         ?
-            <div className="nav-item" onClick={lout} style={{marginRight:10}}>
+            <div className="nav-item" onClick={()=>props.currentUser?logout():lawyerlogout()} style={{marginRight:10}}>
                 <Link onMouseOver={()=>props.componentsPreload.Home.preload()} onClick={props.mobileToggle} 
                 to="/" className="nav-link">
                     <svg style={{marginRight:3}}
@@ -29,7 +29,7 @@ function Logout(props){
 
 function Mycases(props){
     return(
-        isloggedin()
+        (props.currentUser || props.currentLawyer)
         ?
         <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Mycases.preload()} onClick={props.mobileToggle}
@@ -50,7 +50,7 @@ function Mycases(props){
 
 function USERDATA(props){
     return(
-        isloggedin()
+        (props.currentUser || props.currentLawyer)
         ?
         <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Useredit.preload()} onClick={props.mobileToggle}
@@ -59,7 +59,7 @@ function USERDATA(props){
                 xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                </svg> {props.user.user}
+                </svg> {props.currentLawyer?props.currentLawyer.displayName:props.currentUser.displayName}
             </Link>
         </div>
         :
@@ -69,7 +69,7 @@ function USERDATA(props){
 
 function ADDCASEDATA(props){
     return(
-        isloggedin() && isuserloggedin()
+        (props.currentUser)
         ?
         <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Addcase.preload()} onClick={props.mobileToggle}
@@ -84,7 +84,7 @@ function ADDCASEDATA(props){
             </Link>
         </div>
         :
-        isloggedin() && islawyerloggedin()
+        (props.currentLawyer)
         ?
         <div className="nav-item">
             <Link onMouseOver={()=>props.componentsPreload.Allcases.preload()} onClick={props.mobileToggle}
@@ -103,28 +103,23 @@ function ADDCASEDATA(props){
 }
 
 
-// componentsPreload
-class Header extends PureComponent{
-    constructor(props){
-        super(props);
-        this.toggle=this.toggle.bind(this);
-        this.state={
-            isOpen:false,
-            componentsPreload:{}
-        }
+function Header (props){
+    const { currentLawyer } = useLawyerAuth()
+    const { currentUser } = useAuth()
+    const [state,setState]=useState(false)
+    const toggle=()=>{
+        setState({...state,isOpen:!state.isOpen});
     }
-    toggle(){
-        this.setState({...this.state,isOpen:!this.state.isOpen});
-    }
-    mobileToggle=()=>{
+    const mobileToggle=()=>{
         if(window.innerWidth <= 767){
-            this.toggle()
+            toggle()
         }
     }
-    preload(compnt){
-            this.props.componentsPreload[compnt].preload()
+    const preload=(compnt)=>{
+            props.componentsPreload[compnt].preload()
     }
-    componentDidMount(){
+
+    useEffect(()=>{
         var body = document.body;
         var html = document.documentElement;
         var height = 0;
@@ -141,13 +136,10 @@ class Header extends PureComponent{
         }
         document.onscroll = debounce(function () {resize(document.getElementsByClassName("progress-bar"));},15)
         // window.onresize = function () {initiateHeights();}
-    }
+    })
 
-    render(){
-        return(
+    return(
             <div className="fixed-top header-footer four-box-shadow-real">
-
-
                 <div className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div className="navbar-brand">
                         <Link to="/" style={{color:'white'}} className="nav-link">
@@ -155,27 +147,28 @@ class Header extends PureComponent{
                         <b >PEP-LAW</b>
                         </Link>
                     </div>
-                    <div className="navbar-toggler" onClick={this.toggle} >
+                    <div className="navbar-toggler" onClick={toggle} >
                         <div className="navbar-toggler-icon"></div>
                     </div>
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                    <Collapse isOpen={state.isOpen} navbar>
                     {
-                        isloggedin() ?
+                        (currentLawyer || currentUser) ?
                         <ul className="ml-auto navbar-nav">
                             <li>
-                            <ADDCASEDATA componentsPreload={this.props.componentsPreload} mobileToggle={this.mobileToggle}/>
+                            <ADDCASEDATA componentsPreload={props.componentsPreload} mobileToggle={mobileToggle}
+                            currentLawyer={currentLawyer} currentUser={currentUser}/>
                             </li>
                             <li>
-                            <USERDATA user={this.props.userdata} componentsPreload={this.props.componentsPreload}
-                            mobileToggle={this.mobileToggle}/>
+                            <USERDATA componentsPreload={props.componentsPreload} mobileToggle={mobileToggle}
+                            currentLawyer={currentLawyer} currentUser={currentUser}/>
                             </li>
                             <li>
-                            <Mycases componentsPreload={this.props.componentsPreload}
-                            mobileToggle={this.mobileToggle}/>
+                            <Mycases componentsPreload={props.componentsPreload} mobileToggle={mobileToggle}
+                            currentLawyer={currentLawyer} currentUser={currentUser}/>
                             </li>
                             <li>
-                            <Logout fetchuserdata={this.props.fetchuserdata} componentsPreload={this.props.componentsPreload}
-                            mobileToggle={this.mobileToggle}/>
+                            <Logout componentsPreload={props.componentsPreload}
+                            mobileToggle={mobileToggle} currentLawyer={currentLawyer} currentUser={currentUser}/>
                             </li>
                         </ul>
                         :
@@ -189,13 +182,13 @@ class Header extends PureComponent{
                                 Login
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <Link onClick={this.mobileToggle}
-                                     onMouseOver={()=>this.preload('Lawyerlogin')}  to="/lawyer/login" className="dropdown-item">
+                                    <Link onClick={mobileToggle}
+                                     onMouseOver={()=>preload('Lawyerlogin')}  to="/lawyer/login" className="dropdown-item">
                                         Lawyer Login
                                     </Link>
                                     <div tabIndex="-1" className="dropdown-divider"></div>
-                                    <Link onClick={this.mobileToggle}
-                                    onMouseOver={()=>this.preload('Userlogin')}  to="/user/login" className="dropdown-item">
+                                    <Link onClick={mobileToggle}
+                                    onMouseOver={()=>preload('Userlogin')}  to="/user/login" className="dropdown-item">
                                         User Login
                                     </Link>
                                 </DropdownMenu>
@@ -210,13 +203,13 @@ class Header extends PureComponent{
                                     Signup
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <Link onClick={this.mobileToggle}
-                                    onMouseOver={()=>this.preload('Lawersignup')}  to="/lawyer/signup" className="dropdown-item">
+                                    <Link onClick={mobileToggle}
+                                    onMouseOver={()=>preload('Lawersignup')}  to="/lawyer/signup" className="dropdown-item">
                                         Lawyer Signup
                                     </Link>
                                     <div tabIndex="-1" className="dropdown-divider"></div>
-                                    <Link onClick={this.mobileToggle}
-                                    onMouseOver={()=>this.preload('Lawyerlogin')}  to="/user/signup" className="dropdown-item">
+                                    <Link onClick={mobileToggle}
+                                    onMouseOver={()=>preload('Lawyerlogin')}  to="/user/signup" className="dropdown-item">
                                         User Signup
                                     </Link>
                                 </DropdownMenu>
@@ -229,8 +222,6 @@ class Header extends PureComponent{
                 <div className="progress-bar" id="myBar"></div>
                 </div>
        </div>
-        );
-    }
+    )
 }
-
 export default Header;

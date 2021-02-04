@@ -1,7 +1,6 @@
 import * as  actionTypes from '../actionTypes';
 import {baseUrl} from '../url';
 
-import {fetchuserdata} from './Fetchuserdata'
 import {fetchprofiledata,postprofiledata} from './Profiledata'
 import {fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser} from './Cases'
 import {fetchdetailpagedata} from './Detailpage'
@@ -10,7 +9,7 @@ import {clearLoading,load} from './Helpers/Loading'
 import {clearMessage,successMessage,errorMessage} from './Helpers/Error'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
-export {fetchuserdata,fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
+export {fetchprofiledata,postprofiledata,clearMessage,fetchdetailpagedata,
     fetchallcases,fetchusercases,postapply,postusercase,postacceptbyuser,successMessage,errorMessage,load,clearLoading}
 
 export const createuser=(name,email,password,mobile,picture,token,history)=>(dispatch)=>{

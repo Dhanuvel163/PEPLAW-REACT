@@ -3,7 +3,6 @@ import {Switch,Route,Redirect,withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './Partials/Header/headerComponent';
 import Footer from './Partials/Footer/footerComponent';
-import {fetchuserdata} from '../shared/Actioncreators/actionCreators'
 import SnackbarC from './Partials/Snackbar/Snackbar';
 import {AuthProvider} from '../Context/userauth'
 import { LawyerAuthProvider } from "../Context/lawyerauth"
@@ -43,13 +42,11 @@ function lazyWithPreload(factory) {
 
 const mapStateToProps=state=>{
     return {
-        users:state.users,
         loading:state.loading
         // lawyers:state.lawyers
     }
 }
 const mapDispatchToProps=dispatch=>({
-    fetchuserdata:()=>dispatch(fetchuserdata()),
     // fetchlawyers:()=>dispatch(fetchlawyers()),
 })
 
@@ -95,14 +92,15 @@ class Main extends Component{
         // indexCss.preload()
 
         // this.props.fetchlawyers();
-        this.props.fetchuserdata();
     }
     // componentDidUpdate(){
     // }
     render(){
         return(
             <>
-                <Header userdata={this.props.users} fetchuserdata={this.props.fetchuserdata} componentsPreload={componentsPreload}></Header>
+            <AuthProvider>
+                <LawyerAuthProvider>
+                <Header componentsPreload={componentsPreload}></Header>
                 <div style={{marginTop:120,minHeight:'100vh',paddingBottom:30}} className='text-white' >
 
                 <div style={{position:'relative'}}>
@@ -122,8 +120,6 @@ class Main extends Component{
                             </div> 
                     </div>
                     :
-                    <AuthProvider>
-                        <LawyerAuthProvider>
                         <Switch>
                             <Route path='/home' component={()=>Lazysuspense(<Home/>)
                             }></Route>
@@ -183,12 +179,12 @@ class Main extends Component{
                             </Route>
                             <Redirect to="/home"></Redirect>
                         </Switch>
-                        </LawyerAuthProvider>
-                    </AuthProvider>
                 }
                 </div>
                 {/* {Lazysuspense(<Footer/>)} */}
                 <Footer></Footer>
+                </LawyerAuthProvider>
+            </AuthProvider>
             </>
         );
     }

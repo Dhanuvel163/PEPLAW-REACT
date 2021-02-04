@@ -5,7 +5,7 @@ export function useLawyerAuth() {
   return useContext(AuthContext)
 }
 export function LawyerAuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentLawyer, setCurrentLawyer] = useState()
   const [loading, setLoading] = useState(true)
 
   function signup(email, password) {
@@ -32,17 +32,17 @@ export function LawyerAuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = lawyerauth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+      setCurrentLawyer(user)
       setLoading(false)
     })
 
     return unsubscribe
   }, [])
   const value = {
-    currentUser,
+    currentLawyer,
     login,
     signup,
-    logout,
+    lawyerlogout:logout,
     resetPassword,
     // updateEmail,
     // updatePassword,
