@@ -4,19 +4,22 @@ import UsereditForm from './usereditForm'
 import Usereditcard from './Usereditcard'
 import {postprofiledata,fetchprofiledata} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
-// import {Helmet} from 'react-helmet'
-
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+import {useAuth} from '../../../Context/userauth'
 const mapStateToProps=state=>{
     return {
         profiledata:state.profiledata,
     }
 }
 const mapDispatchToProps=dispatch=>({
-    fetchprofiledata:()=>dispatch(fetchprofiledata()),
-    postprofiledata:(name,email,country,city,addr1,state,postalCode)=>dispatch(postprofiledata(name,email,country,city,addr1,state,postalCode)),
+    fetchprofiledata:(token,type)=>dispatch(fetchprofiledata(token,type)),
+    postprofiledata:(name,email,country,city,addr1,state,postalCode,token,type)=>
+    dispatch(postprofiledata(name,email,country,city,addr1,state,postalCode,token,type)),
 })
 let fetchedProfiledata = false
 function Useredit(props){
+  const { currentLawyer } = useLawyerAuth()
+  const { currentUser } = useAuth()
   let [edit,setEdit]=useState(false)
   const clickEdit = () =>{
     setEdit(true)
@@ -24,10 +27,23 @@ function Useredit(props){
   const clearEdit = () =>{
     setEdit(false)
   }
+  const fetchProfile = async() =>{
+      if(currentUser || currentLawyer){
+          let token,type
+          if(currentUser){
+              token = await currentUser.getIdToken()
+              type='USER'
+          }else if(currentLawyer){
+              token =await currentLawyer.getIdToken()
+              type = 'LAWYER'
+          }
+          props.fetchprofiledata(token,type)
+          fetchedProfiledata=true
+      }
+  }
   useEffect(()=>{
       if(!fetchedProfiledata){
-          props.fetchprofiledata()
-          fetchedProfiledata=true
+          fetchProfile()
       }
       return ()=>{
       }
@@ -50,8 +66,6 @@ function Useredit(props){
         props.profiledata.isloading
         ?
         <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
-                {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
-                </div> */}
                 <div  style={{minWidth:'300px'}}> 
                   <div className="lzy_img__image loading"></div> 
                   <div className="lzy_img__title loading"></div> 
@@ -62,11 +76,7 @@ function Useredit(props){
         props.profiledata.profiledata
         ?
         <div>
-          {/* <Helmet>
-            <title>USEREDIT | PEPLAW</title>
-            <meta name="description" content="Page to edit your profile data"/>
-          </Helmet> */}
-                {true && (document.title=`PROFILE | PEPLAW`)?null:null}
+          {true && (document.title=`PROFILE | PEPLAW`)?null:null}
           {
             (edit===true)
             ?

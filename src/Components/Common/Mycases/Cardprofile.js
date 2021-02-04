@@ -1,8 +1,11 @@
-import {islawyerloggedin,isuserloggedin,isloggedin} from '../../../service/userservice'
 import React,{useRef,useState} from 'react';
 import {Link} from 'react-router-dom'
 import {debounce} from '../../../service/debounce'
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+import {useAuth} from '../../../Context/userauth'
 export default function Cardprofile(props){
+    const { currentLawyer } = useLawyerAuth()
+    const { currentUser } = useAuth()
     const [activeTab, setActiveTab] = useState('1');
     const toggleTab = tab => {
         if(activeTab !== tab) setActiveTab(tab);
@@ -18,7 +21,7 @@ export default function Cardprofile(props){
     return(
         <>
         {
-            isloggedin() && islawyerloggedin()
+            (currentLawyer)
             ?
             <div className="card bg-danger card-style four-box-shadow" style={{marginTop:50}} >
                 <div className="card-header">
@@ -60,7 +63,7 @@ export default function Cardprofile(props){
                 </div>
             </div>
             :
-            isloggedin() && isuserloggedin()
+            (currentUser)
             ?
             <div className="card bg-danger card-style four-box-shadow"style={{marginTop:50}} >
                 <div className="card-header" style={{textTransform:'uppercase'}}>

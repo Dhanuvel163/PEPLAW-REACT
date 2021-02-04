@@ -3,31 +3,27 @@ import {Control,LocalForm,Errors} from 'react-redux-form';
 import {postusercase} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
 import Formerror from '../../Partials/Formerror/Formerror';
-// import {Helmet} from 'react-helmet'
+import {useAuth} from '../../../Context/userauth'
 
 const mapStateToProps=state=>{
     return {
     }
 }
 const mapDispatchToProps=dispatch=>({
-    postusercase:(dcode,ddate,stime,acharge,desc)=>dispatch(postusercase(dcode,ddate,stime,acharge,desc)),
+    postusercase:(dcode,ddate,stime,acharge,desc,token)=>dispatch(postusercase(dcode,ddate,stime,acharge,desc,token)),
 })
 const required=(val)=>(val)&&(val.length)
 
 function Addcase(props){
-    const handlesubmit=(values)=>{
+    const { currentUser } = useAuth()
+    const handlesubmit=async(values)=>{
+        const token = await currentUser.getIdToken()
         props.postusercase(values['disposition-code'],values['disposition-date'],
-        values['sentence-time'],values['amended-charge'],values['description']);
-        setTimeout(()=>{
-        props.install();
-        },2000)
+        values['sentence-time'],values['amended-charge'],values['description'],token);
+        // setTimeout(()=>{props.install();},2000)
     }
     return(
         <div className="container" style={{marginTop:50,marginBottom:50}}>
-            {/* <Helmet>
-                <title>ADD CASE | PEPLAW</title>
-                <meta name="description" content="Add case page" />
-            </Helmet> */}
                 {true && (document.title='ADD CASE | PEPLAW')?null:null}
             <h4 className="text-center">
                     <svg style={{marginRight:11}}

@@ -28,12 +28,9 @@ export const createuser=(name,email,password,mobile,picture,token,history)=>(dis
     },dispatch)
     .then(Response=>{
         if(Response.success){
-            localStorage.setItem('islawyer',false)
-            // dispatch(fetchuserdata())
         }
     })
     .catch((error)=>{
-        // displayError(dispatch,error)
     }).finally(()=>{dispatch(clearLoading())})
 }
 
@@ -53,8 +50,6 @@ export const createlawyer=(name,email,password,mobile,picture,token,history)=>(d
     },dispatch)
     .then(Response=>{
         if(Response.success){
-            localStorage.setItem('islawyer',true)
-            // dispatch(fetchuserdata())
         }
     })
     .catch((error)=>{

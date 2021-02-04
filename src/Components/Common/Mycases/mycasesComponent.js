@@ -2,11 +2,10 @@ import React,{useEffect,useState} from 'react';
 import './mycases.scss'
 import {fetchusercases,postacceptbyuser} from '../../../shared/Actioncreators/actionCreators'
 import {connect} from 'react-redux';
-import {islawyerloggedin,isloggedin} from '../../../service/userservice'
 import Cardprofile from './Cardprofile'
 import Head from './Head'
-// import {Helmet} from 'react-helmet'
-
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+import {useAuth} from '../../../Context/userauth'
 
 const mapStateToProps=state=>{
     return {
@@ -14,8 +13,8 @@ const mapStateToProps=state=>{
     }
 }
 const mapDispatchToProps=dispatch=>({
-    fetchusercases:()=>dispatch(fetchusercases()),
-    postacceptbyuser:(caseid,lawyer)=>dispatch(postacceptbyuser(caseid,lawyer))
+    fetchusercases:(token,type)=>dispatch(fetchusercases(token,type)),
+    postacceptbyuser:(caseid,lawyer,token,type)=>dispatch(postacceptbyuser(caseid,lawyer,token,type))
 })
 
 let fetchedusercases = false
@@ -25,10 +24,26 @@ function Mycases(props){
     const toggle = tab => {
         if(activeTab !== tab) setActiveTab(tab);
     }
+    const { currentLawyer } = useLawyerAuth()
+    const { currentUser } = useAuth()
+
+    const fetchCases = async() =>{
+        if(currentUser || currentLawyer){
+            let token,type
+            if(currentUser){
+                token = await currentUser.getIdToken()
+                type='USER'
+            }else if(currentLawyer){
+                token =await currentLawyer.getIdToken()
+                type = 'LAWYER'
+            }
+            props.fetchusercases(token,type)
+            fetchedusercases=true
+        }
+    }
     useEffect(()=>{
         if(!fetchedusercases){
-            props.fetchusercases()
-            fetchedusercases=true
+            fetchCases()
         }
         return ()=>{
         }
@@ -49,8 +64,6 @@ function Mycases(props){
         props.usercases.isloading
         ?
         <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
-                {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
-                </div> */}
                 <div  style={{minWidth:'300px'}}> 
                 <div className="lzy_img__image loading"></div> 
                 <div className="lzy_img__title loading"></div> 
@@ -61,10 +74,6 @@ function Mycases(props){
         (props.usercases.usercasedata && props.usercases.usercasedata.cases && props.usercases.usercasedata.acceptedcases && props.usercases.usercasedata.pendingcases)
         ?
         <div className="container cases" style={{marginTop:50,marginBottom:50,height:'100%'}}>
-            {/* <Helmet>
-                <title>MYCASES | PEPLAW</title>
-                <meta name="description" content="Here you can see your cases"/>
-            </Helmet> */}
                 {true && (document.title='MYCASES | PEPLAW')?null:null}
             <div>
 
@@ -85,7 +94,7 @@ function Mycases(props){
                         </div>
                     </div>
                     {
-                    (isloggedin() && islawyerloggedin() )?
+                    (currentLawyer)?
                     <div className="nav-item">
                         <div className={activeTab === '4'?"nav-link active":"nav-link"} onClick={() => { toggle('4'); }}> 
                             Rejected
@@ -141,7 +150,7 @@ function Mycases(props){
                 </div>
                 <div className={activeTab === '4'?"tab-pane active":"tab-pane"}>
                     {
-                        (isloggedin && islawyerloggedin())?
+                        (currentLawyer)?
                         <>
                         <Head data={props.usercases.usercasedata.rejectedcases} title="Your Rejected Cases !"/>
                         <div style={{marginTop:50}} className="row justify-content-lg-around">

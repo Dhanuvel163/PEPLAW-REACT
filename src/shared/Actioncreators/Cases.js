@@ -5,31 +5,31 @@ import {displayError,displaySuccess} from './Helpers/Error'
 import {clearLoading,load} from './Helpers/Loading'
 import {fetchFunc} from './Helpers/Fetchfunction'
 
-const options = (method='GET',data=null) => {
+const options = (method='GET',data=null,token) => {
     return (method==='GET')?{
-        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        headers: {"Content-Type": "application/json","authorization":token},
         credentials: "same-origin"
     }:
     (data === null)
     ?
     {
         method:method,
-        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        headers: {"Content-Type": "application/json","authorization":token},
         credentials: "same-origin"
     }
     :
     {
         method:method,body:JSON.stringify(data),
-        headers: {"Content-Type": "application/json","authorization":localStorage.getItem('token')},
+        headers: {"Content-Type": "application/json","authorization":token},
         credentials: "same-origin"
     }
 }
 
 //Add Case data
 
-export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
+export const postusercase=(dcode,ddate,stime,acharge,desc,token)=>(dispatch)=>{
     const newcase={dcode,ddate,stime,acharge,desc}
-    return fetchFunc(baseUrl+'api/useraccounts/cases',options('POST',newcase),dispatch)
+    return fetchFunc(baseUrl+'api/useraccounts/cases',options('POST',newcase,token),dispatch)
     .then(Response=>{
         if(Response.success){
             displaySuccess(dispatch,'Added case Successfully!')
@@ -43,14 +43,15 @@ export const postusercase=(dcode,ddate,stime,acharge,desc)=>(dispatch)=>{
 
 //Load user cases
 
-export const fetchusercases=()=>async(dispatch)=>{
+export const fetchusercases=(token,type)=>async(dispatch)=>{
     dispatch(usercasesloading(true));
-    if(isloggedin() && isuserloggedin()){
+    console.log(token,type)
+    if(type==="USER"){
         try{
             const [cases,acceptedcases,pendingcases] = await Promise.all ([
-                fetch(baseUrl+'api/useraccounts/cases',options()),
-                fetch(baseUrl+'api/useraccounts/acceptedcases',options()),
-                fetch(baseUrl+'api/useraccounts/pendingcases',options())
+                fetch(baseUrl+'api/useraccounts/cases',options('GET',null,token)),
+                fetch(baseUrl+'api/useraccounts/acceptedcases',options('GET',null,token)),
+                fetch(baseUrl+'api/useraccounts/pendingcases',options('GET',null,token))
             ])
             if(cases.ok && acceptedcases.ok && pendingcases.ok){
                 const casesdata =await cases.json()
@@ -68,13 +69,13 @@ export const fetchusercases=()=>async(dispatch)=>{
             dispatch(usercasesfailed('Something Went Wrong'))
             // dispatch(usercasesfailed(e.message))
         }
-    }else{
+    }else if(type==="LAWYER"){
         try{
             const [cases,acceptedcases,pendingcases,rejectedcases] = await Promise.all ([
-                fetch(baseUrl+'api/lawyeraccounts/cases',options()),
-                fetch(baseUrl+'api/lawyeraccounts/acceptedcases',options()),
-                fetch(baseUrl+'api/lawyeraccounts/pendingcases',options()),
-                fetch(baseUrl+'api/lawyeraccounts/rejectedcases',options())
+                fetch(baseUrl+'api/lawyeraccounts/cases',options('GET',null,token)),
+                fetch(baseUrl+'api/lawyeraccounts/acceptedcases',options('GET',null,token)),
+                fetch(baseUrl+'api/lawyeraccounts/pendingcases',options('GET',null,token)),
+                fetch(baseUrl+'api/lawyeraccounts/rejectedcases',options('GET',null,token))
             ])
             if(cases.ok && acceptedcases.ok && pendingcases.ok && rejectedcases.ok){
                 const casesdata =await cases.json()

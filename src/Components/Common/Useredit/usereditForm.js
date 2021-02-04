@@ -5,6 +5,8 @@ import { Control, Errors, LocalForm  } from "react-redux-form";
 // import * as country_city from '../../../shared/city-country.json'
 // import * as state_country from '../../../shared/state-country.json'
 import Formerror from '../../Partials/Formerror/Formerror';
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+import {useAuth} from '../../../Context/userauth'
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && val.length >= len;
@@ -15,8 +17,19 @@ const isNumber = (val) => !isNaN(Number(val));
 function UsereditForm(props){
     // let [country,setCountry]=useState(null)
     // let [stateCountry,setstateCountry]=useState(null)
-    const  handlesubmit=(values)=> {
-        props.postprofiledata(values.username,values.mobile,values.country,values.city,values.address,values.state,values.pincode);
+    const { currentLawyer } = useLawyerAuth()
+    const { currentUser } = useAuth()
+    const  handlesubmit=async(values)=> {
+        let token,type
+        if(currentUser){
+            token = await currentUser.getIdToken()
+            type='USER'
+        }else if(currentLawyer){
+            token =await currentLawyer.getIdToken()
+            type = 'LAWYER'
+        }
+        props.postprofiledata(values.username,values.mobile,values.country,values.city,values.address,
+          values.state,values.pincode,token,type);
         props.clearEdit()
     }
     // const  handlechange=(values)=> {

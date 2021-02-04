@@ -1,15 +1,13 @@
 import * as  actionTypes from '../actionTypes';
 import {baseUrl} from '../url';
-import {isloggedin,islawyerloggedin,isuserloggedin} from '../../service/userservice';
 import {displayError,displaySuccess} from './Helpers/Error'
 
 //Fetch Profile Data
 
-export const fetchprofiledata=()=>(dispatch)=>{
+export const fetchprofiledata=(token,type)=>(dispatch)=>{
     dispatch(addprofileloading(true))
-
-    if(isloggedin() && islawyerloggedin()){
-        return fetch(baseUrl+'api/lawyeraccounts/profile',{headers: {'authorization':localStorage.getItem('token')}})
+    if(type==='LAWYER'){
+        return fetch(baseUrl+'api/lawyeraccounts/profile',{headers: {'authorization':token}})
         .then((res)=>{
             if(res.ok){
                 return res;
@@ -25,8 +23,8 @@ export const fetchprofiledata=()=>(dispatch)=>{
         .then(res=> res.json())
         .then(res=>{dispatch(addprofiledata(res.lawyer))})
         .catch((error)=>{dispatch(addprofilefailed(error.message))})
-    }else if(isloggedin() && isuserloggedin()){
-        return fetch(baseUrl+'api/useraccounts/profile',{headers: {'authorization':localStorage.getItem('token')}})
+    }else if(type==="USER"){
+        return fetch(baseUrl+'api/useraccounts/profile',{headers: {'authorization':token}})
         .then((res)=>{
             if(res.ok){
                 return res;
@@ -59,16 +57,16 @@ export const addprofileloading=()=>({
 
 //post edited profile data
 
-export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>(dispatch)=>{
+export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode,token,type)=>(dispatch)=>{
     dispatch(addprofileloading(true))
-    if(islawyerloggedin()){
+    if(type==="LAWYER"){
         return fetch(baseUrl+'api/lawyeraccounts/profile',{
             method: "POST",
             body:JSON.stringify({name,mobile,country,city,addr1,state,postalCode}),
             credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
-              "authorization":localStorage.getItem('token')
+              "authorization":token
             },
         })
             .then((res)=>{
@@ -91,14 +89,14 @@ export const postprofiledata=(name,mobile,country,city,addr1,state,postalCode)=>
             .catch((error)=>{
                 displayError(dispatch,'Something went wrong:'+error.message)
             })
-    }else if(isuserloggedin()){
+    }else if(type==="USER"){
         return fetch(baseUrl+'api/useraccounts/profile',{
             method: "POST",
             body:JSON.stringify({name,mobile,country,city,addr1,state,postalCode}),
             credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
-              "authorization":localStorage.getItem('token')
+              "authorization":token
             },
         })
             .then((res)=>{

@@ -26,7 +26,7 @@ export default function Usereditcard(props) {
             <span>Mail         : </span>   {props.profiledata.profiledata.email}
             </pre>
             <pre>
-            <span>Mobile     : </span>   {props.profiledata.profiledata.mobile}
+            <span>Mobile     : </span>   {props.profiledata.profiledata.mobile || 'No Data !'}
             </pre>
             <pre>
             <span>Address  : </span>   {props.profiledata.profiledata.address ? props.profiledata.profiledata.address.addr1 : 'No Data !'}
