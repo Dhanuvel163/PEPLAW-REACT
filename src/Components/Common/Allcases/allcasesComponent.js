@@ -1,21 +1,20 @@
 import React,{useEffect} from 'react';
 import Cardprofile from './cardprofile'
 import {connect} from 'react-redux';
-// import {Helmet} from 'react-helmet'
-
 import {fetchallcases,postapply
 } from '../../../shared/Actioncreators/actionCreators'
+import {useLawyerAuth} from '../../../Context/lawyerauth'
+
 const mapStateToProps=state=>{
     return {
         allcases:state.allcases
     }
 }
 const mapDispatchToProps=dispatch=>({
-    fetchallcases:()=>dispatch(fetchallcases()),
+    fetchallcases:(token)=>dispatch(fetchallcases(token)),
     postapply:(id)=>dispatch(postapply(id))
 })
 function Head(props){
-
         return(
             <>
             {
@@ -44,11 +43,16 @@ function Head(props){
 }
 let fetched = false
 function Allcases(props){
-    useEffect(()=>{
+    const { currentLawyer } = useLawyerAuth()
+    const fetchAllcases=async()=>{
         if(!fetched){
-        props.fetchallcases()
-        fetched=true
+            let token = await currentLawyer.getIdToken()
+            props.fetchallcases(token)
+            fetched=true
         }
+    }
+    useEffect(()=>{
+        fetchAllcases()
         return ()=>{
         }
     })

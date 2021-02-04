@@ -120,24 +120,22 @@ export const addtousercases=(newcase)=>({
 
 //Load All unlocked cases
 
-export const fetchallcases=()=>async(dispatch)=>{
+export const fetchallcases=(token)=>async(dispatch)=>{
     dispatch(allcasesloading(true));
-    if(isloggedin() && islawyerloggedin()){
-        try{
-            const res = await fetch(baseUrl+'api/lawyeraccounts/allcases',options())
-            if(res.ok){
-                const data =await res.json()
-                if(data.success){
-                    dispatch(addallcases(data.cases))
-                }else{
-                    throw new Error(data.message)
-                }
+    try{
+        const res = await fetch(baseUrl+'api/lawyeraccounts/allcases',options("GET",null,token))
+        if(res.ok){
+            const data =await res.json()
+            if(data.success){
+                dispatch(addallcases(data.cases))
             }else{
-                throw new Error('Something Went Wrong')
+                throw new Error(data.message)
             }
-        }catch(e){
-            dispatch(allcasesfailed('Something Went Wrong'))
+        }else{
+            throw new Error('Something Went Wrong')
         }
+    }catch(e){
+        dispatch(allcasesfailed('Something Went Wrong'))
     }
 }
 
