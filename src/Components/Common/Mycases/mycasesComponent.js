@@ -63,7 +63,7 @@ function Mycases(props){
         :
         props.usercases.isloading
         ?
-        <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+        <div style={{height:'90vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
                 <div  style={{minWidth:'300px'}}> 
                 <div className="lzy_img__image loading"></div> 
                 <div className="lzy_img__title loading"></div> 

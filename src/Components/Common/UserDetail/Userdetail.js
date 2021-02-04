@@ -55,7 +55,7 @@ function Userdetail({detailpage,fetchdetailpagedata}) {
                 :
                detailpage.isloading
                 ?
-                <div style={{height:'100vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
+                <div style={{height:'90vh',overflow:'hidden'}} className="d-flex align-items-center justify-content-center">
                         {/* <div className="spinner-border" style={{ width: '4rem', height: '4rem',color:'#a01ba7' }} role="status">           
                         </div> */}
                         <div  style={{minWidth:'300px'}}> 
