@@ -74,14 +74,23 @@ html {
 //For BG
 
 .bg-dark {
-  background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
+  // background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
+  // background: rgb(36, 11, 54);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  &:hover {
+    opacity: 1;
+    background: rgba(36, 11, 54, 0.9);
+  }
 }
 .bg-danger {
   background: linear-gradient(to right, rgb(127, 0, 255), rgb(102, 18, 158));
 }
 
 //For Button
-
+.btn {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
 .btn-primary {
   background: linear-gradient(to right, rgb(9, 48, 40), rgb(35, 122, 87));
   &:hover {

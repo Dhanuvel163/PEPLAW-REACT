@@ -56,7 +56,7 @@ function Lawyersignup(props){
         props.lawyersignupformreset();
     }
     return(
-            <div style={{marginTop:50,marginBottom:50}}>
+            <div>
                 {/* <Helmet>
                     <title>LAWYER SIGNUP | PEPLAW</title>
                     <meta name="description" content="lawyer signup page"/>
@@ -151,7 +151,7 @@ function Lawyersignup(props){
                                         </b>
                                     </p>
                                 </Link>
-                                <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-center mt-2">
                                     <button className="btn btn-secondary">Sign Up</button>
                                 </div>
                             </Form>

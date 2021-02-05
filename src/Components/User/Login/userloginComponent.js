@@ -103,7 +103,7 @@ function Userlogin(props){
         }
     }
         return(
-            <div style={{marginTop:50,marginBottom:50}} className="login">
+            <div className="login">
                 {/* <Helmet>
                     <title>USER LOGIN | PEPLAW</title>
                     <meta name="description" content="user login page" />
