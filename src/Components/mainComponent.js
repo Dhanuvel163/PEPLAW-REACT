@@ -121,7 +121,7 @@ class Main extends Component{
                     </div>
                     :
                         <Switch>
-                            <Route path='/home' component={()=>Lazysuspense(<Home/>)
+                             <Route path='/home' component={()=>Lazysuspense(<Home/>)
                             }></Route>
                             <Route path='/lawyer/login' component={()=>
                             Lazysuspense(

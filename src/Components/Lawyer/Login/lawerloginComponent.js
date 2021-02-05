@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import {Link,useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -29,12 +29,13 @@ const required=(val)=>(val)&&(val.length)
 const isemail=(val)=>/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(val)
 function Lawyerlogin(props){
     let history = useHistory()
-    const { login,signInWithGoogle,currentLawyer } = useLawyerAuth()
+    let [email,setemail] = useState(null)
+    const { login,signInWithGoogle,signInWithFacebook,resetPassword } = useLawyerAuth()
     const handlesubmit=async(values)=>{
         props.load()
         try{
-            await login(values.email,values.password)
-            let token =await currentLawyer.getIdToken()
+            const data = await login(values.email,values.password)
+            let token =await data.user.getIdToken()
             props.fetchprofiledata(token,"LAWYER")
             props.fetchusercases(token,"LAWYER")
             props.fetchallcases(token)
@@ -45,6 +46,9 @@ function Lawyerlogin(props){
             setTimeout(()=>{props.clearMessage()},4000)
             props.clearLoading()
         }
+    }
+    const handlechange=async(values)=>{
+        setemail(values.email)
     }
     const signInGoogle = async()=>{
         props.load()
@@ -66,6 +70,44 @@ function Lawyerlogin(props){
             setTimeout(()=>{props.clearMessage()},2000)
         }
     }
+    const signInFb = async()=>{
+        props.load()
+        try{
+            const data = await signInWithFacebook()
+            console.log(data)
+            const token = await data.user.getIdToken()
+            props.createlawyer(
+                data.user.displayName,data.user.email,null,data.user.phoneNumber,
+                data.additionalUserInfo.profile.picture,token,history
+            )
+            props.fetchprofiledata(token,"LAWYER")
+            props.fetchusercases(token,"LAWYER")
+            props.fetchallcases(token)
+            props.successMessage('Signed in successfully')
+        }catch(e){
+            props.errorMessage(e.message)
+        }finally{
+            props.clearLoading()
+            setTimeout(()=>{props.clearMessage()},2000)
+        }
+    }
+    const resetPass=async()=>{
+        if(!email){
+            props.errorMessage('Please enter the email to send reset link to mail')
+            setTimeout(()=>{props.clearMessage()},4000)
+            return
+        }
+        props.load()
+        try{
+            await resetPassword(email)
+            props.successMessage('Password reset link sent successfully')
+        }catch(e){
+            props.errorMessage(e.message)
+        }finally{
+            props.clearLoading()
+            setTimeout(()=>{props.clearMessage()},4000)
+        }
+    }
         return(
             <div style={{marginTop:50,marginBottom:50}} className="login">
                 {/* <Helmet>
@@ -83,7 +125,7 @@ function Lawyerlogin(props){
                         <div className="d-flex justify-content-center align-items-center">
                             <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
                                 <div>
-                                    <LocalForm onSubmit={(values)=>handlesubmit(values)}>
+                                    <LocalForm onSubmit={(values)=>handlesubmit(values)} onChange={(values) => handlechange(values)}>
                                     <div className="form-group">
                                             <label htmlFor="exampleEmail">Email</label>
                                             <Control.text model=".email" className='form-control' name="email" id="exampleEmail"
@@ -113,10 +155,27 @@ function Lawyerlogin(props){
                                             }}
                                             ></Errors>
                                         </div>
-                                            <Link to="/user/login" className="nav-link">
-                                                <p style={{color:'white'}}>Are you a user ?</p>
-                                            </Link>
-                                        <div className="d-flex justify-content-center">
+                                        <div className="d-flex justify-content-between">
+                                            <div>
+                                                <Link to="/user/login" className="nav-link">
+                                                    <p style={{color:'white'}}>
+                                                        <b className="foot-link">
+                                                        Are you a user ?
+                                                        </b>
+                                                    </p>
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <div onClick={resetPass} className="nav-link text-right">
+                                                    <p style={{color:'white'}}>
+                                                        <b className="foot-link">
+                                                        Forgot password ?
+                                                        </b>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex justify-content-center mt-2">
                                         <button className="btn btn-secondary">Sign in</button>
                                         </div>
                                     </LocalForm> 
@@ -128,7 +187,16 @@ function Lawyerlogin(props){
                                             <img className="google-icon" alt="google logo"
                                             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
                                         </div>
-                                        <p className="btn-text"><b>Sign in with google</b></p>
+                                        <span className="btn-text"><b>Sign in with google</b></span>
+                                        </div>
+                                    </div>
+                                    <div className="container d-flex justify-content-center align-items-center mt-2">
+                                        <div onClick={signInFb} className="fb connect">
+                                            <span className="btn-text">
+                                                <b>
+                                                    Sign in with Facebook
+                                                </b>
+                                            </span>
                                         </div>
                                     </div>
                                     <div  style={{display:'flex',justifyContent:'center'}}>
@@ -139,7 +207,8 @@ function Lawyerlogin(props){
                                             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                             <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                                             </svg>
-                                            Click here to Signup</button>
+                                            Click here to Signup
+                                            </button>
                                         </Link>
                                     </div>       
                                 </div>

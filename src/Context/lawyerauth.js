@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { lawyerauth,lawyerprovider } from "../firebase/lawyer"
+import { lawyerauth,lawyerprovider,lawyerFbprovider } from "../firebase/lawyer"
 const AuthContext = React.createContext()
 export function useLawyerAuth() {
   return useContext(AuthContext)
@@ -29,7 +29,9 @@ export function LawyerAuthProvider({ children }) {
   function signInWithGoogle(){
     return lawyerauth.signInWithPopup(lawyerprovider)
   }
-
+  function signInWithFacebook(){
+    return lawyerauth.signInWithPopup(lawyerFbprovider)
+  }
   useEffect(() => {
     const unsubscribe = lawyerauth.onAuthStateChanged(user => {
       setCurrentLawyer(user)
@@ -46,7 +48,8 @@ export function LawyerAuthProvider({ children }) {
     resetPassword,
     // updateEmail,
     // updatePassword,
-    signInWithGoogle
+    signInWithGoogle,
+    signInWithFacebook
   }
   return (
     <AuthContext.Provider value={value}>

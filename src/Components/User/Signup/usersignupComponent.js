@@ -168,7 +168,11 @@ function Usersignup(props){
                                     ></Errors>
                             </div> */}
                                 <Link to="/lawyer/signup" className="nav-link">
-                                    <p style={{color:'white'}}>Are you a lawyer ?</p>
+                                    <p style={{color:'white'}}>
+                                        <b>
+                                        Are you a lawyer ?
+                                        </b>
+                                    </p>
                                 </Link>
                             <div className="d-flex justify-content-center">
                             <button className="btn btn-secondary">Sign Up</button>
