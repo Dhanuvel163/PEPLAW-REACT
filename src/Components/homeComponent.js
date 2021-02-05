@@ -129,7 +129,7 @@ function Home(){
                 </div>
                 <div className="form-group">
                   <label htmlFor="comment">Detail</label>
-                  <input style={{height:200}} id="comment" type="textarea" name="comment" className="form-control" required/>
+                  <textarea style={{height:200}} id="comment" type="textarea" name="comment" className="form-control" required/>
                 </div>
 
                 <div className="d-flex justify-content-center">

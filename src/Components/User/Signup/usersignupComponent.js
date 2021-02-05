@@ -67,7 +67,7 @@ function Usersignup(props){
                         </svg>
                     User Signup
                 </h5>
-                <div className="container" style={{marginTop:50}}>
+                <div className="container" style={{marginTop:30}}>
                 <hr></hr>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">

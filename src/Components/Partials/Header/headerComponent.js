@@ -186,7 +186,6 @@ function Header (props){
                                      onMouseOver={()=>preload('Lawyerlogin')}  to="/lawyer/login" className="dropdown-item">
                                         Lawyer Login
                                     </Link>
-                                    <div tabIndex="-1" className="dropdown-divider"></div>
                                     <Link onClick={mobileToggle}
                                     onMouseOver={()=>preload('Userlogin')}  to="/user/login" className="dropdown-item">
                                         User Login
@@ -207,7 +206,6 @@ function Header (props){
                                     onMouseOver={()=>preload('Lawersignup')}  to="/lawyer/signup" className="dropdown-item">
                                         Lawyer Signup
                                     </Link>
-                                    <div tabIndex="-1" className="dropdown-divider"></div>
                                     <Link onClick={mobileToggle}
                                     onMouseOver={()=>preload('Lawyerlogin')}  to="/user/signup" className="dropdown-item">
                                         User Signup

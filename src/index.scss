@@ -45,6 +45,9 @@
 //   content-visibility: auto;
 //   contain-intrinsic-size: 0 700 px;
 // }
+
+// -----------------------------------------------------------------------------------------------------
+
 * {
   font-display: swap;
 }
@@ -64,30 +67,31 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/*! purgecss start ignore */
+// /*! purgecss start ignore */
 
 *,
 html {
   scroll-behavior: smooth;
 }
 
-//For BG
+// //For BG
 
 .bg-dark {
   // background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
-  // background: rgb(36, 11, 54);
-  background: rgba(255, 255, 255, 0.15);
+
+  // background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
   border: 1px solid rgba(255, 255, 255, 0.18);
   &:hover {
     opacity: 1;
-    background: rgba(36, 11, 54, 0.9);
+    // background: rgba(36, 11, 54, 0.9);
+    background: linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54));
   }
 }
 .bg-danger {
   background: linear-gradient(to right, rgb(127, 0, 255), rgb(102, 18, 158));
 }
 
-//For Button
+// //For Button
 .btn {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -104,7 +108,6 @@ html {
   &:hover {
     box-shadow: 0 0 6px rgb(142, 45, 226) !important;
   }
-  // background: rgb(0, 0, 204);
 }
 .btn-dark-blue,
 .btn-dark-blue:hover,
@@ -118,47 +121,22 @@ html {
   }
 }
 
-// .btn,
-// .btn:focus {
-//   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-//     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-//     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-//     0 100px 80px rgba(0, 0, 0, 0.12) !important;
-// }
-// .btn:active {
-//   animation: click 0.2s ease-in-out !important;
-// }
-
-.text-warning {
-  text-transform: uppercase;
-}
-
-//For Header-Footer
+// //For Header-Footer
 
 .header-footer {
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 5px 10px 0px 10px;
   border-radius: 15px;
 }
 @media only screen and (max-width: 600px) {
   .header-footer {
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-top: 2px;
-    margin-bottom: 3px !important;
-    border-radius: 10px;
+    // margin: 2px 2px 3px 2px;
+    margin: 0px 0px 0px 0px !important;
+    border-radius: 0px;
   }
   .navbar-brand > a {
     padding: 2px;
   }
 }
-
-//For Box Shadow
-
-// .top-edge-shadow {
-//   box-shadow: 0px 10px 5px black, 0px -5px 5px -2px black;
-// }
 
 .four-box-shadow {
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -170,22 +148,17 @@ html {
   box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
 }
 
-//For Cards
+// //For Cards
 
 .card-style {
-  transition: transform 0.5s ease-in-out;
   animation: fadein 0.1s;
   border-radius: 10px;
   overflow: hidden;
 }
-.card-style:hover {
-  transform: translateX(-6px) translateY(-6px);
-}
-
-.cases .card-body {
-  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
-  border-radius: inherit;
-}
+// .cases .card-body {
+//   background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
+//   border-radius: inherit;
+// }
 
 .cases .card-header {
   box-shadow: 0 8px 6px -6px black;
@@ -207,13 +180,7 @@ html {
   }
 }
 
-img {
-  // box-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
-  border-radius: 5px;
-  // filter: drop-shadow(2px, 4px, 8px, #585858) !important;
-}
-
-//For Forms
+// //For Forms
 
 form {
   width: 100%;
@@ -225,7 +192,7 @@ form {
   /* border: 2.1px solid blueviolet !important; */
   border: 2.1px solid #6c63ff !important;
   opacity: 0.8;
-  transition: transform 0.5s ease-in-out !important;
+  transition: transform 0.3s ease-in-out !important;
 }
 
 .form-control::placeholder {
@@ -241,13 +208,6 @@ form {
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12) !important;
-}
-.form-control:hover {
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-  transform: translateX(-3px) translateY(-3px) scale(0.97);
 }
 .form-group span {
   text-align: center;
@@ -265,38 +225,14 @@ form {
   display: none;
 }
 
-//Animation
-
-@keyframes click {
-  0% {
-    transform: scaleX(1) translateY(4px);
-  }
-  50% {
-    transform: scaleX(1.1) translateY(4px);
-  }
-  100% {
-    transform: scaleY(1) translateY(-4px);
-  }
-}
-// @keyframes cardAnim {
+// @keyframes growDown {
 //   0% {
-//     transform: scale(1.2);
+//     transform: scaleY(0);
 //   }
-//   50% {
-//     transform: scale(0.8);
-//   }
-//   99% {
-//     transform: scale(1);
+//   100% {
+//     transform: scaleY(1);
 //   }
 // }
-@keyframes growDown {
-  0% {
-    transform: scaleY(0);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
 @keyframes fadein {
   from {
     opacity: 0;
@@ -306,7 +242,7 @@ form {
   }
 }
 
-//Scrollbar
+// //Scrollbar
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -323,7 +259,7 @@ form {
   border-radius: 10px;
 }
 
-//Lazy Loading
+// //Lazy Loading
 
 .lzy_img {
   background-color: #fff;
@@ -360,28 +296,28 @@ form {
   border-radius: 10px;
   animation: loadingfade 0.8s infinite;
 }
-// .loading::after {
-//   display: block;
-//   content: "";
-//   position: absolute;
-//   width: 80%;
-//   height: 100%;
-//   transform: translateX(0%);
+// // .loading::after {
+// //   display: block;
+// //   content: "";
+// //   position: absolute;
+// //   width: 80%;
+// //   height: 100%;
+// //   transform: translateX(0%);
 
-//   background: linear-gradient(
-//     90deg,
-//     transparent,
-//     rgba(148, 110, 110, 0.2),
-//     transparent
-//   );
-//   animation: loading 1s infinite;
-// }
+// //   background: linear-gradient(
+// //     90deg,
+// //     transparent,
+// //     rgba(148, 110, 110, 0.2),
+// //     transparent
+// //   );
+// //   animation: loading 1s infinite;
+// // }
 
-// @keyframes loading {
-//   100% {
-//     transform: translateX(40%);
-//   }
-// }
+// // @keyframes loading {
+// //   100% {
+// //     transform: translateX(40%);
+// //   }
+// // }
 @keyframes loadingfade {
   0% {
     opacity: 1;
@@ -390,4 +326,4 @@ form {
     opacity: 0.7;
   }
 }
-/*! purgecss end ignore */
+// /*! purgecss end ignore */

@@ -1,6 +1,6 @@
-export const lawyersignupform={
-    username:'',
-    email:'',
-    password:'',
-    mobile:''
-}
+// export const lawyersignupform={
+//     username:'',
+//     email:'',
+//     password:'',
+//     mobile:''
+// }

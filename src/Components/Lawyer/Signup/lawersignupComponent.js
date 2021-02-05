@@ -1,10 +1,10 @@
 import React from 'react';
-import {Control,Errors,Form} from 'react-redux-form';
+import {Control,Errors,LocalForm} from 'react-redux-form';
 import {Link,useHistory
 } from "react-router-dom";
 import {successMessage,errorMessage,clearMessage,load,clearLoading,createlawyer} from '../../../shared/Actioncreators/actionCreators';
 import {connect} from 'react-redux';
-import {actions} from 'react-redux-form';
+// import {actions} from 'react-redux-form';
 import Formerror from '../../Partials/Formerror/Formerror';
 import { useLawyerAuth } from "../../../Context/lawyerauth"
 // import {Helmet} from 'react-helmet'
@@ -19,7 +19,7 @@ const mapDispatchToProps=dispatch=>({
     clearMessage:()=>dispatch(clearMessage()),
     load:()=>dispatch(load()),
     clearLoading:()=>dispatch(clearLoading()),
-    lawyersignupformreset:()=>dispatch(actions.reset('lawyersignupform')),
+    // lawyersignupformreset:()=>dispatch(actions.reset('lawyersignupform')),
     createlawyer:(name,email,password,mobile,picture,token,history)=>dispatch(createlawyer(name,email,password,mobile,picture,token,history)),
 })
 const required=(val)=>(val)&&(val.length)
@@ -53,7 +53,7 @@ function Lawyersignup(props){
             props.clearLoading()
             setTimeout(()=>{props.clearMessage()},2000)
         }
-        props.lawyersignupformreset();
+        // props.lawyersignupformreset();
     }
     return(
             <div>
@@ -69,12 +69,12 @@ function Lawyersignup(props){
                         <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                         </svg>
                     Lawyer Signup</h5>
-                <div className="container" style={{marginTop:50}}>
+                <div className="container" style={{marginTop:30}}>
                 <hr></hr>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="glass card-style card p-3 p-sm-5 pt-5 pb-5 four-box-shadow">
                         <div>
-                        <Form model='lawyersignupform' onSubmit={(values)=>handlesubmit(values)}>
+                        <LocalForm  onSubmit={(values)=>handlesubmit(values)}>
                                 <div className='form-group'>
                                     <label htmlFor="username">Username</label>
                                     <Control.text model=".username" className='form-control' name="username" id="username"
@@ -154,7 +154,7 @@ function Lawyersignup(props){
                                 <div className="d-flex justify-content-center mt-2">
                                     <button className="btn btn-secondary">Sign Up</button>
                                 </div>
-                            </Form>
+                            </LocalForm>
                         </div>
                     </div>
                 </div>

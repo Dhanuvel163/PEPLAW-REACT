@@ -4,6 +4,7 @@
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 const fs = require('fs');
 const path = require('path');
@@ -583,11 +584,7 @@ module.exports = function(webpackEnv) {
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
 
-      // ---------------------ADDEDME-----------------------------
-          // new webpack.optimize.DedupePlugin(), //dedupe similar code 
-          // new webpack.optimize.UglifyJsPlugin(), //minify everything
-          // new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks 
-
+      
 
       // This is necessary to emit hot updates (currently CSS only):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),

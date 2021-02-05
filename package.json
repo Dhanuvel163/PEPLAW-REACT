@@ -101,6 +101,7 @@
     ]
   },
   "devDependencies": {
+    "compression-webpack-plugin": "^7.1.2",
     "glob-all": "^3.2.1",
     "purgecss-webpack-plugin": "^4.0.0",
     "webpack-bundle-analyzer": "^4.3.0"
